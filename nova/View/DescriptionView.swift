@@ -1,12 +1,8 @@
 import SwiftUI
 
-struct TemaView: View {
+struct DescriptionView: View {
     
-    var onCompletion: ((Estrela) -> Void)?
-    var estrela: Estrela
-    
-    @State private var titulo: String = ""
-    @State private var texto: String = ""
+    var estrela : Estrela
     
     var body: some View {
         ZStack{
@@ -16,7 +12,7 @@ struct TemaView: View {
                     VStack(alignment: .center, spacing: 5) {
                         Spacer()
                         VStack(alignment: .center, spacing: 4) {
-                            TextField("Tema", text: $titulo)
+                            Text(estrela.reflexao.titulo)
                                 .cornerRadius(8)
                                 .font(
                                     Font.custom("Kodchasan", size: 18)
@@ -38,33 +34,44 @@ struct TemaView: View {
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(.black)
                                 .frame(width: 124, alignment: .top)
-                        }.padding(10)
-                        
-                            
-                        TextField("Reflexão", text: $texto, axis: .vertical)
-                            .autocorrectionDisabled()
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 10)
-                            .frame(width: 260, height: 246, alignment: .topLeading)
-                        
-                        Button {
-                            let novaReflexao = Reflexao(titulo: self.titulo, texto: self.texto)
-                            let novaEstrela = Estrela(reflexao: novaReflexao, x: estrela.x, y: estrela.y)
-                            Manager.shared.estrela = novaEstrela
-                            Manager.shared.showView = false
-                            
-                        } label: {
-                            Text(.init(systemName: "plus.circle.fill"))
-                                .font(.system(size: 32))
+                        }.padding(5)
+                            .padding(.top, 85/2)
+                        ScrollView{
+                            Text(estrela.reflexao.texto)
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 10)
+                                .frame(width: 260, height: .infinity, alignment: .topLeading)
                                 .foregroundColor(.black)
                         }
+                        Button {
+                            Manager.shared.showNewView = false
+                            
+//                            let novaEstrela = criarNovaEstrelaBaseadaEm(estrela)
+//                            conectarEstrelas(estrela1: estrela, estrela2: novaEstrela)
+//                            estrela.conexoes.append(novaEstrela.id)
+//                            EstrelaManager.shared.addConexao(from: estrela, to: novaEstrela)
+//                            print(EstrelaManager.shared.todasEstrelas)
+                            
+                        } label: {
+                            Text("Adicionar nova estrela")
+                                .padding(10)
+                                .background(.black)
+                                .font(.system(size: 15))
+                                .foregroundColor(.white)
+                                .cornerRadius(12)
+                                
+                        }
                         .padding(.bottom ,24)
-                        Spacer()
+                        .padding(.top, 10)
                     }
-                    .padding(.top, 85/2)
+                    
                     .frame(width: 300, height: 445, alignment: .top)
                     .background(.white)
                     .cornerRadius(16)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(.black, lineWidth: 1)
+                    )
                 }
                 
                 VStack{
@@ -74,36 +81,20 @@ struct TemaView: View {
                         .frame(width: 85, height: 85)
                     Spacer()
                 }
+                
             }
             .frame(width: 300, height: 487.5)
+            
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-//        .background(.black)
-
+        
         
     }
 }
 
-struct LengthLimitingTextField: View {
-    @Binding var text: String
-    let limit: Int
 
-    var body: some View {
-        TextField("Texto", text: $text)
-            .onChange(of: text) { newValue in
-                if newValue.count > limit {
-                    text = String(newValue.prefix(limit))
-                }
-            }
-            .multilineTextAlignment(.leading) // Alinha à esquerda
-            .padding(.top, 5) // Ajuste conforme necessário para alinhar à parte superior
-    }
-}
-
-
-
-struct TemaView_Previews: PreviewProvider {
+struct DescriptionView_Previews: PreviewProvider {
     static var previews: some View {
-        TemaView(estrela: Estrela(reflexao: Reflexao(titulo: "Amor", texto: "Todos amam"), x: 0, y: 0))
+        DescriptionView(estrela: Estrela(reflexao: Reflexao(titulo: "Tema", texto: "A amizade é uma das joias mais preciosas que podemos encontrar ao longo da vida. Ela é como um jardim que requer cuidado constante, regado com amor, confiança e apoio mútuo. Assim como as flores desabrocham e crescem com o tempo, as verdadeiras amizades também se fortalecem com as experiências compartilhadas e os desafios enfrentados juntos."), x: 0, y: 0))
     }
 }

@@ -13,7 +13,6 @@
 		AF6C18E62A9FBCF000D0A089 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6C18E52A9FBCF000D0A089 /* Preview Assets.xcassets */; };
 		AF6C18EF2A9FBD5E00D0A089 /* CosntelacaoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C18EE2A9FBD5E00D0A089 /* CosntelacaoScene.swift */; };
 		AF6C18F12A9FBF5800D0A089 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF6C18F02A9FBF5800D0A089 /* GoogleService-Info.plist */; };
-		AF6C18F32A9FCC3800D0A089 /* Astro.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C18F22A9FCC3800D0A089 /* Astro.swift */; };
 		AF6C18F62A9FCCF600D0A089 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = AF6C18F52A9FCCF600D0A089 /* FirebaseAnalytics */; };
 		AF6C18F82A9FCCF600D0A089 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = AF6C18F72A9FCCF600D0A089 /* FirebaseAnalyticsOnDeviceConversion */; };
 		AF6C18FA2A9FCCF600D0A089 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AF6C18F92A9FCCF600D0A089 /* FirebaseAnalyticsSwift */; };
@@ -42,9 +41,11 @@
 		AF6C19282A9FCCF600D0A089 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = AF6C19272A9FCCF600D0A089 /* FirebaseStorage */; };
 		AF6C192A2A9FCCF600D0A089 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = AF6C19292A9FCCF600D0A089 /* FirebaseStorageCombine-Community */; };
 		AF6C192C2A9FD38400D0A089 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C192B2A9FD38300D0A089 /* DatabaseManager.swift */; };
-		AF6C192E2A9FD73F00D0A089 /* Estrela.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C192D2A9FD73F00D0A089 /* Estrela.swift */; };
 		AF6C19302A9FE0CC00D0A089 /* TemaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C192F2A9FE0CC00D0A089 /* TemaView.swift */; };
-		AF6C19322A9FE1CC00D0A089 /* ConstelacaoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C19312A9FE1CC00D0A089 /* ConstelacaoView.swift */; };
+		AF7F2D5F2AA1287200F361F9 /* Reflexao.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7F2D5E2AA1287200F361F9 /* Reflexao.swift */; };
+		AFA55EF02AA1675E00163AB9 /* Estrela.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA55EEF2AA1675E00163AB9 /* Estrela.swift */; };
+		AFA55EF22AA25A3B00163AB9 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA55EF12AA25A3B00163AB9 /* Manager.swift */; };
+		AFA55EF42AA65DDB00163AB9 /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA55EF32AA65DDB00163AB9 /* DescriptionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,11 +56,12 @@
 		AF6C18E52A9FBCF000D0A089 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AF6C18EE2A9FBD5E00D0A089 /* CosntelacaoScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosntelacaoScene.swift; sourceTree = "<group>"; };
 		AF6C18F02A9FBF5800D0A089 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		AF6C18F22A9FCC3800D0A089 /* Astro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Astro.swift; sourceTree = "<group>"; };
 		AF6C192B2A9FD38300D0A089 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
-		AF6C192D2A9FD73F00D0A089 /* Estrela.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Estrela.swift; sourceTree = "<group>"; };
 		AF6C192F2A9FE0CC00D0A089 /* TemaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemaView.swift; sourceTree = "<group>"; };
-		AF6C19312A9FE1CC00D0A089 /* ConstelacaoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstelacaoView.swift; sourceTree = "<group>"; };
+		AF7F2D5E2AA1287200F361F9 /* Reflexao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reflexao.swift; sourceTree = "<group>"; };
+		AFA55EEF2AA1675E00163AB9 /* Estrela.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Estrela.swift; sourceTree = "<group>"; };
+		AFA55EF12AA25A3B00163AB9 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		AFA55EF32AA65DDB00163AB9 /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,9 +143,10 @@
 		AF6C19332AA0D51400D0A089 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AF6C18F22A9FCC3800D0A089 /* Astro.swift */,
-				AF6C192D2A9FD73F00D0A089 /* Estrela.swift */,
+				AF7F2D5E2AA1287200F361F9 /* Reflexao.swift */,
+				AFA55EEF2AA1675E00163AB9 /* Estrela.swift */,
 				AF6C192B2A9FD38300D0A089 /* DatabaseManager.swift */,
+				AFA55EF12AA25A3B00163AB9 /* Manager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -152,8 +155,8 @@
 			isa = PBXGroup;
 			children = (
 				AF6C192F2A9FE0CC00D0A089 /* TemaView.swift */,
-				AF6C19312A9FE1CC00D0A089 /* ConstelacaoView.swift */,
 				AF6C18EE2A9FBD5E00D0A089 /* CosntelacaoScene.swift */,
+				AFA55EF32AA65DDB00163AB9 /* DescriptionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -261,14 +264,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFA55EF02AA1675E00163AB9 /* Estrela.swift in Sources */,
 				AF6C18E12A9FBCEF00D0A089 /* ContentView.swift in Sources */,
 				AF6C192C2A9FD38400D0A089 /* DatabaseManager.swift in Sources */,
+				AFA55EF42AA65DDB00163AB9 /* DescriptionView.swift in Sources */,
 				AF6C19302A9FE0CC00D0A089 /* TemaView.swift in Sources */,
-				AF6C192E2A9FD73F00D0A089 /* Estrela.swift in Sources */,
 				AF6C18DF2A9FBCEF00D0A089 /* novaApp.swift in Sources */,
-				AF6C18F32A9FCC3800D0A089 /* Astro.swift in Sources */,
 				AF6C18EF2A9FBD5E00D0A089 /* CosntelacaoScene.swift in Sources */,
-				AF6C19322A9FE1CC00D0A089 /* ConstelacaoView.swift in Sources */,
+				AFA55EF22AA25A3B00163AB9 /* Manager.swift in Sources */,
+				AF7F2D5F2AA1287200F361F9 /* Reflexao.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

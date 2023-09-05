@@ -1,65 +1,74 @@
 import Foundation
-import Firebase
+import Combine
 
-class DatabaseManager : ObservableObject {
-    
-    private let db = Database.database().reference()
-    
-    // Create
-    func createTema(tema: Tema) {
-        db.child("temas").child(tema.titulo).setValue(tema.toDictionary())
+class EstrelaManager: ObservableObject {
+    static let shared = EstrelaManager()
+
+    @Published var todasEstrelas: [Estrela] = []
+    @Published var conexoes: [UUID: [UUID]] = [:]  // Mapeia uma estrela para suas conexões
+
+    private var cancellables: Set<AnyCancellable> = []
+
+    init() {
+        loadFromUserDefaults()
+        setupBindings()
     }
-    
-    func createReflexao(reflexao: Reflexao) {
-        db.child("reflexoes").childByAutoId().setValue(reflexao.toDictionary())
-    }
-    
-    func readTema(titulo: String, completion: @escaping (Tema?) -> Void) {
-        db.child("temas").child(titulo).observeSingleEvent(of: .value) { (snapshot, error) in
-            guard let value = snapshot.value as? [String: Any] else {
-                completion(nil)
-                return
+
+    private func setupBindings() {
+        $todasEstrelas
+            .sink { [weak self] updatedEstrelas in
+                self?.saveToUserDefaults()
             }
-            
-            let tema = Tema(dictionary: value)
-            
-            let estrela = Estrela(texto: tema.titulo, x: tema.posicaoX, y: tema.posicaoY)
-            estrela.tema = tema
-            // ... adicionar estrela à cena ...
-            
-            completion(tema)
-        }
-
+            .store(in: &cancellables)
     }
 
-    func readReflexao(id: String, completion: @escaping (Reflexao?) -> Void) {
-        db.child("reflexoes").child(id).observeSingleEvent(of: .value) { snapshot in
-            guard let value = snapshot.value as? [String: Any] else {
-                completion(nil)
-                return
-            }
-            
-            let reflexao = Reflexao(dictionary: value)
-            
-            completion(reflexao)
+    func saveToUserDefaults() {
+        let encoder = JSONEncoder()
+        if let encodedEstrelas = try? encoder.encode(todasEstrelas),
+           let encodedConexoes = try? encoder.encode(conexoes) {
+            UserDefaults.standard.set(encodedEstrelas, forKey: "todasEstrelas")
+            UserDefaults.standard.set(encodedConexoes, forKey: "conexoes")
         }
     }
-    
-    // Update
-    func updateTema(titulo: String, newTema: Tema) {
-        db.child("temas").child(titulo).setValue(newTema.toDictionary())
+
+    func loadFromUserDefaults() {
+        let decoder = JSONDecoder()
+        if let savedEstrelas = UserDefaults.standard.object(forKey: "todasEstrelas") as? Data,
+           let savedConexoes = UserDefaults.standard.object(forKey: "conexoes") as? Data {
+            if let loadedEstrelas = try? decoder.decode([Estrela].self, from: savedEstrelas),
+               let loadedConexoes = try? decoder.decode([UUID: [UUID]].self, from: savedConexoes) {
+                todasEstrelas = loadedEstrelas
+                conexoes = loadedConexoes
+            }
+        }
+        filterExpiredEstrelas()
     }
-    
-    func updateReflexao(id: String, newReflexao: Reflexao) {
-        db.child("reflexoes").child(id).setValue(newReflexao.toDictionary())
+
+    func addEstrela(_ estrela: Estrela) {
+        if !todasEstrelas.contains(where: { $0.id == estrela.id }) {
+            todasEstrelas.append(estrela)
+        }
     }
-    
-    // Delete
-    func deleteTema(titulo: String) {
-        db.child("temas").child(titulo).removeValue()
+
+    func addConexao(from estrelaOrigem: Estrela, to estrelaDestino: Estrela) {
+        if conexoes[estrelaOrigem.id] != nil {
+            conexoes[estrelaOrigem.id]?.append(estrelaDestino.id)
+        } else {
+            conexoes[estrelaOrigem.id] = [estrelaDestino.id]
+        }
     }
-    
-    func deleteReflexao(id: String) {
-        db.child("reflexoes").child(id).removeValue()
+
+    func removeEstrela(_ estrela: Estrela) {
+        todasEstrelas.removeAll { $0.id == estrela.id }
+        conexoes[estrela.id] = nil
+        saveToUserDefaults()
+    }
+
+    private func filterExpiredEstrelas() {
+        let currentDate = Date()
+        todasEstrelas = todasEstrelas.filter { estrela in
+            let endDate = estrela.dataInicio.addingTimeInterval(estrela.duracao)
+            return currentDate <= endDate
+        }
     }
 }

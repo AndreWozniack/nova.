@@ -1,9 +1,8 @@
 import Foundation
 import SpriteKit
+import Combine
 
 class ConstelacaoScene: SKScene, EstrelaDelegate {
-
-    
 
     private var estrelaOriginal: Estrela?
     private var todasEstrelas: [Estrela] = []
@@ -15,11 +14,15 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
     var pinchGesture: UIPinchGestureRecognizer!
     var panGesture: UIPanGestureRecognizer!
     var rotateGesture: UIRotationGestureRecognizer!
+    var longPressGesture : UILongPressGestureRecognizer!
     private var ui = SKShapeNode()
     var lastUpdateTime: TimeInterval?
-
+    var cancellable = Set<AnyCancellable>()
     
+    
+
     override func didMove(to view: SKView) {
+        
         // Definir o fundo como preto
         self.backgroundColor = SKColor.black
         anchorPoint = CGPoint(x: view.bounds.width / 2, y: view.bounds.height / 2)
@@ -34,9 +37,6 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
 //        cameraNode.addChild(ui)
         addChild(cameraNode)
         
-        // Adicionar estrela no centro
-        estrelaOriginal = adicionarEstrela(x: Double(self.size.width / 2), y: Double(self.size.height / 2))
-        todasEstrelas.append(estrelaOriginal!)
         labelInfo = SKLabelNode(text: "")
         labelInfo.fontSize = 14
         labelInfo.fontColor = .white
@@ -54,32 +54,47 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(rotateGestureAction(_:)))
         view.addGestureRecognizer(rotateGesture)
         rotateGesture.delegate = self
+        
+        longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        longPressGesture.minimumPressDuration = 1
+        view.addGestureRecognizer(longPressGesture)
+        longPressGesture.delegate = self
+        
+        initSink()
+        
     }
     
-    func adicionarEstrela(x: CGFloat, y: CGFloat, texto: String = "Nome", tamanho: CGSize? = nil) -> Estrela {
-        let size = tamanho ?? CGSize(width: 20, height: 20)
-        let estrela = Estrela(texto: texto, x: x, y: y,tamanho: size)
+    func initSink() {
+        Manager.shared.$estrela.sink { estrela in
+            if estrela.reflexao.texto != "" {
+                self.estrelaCriada(estrela)
+            }
+        }.store(in: &cancellable)
+    }
+    
+    
+    func adicionarEstrela(titulo: String, texto: String, nivel: Int, x: CGFloat, y: CGFloat, tamanho: CGSize? = nil) -> Estrela {
+        let reflexao = Reflexao(titulo: titulo, texto: texto)
+        let estrela = Estrela(reflexao: reflexao, x: x, y: y)
+        estrela.nivel = nivel
         estrela.delegate = self
         estrela.position = CGPoint(x: x, y: y)
+        estrela.zPosition = 1
         self.addChild(estrela)
         return estrela
     }
-    
     func conectarEstrelas(estrela1: Estrela, estrela2: Estrela) {
         let path = UIBezierPath()
-        path.move(to: estrela1.position)
-        path.addLine(to: estrela2.position)
-
+        path.move(to: CGPoint(x: estrela1.x, y: estrela1.y))
+        path.addLine(to: CGPoint(x: estrela2.x, y: estrela2.y))
         let linha = SKShapeNode(path: path.cgPath)
         linha.strokeColor = SKColor.gray.withAlphaComponent(transparenciaParaNivel(estrela1.nivel))
         linha.zPosition = -1
         self.addChild(linha)
     }
-
     func transparenciaParaNivel(_ nivel: Int) -> CGFloat {
         return 1.0 - CGFloat(nivel) * 0.4
     }
-
     func posicaoEhValida(x: CGFloat, y: CGFloat) -> Bool {
         let novaPosicao = CGPoint(x: x, y: y)
         for estrela in todasEstrelas {
@@ -89,21 +104,6 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         }
         return true
     }
-    
-    func calcularNovaPosicao(estrela: Estrela, tempoPassado: CGFloat) -> CGPoint {
-        guard let estrelaOrigem = estrela.estrelaOrigem else {
-            return estrela.position
-        }
-        let raio = estrelaOrigem.position.distance(to: estrela.position)
-        let anguloInicial = anguloEntre(ponto1: estrelaOrigem.position, ponto2: estrela.position)
-        let velocidadeAngular = CGFloat.pi/180 // 1 grau por segundo
-        let anguloNovo = anguloInicial + velocidadeAngular * tempoPassado
-        let novoX = estrelaOrigem.position.x + cos(anguloNovo) * raio
-        let novoY = estrelaOrigem.position.y + sin(anguloNovo) * raio
-        
-        return CGPoint(x: novoX, y: novoY)
-    }
-    
     func distanciaMaximaParaNivel(_ nivel: Int) -> CGFloat {
         switch nivel {
         case 0: return 500
@@ -113,14 +113,49 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         }
     }
     
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        // Se o pinchGesture estiver ativo, desative os outros gestures
-        if gestureRecognizer == pinchGesture || otherGestureRecognizer == pinchGesture {
-            return false
-        }
-        return true
+    func estrelaTocada(_ estrela: Estrela) {
+        print(estrela)
+        Manager.shared.estrelaTocada = estrela
+        Manager.shared.showNewView = true
+        
+
     }
+    func criarNovaEstrelaBaseadaEm(_ estrela: Estrela) -> Estrela {
+        let distanciaMax = distanciaMaximaParaNivel(estrela.nivel)
+        var x: CGFloat = 0
+        var y: CGFloat = 0
+        var angulo: CGFloat = 0
+        angulo = CGFloat.random(in: 0...2 * .pi)
+        repeat {
+            x = estrela.x + cos(angulo) * CGFloat.random(in: (distanciaMax/2)...distanciaMax)
+            y = estrela.y + sin(angulo) * CGFloat.random(in: (distanciaMax/2)...distanciaMax)
+        } while !posicaoEhValida(x: x, y: y)
+        let novaEstrela = adicionarEstrela(titulo: estrela.reflexao.titulo, texto: estrela.reflexao.texto, nivel: estrela.nivel, x: x, y: y)
+        novaEstrela.nivel = estrela.nivel + 1
+        novaEstrela.estrelaOrigem = estrela.id
+        todasEstrelas.append(novaEstrela)
+        return novaEstrela
+    }
+
+    
+    func estrelaCriada(_ estrela: Estrela) {
+        let distanciaMax = distanciaMaximaParaNivel(estrela.nivel)
+        var x: CGFloat = 0
+        var y: CGFloat = 0
+        var angulo: CGFloat = 0
+        angulo = CGFloat.random(in: 0...2 * .pi)
+        repeat {
+            x = estrela.x + cos(angulo) * CGFloat.random(in: (distanciaMax/2)...distanciaMax)
+            y = estrela.y + sin(angulo) * CGFloat.random(in: (distanciaMax/2)...distanciaMax)
+        } while !posicaoEhValida(x: x, y: y)
+        let novaEstrela = adicionarEstrela(titulo: estrela.reflexao.titulo, texto: estrela.reflexao.texto, nivel: estrela.nivel, x: x, y: y)
+        novaEstrela.nivel = estrela.nivel + 1
+        novaEstrela.estrelaOrigem = estrela.id
+        todasEstrelas.append(novaEstrela)
+    }
+    
+        
+    // MARK: - Gestos
     @objc func panGestureAction(_ sender: UIPanGestureRecognizer) {
         guard let camera = self.camera else {
             return
@@ -133,6 +168,7 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         camera.position = CGPoint(x: camera.position.x + translationInScene.x, y: camera.position.y + translationInScene.y)
         sender.setTranslation(CGPoint.zero, in: self.view)
     }
+    
     @objc func rotateGestureAction(_ sender: UIRotationGestureRecognizer) {
         guard let camera = self.camera else {
             return
@@ -140,11 +176,11 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         camera.zRotation += sender.rotation
         sender.rotation = 0
     }
+    
     @objc func pinchGestureAction(_ sender: UIPinchGestureRecognizer) {
         guard let camera = self.camera else {
             return
         }
-
         let minScale: CGFloat = 0.2
         let maxScale: CGFloat = 5.0
         var newScale = camera.xScale * (1.0/(sender.scale))
@@ -153,44 +189,22 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         sender.scale = 1.0
     }
     
-    override func update(_ currentTime: TimeInterval) {
-        // Chamado antes de cada quadro ser renderizado
-        let tempoPassado = CGFloat(currentTime - (self.lastUpdateTime ?? currentTime))
-        self.lastUpdateTime = currentTime
-        
-        for estrela in todasEstrelas {
-            if estrela.nivel > 1{
-                guard estrela != estrelaOriginal else {
-                continue
+    @objc func handleLongPress(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            let locationInView = sender.location(in: self.view)
+            let locationInScene = convertPoint(fromView: locationInView)
+            if posicaoEhValida(x: locationInScene.x, y: locationInScene.y) {
+                Manager.shared.showView = true
+                Manager.shared.estrela = Estrela(reflexao: Reflexao(titulo: "", texto: ""), x: Double(locationInScene.x), y: Double(locationInScene.y))
             }
-            
-            estrela.position = calcularNovaPosicao(estrela: estrela, tempoPassado: tempoPassado)
-        }}
-    }
-    
-    func criarEConectarNovaEstrela(_ estrela: Estrela) {
-        guard estrela.nivel < 3 else {
-            return
         }
+    }
 
-        let distanciaMax = distanciaMaximaParaNivel(estrela.nivel)
-        var x: CGFloat = 0
-        var y: CGFloat = 0
-        var angulo: CGFloat = 0
-
-        angulo = CGFloat.random(in: 0...2 * .pi)
-
-        repeat {
-            x = estrela.position.x + cos(angulo) * CGFloat.random(in: (distanciaMax/2)...distanciaMax)
-            y = estrela.position.y + sin(angulo) * CGFloat.random(in: (distanciaMax/2)...distanciaMax)
-        } while !posicaoEhValida(x: x, y: y)
-
-        let tamanhoEstrela = CGSize(width: estrela.frame.width/2, height: estrela.frame.height/2)
-        let novaEstrela = adicionarEstrela(x: Double(x), y: Double(y), texto: "AlgumTexto", tamanho: tamanhoEstrela)
-        novaEstrela.nivel = estrela.nivel + 1
-        novaEstrela.estrelaOrigem = estrela
-        todasEstrelas.append(novaEstrela)
-        conectarEstrelas(estrela1: estrela, estrela2: novaEstrela)
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer == pinchGesture || otherGestureRecognizer == pinchGesture {
+            return false
+        }
+        return true
     }
 
 }
@@ -200,11 +214,7 @@ extension ConstelacaoScene: UIGestureRecognizerDelegate {
         let deltaX = ponto2.x - ponto1.x
         return atan2(deltaY, deltaX)
     }
-    func estrelaTocada(_ estrela: Estrela) {
-        
-    }
 }
-
 
 extension CGPoint {
     func distance(to point: CGPoint) -> CGFloat {
