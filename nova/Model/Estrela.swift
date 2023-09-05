@@ -80,8 +80,9 @@ class Estrela: SKShapeNode, Codable{
 
     
     override var description: String {
-        return "=============\nID = \(id)\nTema = \(reflexao.titulo)\nReflexão = \(reflexao.texto)\nData de Criação = \(dataInicio)\nTempo Restante = \(formatTimeInterval(tempoRestante()))\nNivel = \(nivel)\nx:\(x) y:\(y)\n=============\n"
+        return "=============\nID = \(id)\nTema = \(reflexao.titulo)\nReflexão = \(reflexao.texto)\nData de Criação = \(dataInicio)\nTempo Restante = \(formatTimeInterval())\nNivel = \(nivel)\nx:\(x) y:\(y)\n=============\n"
     }
+    
     func corParaNivel(_ nivel: Int) -> UIColor {
         switch nivel {
         case 0:
@@ -112,14 +113,13 @@ class Estrela: SKShapeNode, Codable{
         let endDate = dataInicio.addingTimeInterval(duracao)
         return endDate.timeIntervalSince(Date())
     }
-    func formatTimeInterval(_ interval: TimeInterval) -> String {
-        let interval = Int(interval)
+    
+    func formatTimeInterval() -> String {
+        let interval = Int(tempoRestante())
         let days = interval / (24 * 3600)
         let hours = (interval % (24 * 3600)) / 3600
         let minutes = (interval % 3600) / 60
         return "\(days) dias, \(hours) horas, \(minutes) minutos"
     }
-
-    
 }
 
