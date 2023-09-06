@@ -1,8 +1,6 @@
 import Foundation
-import SpriteKit
 
 class Reflexao: Codable {
-    var id = UUID()
     var titulo: String
     var texto: String
 

@@ -2,11 +2,11 @@ import SwiftUI
 
 struct TemaView: View {
     
-    var onCompletion: ((Estrela) -> Void)?
     var estrela: Estrela
     
     @State private var titulo: String = ""
     @State private var texto: String = ""
+
     
     var body: some View {
         ZStack{
@@ -17,27 +17,26 @@ struct TemaView: View {
                         Spacer()
                         VStack(alignment: .center, spacing: 4) {
                             TextField("Tema", text: $titulo)
+                                .autocorrectionDisabled()
                                 .cornerRadius(8)
                                 .font(
                                     Font.custom("Kodchasan", size: 18)
                                         .weight(.bold)
                                 )
                                 .multilineTextAlignment(.center)
-                                .foregroundColor(.black)
-                            HStack(alignment: .center, spacing: 4) {
-                                Text("Planeta gasoso")
-                                    .font(
-                                        Font.custom("SF Pro", size: 9)
-                                            .weight(.bold)
-                                    )
-                                    .foregroundColor(.black)
-                            }
+//                            HStack(alignment: .center, spacing: 4) {
+//                                Text("Planeta gasoso")
+//                                    .font(
+//                                        Font.custom("SF Pro", size: 9)
+//                                            .weight(.bold)
+//                                    )
+//                                    .foregroundColor(.black)
+//                            }
                             .padding(0)
-                            Text("20 dias de vida restante")
+                            Text("Essa estrela tem 1 hora de vida")
                                 .font(Font.custom("Inter", size: 9))
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(.black)
-                                .frame(width: 124, alignment: .top)
                         }.padding(10)
                         
                             
@@ -48,10 +47,9 @@ struct TemaView: View {
                             .frame(width: 260, height: 246, alignment: .topLeading)
                         
                         Button {
-                            let novaReflexao = Reflexao(titulo: self.titulo, texto: self.texto)
-                            let novaEstrela = Estrela(reflexao: novaReflexao, x: estrela.x, y: estrela.y)
-                            Manager.shared.estrela = novaEstrela
+                            Manager.shared.estrela = Estrela(reflexao: Reflexao(titulo: self.titulo, texto: self.texto), x: estrela.x, y: estrela.y)
                             Manager.shared.showView = false
+                            
                             
                         } label: {
                             Text(.init(systemName: "plus.circle.fill"))
@@ -81,22 +79,6 @@ struct TemaView: View {
 //        .background(.black)
 
         
-    }
-}
-
-struct LengthLimitingTextField: View {
-    @Binding var text: String
-    let limit: Int
-
-    var body: some View {
-        TextField("Texto", text: $text)
-            .onChange(of: text) { newValue in
-                if newValue.count > limit {
-                    text = String(newValue.prefix(limit))
-                }
-            }
-            .multilineTextAlignment(.leading) // Alinha à esquerda
-            .padding(.top, 5) // Ajuste conforme necessário para alinhar à parte superior
     }
 }
 

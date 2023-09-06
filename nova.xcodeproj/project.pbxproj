@@ -43,9 +43,12 @@
 		AF6C192C2A9FD38400D0A089 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C192B2A9FD38300D0A089 /* DatabaseManager.swift */; };
 		AF6C19302A9FE0CC00D0A089 /* TemaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C192F2A9FE0CC00D0A089 /* TemaView.swift */; };
 		AF7F2D5F2AA1287200F361F9 /* Reflexao.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7F2D5E2AA1287200F361F9 /* Reflexao.swift */; };
+		AF9FAE022AA9108700DE8FAE /* SubDescripitionVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9FAE012AA9108700DE8FAE /* SubDescripitionVIew.swift */; };
 		AFA55EF02AA1675E00163AB9 /* Estrela.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA55EEF2AA1675E00163AB9 /* Estrela.swift */; };
 		AFA55EF22AA25A3B00163AB9 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA55EF12AA25A3B00163AB9 /* Manager.swift */; };
 		AFA55EF42AA65DDB00163AB9 /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA55EF32AA65DDB00163AB9 /* DescriptionView.swift */; };
+		AFA55EF72AA80AD100163AB9 /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA55EF62AA80AD100163AB9 /* CardsView.swift */; };
+		AFA55EF92AA80FD300163AB9 /* SubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA55EF82AA80FD300163AB9 /* SubView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,9 +62,12 @@
 		AF6C192B2A9FD38300D0A089 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		AF6C192F2A9FE0CC00D0A089 /* TemaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemaView.swift; sourceTree = "<group>"; };
 		AF7F2D5E2AA1287200F361F9 /* Reflexao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reflexao.swift; sourceTree = "<group>"; };
+		AF9FAE012AA9108700DE8FAE /* SubDescripitionVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubDescripitionVIew.swift; sourceTree = "<group>"; };
 		AFA55EEF2AA1675E00163AB9 /* Estrela.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Estrela.swift; sourceTree = "<group>"; };
 		AFA55EF12AA25A3B00163AB9 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		AFA55EF32AA65DDB00163AB9 /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
+		AFA55EF62AA80AD100163AB9 /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
+		AFA55EF82AA80FD300163AB9 /* SubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,9 +128,9 @@
 			isa = PBXGroup;
 			children = (
 				AF6C18DE2A9FBCEF00D0A089 /* novaApp.swift */,
-				AF6C18E02A9FBCEF00D0A089 /* ContentView.swift */,
-				AF6C19502AA0D76E00D0A089 /* View */,
 				AF6C19332AA0D51400D0A089 /* Model */,
+				AF6C19502AA0D76E00D0A089 /* View */,
+				AFA55EF52AA7A9C400163AB9 /* Controller */,
 				AF6C18F02A9FBF5800D0A089 /* GoogleService-Info.plist */,
 				AF6C18E22A9FBCF000D0A089 /* Assets.xcassets */,
 				AF6C18E42A9FBCF000D0A089 /* Preview Content */,
@@ -145,8 +151,6 @@
 			children = (
 				AF7F2D5E2AA1287200F361F9 /* Reflexao.swift */,
 				AFA55EEF2AA1675E00163AB9 /* Estrela.swift */,
-				AF6C192B2A9FD38300D0A089 /* DatabaseManager.swift */,
-				AFA55EF12AA25A3B00163AB9 /* Manager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -154,11 +158,24 @@
 		AF6C19502AA0D76E00D0A089 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AF6C18E02A9FBCEF00D0A089 /* ContentView.swift */,
 				AF6C192F2A9FE0CC00D0A089 /* TemaView.swift */,
 				AF6C18EE2A9FBD5E00D0A089 /* CosntelacaoScene.swift */,
 				AFA55EF32AA65DDB00163AB9 /* DescriptionView.swift */,
+				AF9FAE012AA9108700DE8FAE /* SubDescripitionVIew.swift */,
+				AFA55EF62AA80AD100163AB9 /* CardsView.swift */,
+				AFA55EF82AA80FD300163AB9 /* SubView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		AFA55EF52AA7A9C400163AB9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AF6C192B2A9FD38300D0A089 /* DatabaseManager.swift */,
+				AFA55EF12AA25A3B00163AB9 /* Manager.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,8 +287,11 @@
 				AFA55EF42AA65DDB00163AB9 /* DescriptionView.swift in Sources */,
 				AF6C19302A9FE0CC00D0A089 /* TemaView.swift in Sources */,
 				AF6C18DF2A9FBCEF00D0A089 /* novaApp.swift in Sources */,
+				AFA55EF72AA80AD100163AB9 /* CardsView.swift in Sources */,
 				AF6C18EF2A9FBD5E00D0A089 /* CosntelacaoScene.swift in Sources */,
 				AFA55EF22AA25A3B00163AB9 /* Manager.swift in Sources */,
+				AFA55EF92AA80FD300163AB9 /* SubView.swift in Sources */,
+				AF9FAE022AA9108700DE8FAE /* SubDescripitionVIew.swift in Sources */,
 				AF7F2D5F2AA1287200F361F9 /* Reflexao.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,8 +427,10 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -416,9 +438,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = amigosestoaqui.nova.nova;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -436,8 +461,10 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -445,9 +472,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = amigosestoaqui.nova.nova;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

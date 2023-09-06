@@ -12,6 +12,34 @@ struct ContentView: View {
         ZStack {
             ConstelacaoView()
                 .edgesIgnoringSafeArea(.all)
+            VStack{
+                Spacer()
+                HStack{
+                    Button {
+                        print(EstrelaManager.shared.todasEstrelas)
+                    } label: {
+                        Text("Lista de estrelas")
+                            .padding(10)
+                            .background(.white)
+                            .font(.system(size: 15))
+                            .foregroundColor(.black)
+                            .cornerRadius(12)
+                    }
+                    Button {
+                        EstrelaManager.shared.clearSky()
+                        manager.estrela = Estrela()
+                        
+                    } label: {
+                        Text("Limpar Estrelas")
+                            .padding(10)
+                            .background(.white)
+                            .font(.system(size: 15))
+                            .foregroundColor(.black)
+                            .cornerRadius(12)
+                    }
+                }
+            }
+
             
             if manager.showView {
                 // Fundo semi-transparente
@@ -30,11 +58,21 @@ struct ContentView: View {
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
                         withAnimation {
-                            manager.showNewView = false
+                            manager.showSubView = false
                         }
                     }
                 DescriptionView(estrela: manager.estrelaTocada)
                 
+            }
+            if manager.showSubView{
+                Color.black.opacity(0.4)
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        withAnimation {
+                            manager.showSubView = false
+                        }
+                    }
+                SubView()
             }
         }
          

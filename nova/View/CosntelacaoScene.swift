@@ -3,54 +3,36 @@ import SpriteKit
 import Combine
 
 class ConstelacaoScene: SKScene, EstrelaDelegate {
-
+    
     private var estrelaOriginal: Estrela?
     private var todasEstrelas: [Estrela] = []
     private var cameraNode = SKCameraNode()
-    var labelInfo: SKLabelNode!
-    let distanciaNovaEstrela: CGFloat = 500
-    var previousCameraScale = CGFloat()
-    private var lastPanLocation: CGPoint?
     var pinchGesture: UIPinchGestureRecognizer!
     var panGesture: UIPanGestureRecognizer!
     var rotateGesture: UIRotationGestureRecognizer!
     var longPressGesture : UILongPressGestureRecognizer!
-    private var ui = SKShapeNode()
-    var lastUpdateTime: TimeInterval?
     var cancellable = Set<AnyCancellable>()
+    var panVelocity: CGPoint = .zero
     
     
-
     override func didMove(to view: SKView) {
         
-        // Definir o fundo como preto
         self.backgroundColor = SKColor.black
-        anchorPoint = CGPoint(x: view.bounds.width / 2, y: view.bounds.height / 2)
-        ui = SKShapeNode(rectOf: CGSize(width: view.bounds.width * 4.4, height: view.bounds.height * 4.4))
-        ui.zPosition = 2
-        ui.strokeColor = .clear
+        anchorPoint = CGPoint(x: 0, y: 0)
         
-        // Setting game camera
-        cameraNode.position = CGPoint(x: view.bounds.midX, y: view.bounds.midY)
-        cameraNode.setScale(0.5)
+        cameraNode.position = anchorPoint
+        cameraNode.setScale(1)
         camera = cameraNode
-//        cameraNode.addChild(ui)
         addChild(cameraNode)
         
-        labelInfo = SKLabelNode(text: "")
-        labelInfo.fontSize = 14
-        labelInfo.fontColor = .white
-        labelInfo.position = CGPoint(x: self.size.width / 2, y: self.size.height - 50) // Topo da tela
-        self.addChild(labelInfo)
-
         pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinchGestureAction(_:)))
         view.addGestureRecognizer(pinchGesture)
         pinchGesture.delegate = self
-
+        
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureAction(_:)))
         view.addGestureRecognizer(panGesture)
         panGesture.delegate = self
-
+        
         rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(rotateGestureAction(_:)))
         view.addGestureRecognizer(rotateGesture)
         rotateGesture.delegate = self
@@ -60,29 +42,66 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         view.addGestureRecognizer(longPressGesture)
         longPressGesture.delegate = self
         
-        initSink()
         
+        initSink()
+        setConstelacoes()
+        
+        if let ultimaEstrela = EstrelaManager.shared.todasEstrelas.last {
+            print(ultimaEstrela)
+            cameraNode.position = CGPoint(x: ultimaEstrela.x, y: ultimaEstrela.y)
+            print("x: \(cameraNode.position.x), y: \(cameraNode.position.y)")
+        }
     }
     
     func initSink() {
         Manager.shared.$estrela.sink { estrela in
             if estrela.reflexao.texto != "" {
+                if estrela.nivel > 0{
+                    self.estrelaCriada(estrela)
+                    self.todasEstrelas.append(estrela)
+                    
+                }
+                
                 self.estrelaCriada(estrela)
             }
         }.store(in: &cancellable)
+        
+        Manager.shared.$subEstrela.sink { subEstrela in
+            if subEstrela.reflexao.texto != "" {
+                self.estrelaCriada(subEstrela)
+                if let estrelaOrigemID = subEstrela.estrelaOrigem,let estrelaOrigem = self.todasEstrelas.first(where: { $0.id == estrelaOrigemID }) {
+                    estrelaOrigem.addChild(subEstrela)
+                }
+            }
+        }.store(in: &cancellable)
+
     }
     
-    
-    func adicionarEstrela(titulo: String, texto: String, nivel: Int, x: CGFloat, y: CGFloat, tamanho: CGSize? = nil) -> Estrela {
-        let reflexao = Reflexao(titulo: titulo, texto: texto)
-        let estrela = Estrela(reflexao: reflexao, x: x, y: y)
-        estrela.nivel = nivel
-        estrela.delegate = self
-        estrela.position = CGPoint(x: x, y: y)
-        estrela.zPosition = 1
-        self.addChild(estrela)
-        return estrela
+    func adicionarEstrelaNaTela(_ estrela: Estrela) -> Estrela {
+        let novaEstrela = Estrela(reflexao: estrela.reflexao, x: estrela.x, y: estrela.y)
+        novaEstrela.nivel = estrela.nivel
+        novaEstrela.delegate = self
+        novaEstrela.position = CGPoint(x: estrela.x, y: estrela.y)
+        novaEstrela.zPosition = 1
+        self.addChild(novaEstrela)
+        
+        novaEstrela.dataInicio = estrela.dataInicio
+        novaEstrela.id = estrela.id
+        novaEstrela.isAlive = estrela.isAlive
+        novaEstrela.estrelaOrigem = estrela.estrelaOrigem
+        
+        
+        let titulo = SKLabelNode(text: estrela.reflexao.titulo)
+        titulo.zPosition = 3
+        titulo.position.y += 25
+        titulo.fontName = "Helvetica-Bold"
+        
+        novaEstrela.addChild(titulo)
+        todasEstrelas.append(novaEstrela)
+        
+        return novaEstrela
     }
+    
     func conectarEstrelas(estrela1: Estrela, estrela2: Estrela) {
         let path = UIBezierPath()
         path.move(to: CGPoint(x: estrela1.x, y: estrela1.y))
@@ -90,11 +109,14 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         let linha = SKShapeNode(path: path.cgPath)
         linha.strokeColor = SKColor.gray.withAlphaComponent(transparenciaParaNivel(estrela1.nivel))
         linha.zPosition = -1
+        estrela1.addChild(estrela2)
         self.addChild(linha)
     }
+    
     func transparenciaParaNivel(_ nivel: Int) -> CGFloat {
         return 1.0 - CGFloat(nivel) * 0.4
     }
+    
     func posicaoEhValida(x: CGFloat, y: CGFloat) -> Bool {
         let novaPosicao = CGPoint(x: x, y: y)
         for estrela in todasEstrelas {
@@ -104,6 +126,7 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         }
         return true
     }
+    
     func distanciaMaximaParaNivel(_ nivel: Int) -> CGFloat {
         switch nivel {
         case 0: return 500
@@ -117,58 +140,106 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         print(estrela)
         Manager.shared.estrelaTocada = estrela
         Manager.shared.showNewView = true
-        
-
     }
-    func criarNovaEstrelaBaseadaEm(_ estrela: Estrela) -> Estrela {
-        let distanciaMax = distanciaMaximaParaNivel(estrela.nivel)
-        var x: CGFloat = 0
-        var y: CGFloat = 0
-        var angulo: CGFloat = 0
-        angulo = CGFloat.random(in: 0...2 * .pi)
-        repeat {
-            x = estrela.x + cos(angulo) * CGFloat.random(in: (distanciaMax/2)...distanciaMax)
-            y = estrela.y + sin(angulo) * CGFloat.random(in: (distanciaMax/2)...distanciaMax)
-        } while !posicaoEhValida(x: x, y: y)
-        let novaEstrela = adicionarEstrela(titulo: estrela.reflexao.titulo, texto: estrela.reflexao.texto, nivel: estrela.nivel, x: x, y: y)
-        novaEstrela.nivel = estrela.nivel + 1
-        novaEstrela.estrelaOrigem = estrela.id
-        todasEstrelas.append(novaEstrela)
-        return novaEstrela
-    }
-
     
     func estrelaCriada(_ estrela: Estrela) {
-        let distanciaMax = distanciaMaximaParaNivel(estrela.nivel)
-        var x: CGFloat = 0
-        var y: CGFloat = 0
-        var angulo: CGFloat = 0
-        angulo = CGFloat.random(in: 0...2 * .pi)
-        repeat {
-            x = estrela.x + cos(angulo) * CGFloat.random(in: (distanciaMax/2)...distanciaMax)
-            y = estrela.y + sin(angulo) * CGFloat.random(in: (distanciaMax/2)...distanciaMax)
-        } while !posicaoEhValida(x: x, y: y)
-        let novaEstrela = adicionarEstrela(titulo: estrela.reflexao.titulo, texto: estrela.reflexao.texto, nivel: estrela.nivel, x: x, y: y)
-        novaEstrela.nivel = estrela.nivel + 1
-        novaEstrela.estrelaOrigem = estrela.id
+        if estrela.nivel > 0 {
+            let novaEstrela = adicionarEstrelaNaTela(estrela)
+            todasEstrelas.append(novaEstrela)
+        }
+        let novaEstrela = adicionarEstrelaNaTela(estrela)
         todasEstrelas.append(novaEstrela)
+        EstrelaManager.shared.addEstrela(novaEstrela)
     }
     
+    func setConstelacoes() {
+        for estrela in EstrelaManager.shared.todasEstrelas {
+            adicionarEstrelaNaTela(estrela)
+            percorrerTodosOsNosFilhos(estrela)
+        }
+    }
+    
+    func percorrerTodosOsNosFilhos(_ estrela: Estrela) {
+        for filho in estrela.children {
+            if let filhoEstrela = filho as? Estrela {
+                print()
+                if let pai = estrela.parent as? Estrela {
+                    criarLinhaEntreEstrelas(pai, filhoEstrela)
+                    conectarEstrelas(estrela1: pai, estrela2: filhoEstrela)
+                }
+                // Verifique se o nó filho tem filhos e, se sim, percorra todos eles
+                if filhoEstrela.children.count > 0 {
+                    percorrerTodosOsNosFilhos(filhoEstrela)
+                }
+            }
+        }
+    }
+
+    func criarLinhaEntreEstrelas(_ estrela1: Estrela, _ estrela2: Estrela) {
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: estrela1.x, y: estrela1.y))
+        path.addLine(to: CGPoint(x: estrela2.x, y: estrela2.y))
         
+        let linha = SKShapeNode(path: path.cgPath)
+        linha.strokeColor = SKColor.gray
+        // Defina outras propriedades da linha, como espessura e transparência, conforme necessário
+        linha.zPosition = -2
+        
+        self.addChild(linha)
+    }
+
+    
     // MARK: - Gestos
     @objc func panGestureAction(_ sender: UIPanGestureRecognizer) {
         guard let camera = self.camera else {
             return
         }
-        let translationInView = sender.translation(in: self.view)
-        let angle = camera.zRotation
-        let rotatedTranslation = CGPoint(x: cos(angle) * translationInView.x + sin(angle) * translationInView.y,
-                                         y: -sin(angle) * translationInView.x + cos(angle) * translationInView.y)
-        let translationInScene = CGPoint(x: rotatedTranslation.x * -camera.xScale, y: rotatedTranslation.y * camera.yScale)
-        camera.position = CGPoint(x: camera.position.x + translationInScene.x, y: camera.position.y + translationInScene.y)
-        sender.setTranslation(CGPoint.zero, in: self.view)
+
+        switch sender.state {
+        case .changed:
+            let translationInView = sender.translation(in: self.view)
+            let angle = camera.zRotation
+            let rotatedTranslation = CGPoint(x: cos(angle) * translationInView.x + sin(angle) * translationInView.y,
+                                             y: -sin(angle) * translationInView.x + cos(angle) * translationInView.y)
+            let translationInScene = CGPoint(x: rotatedTranslation.x * -camera.xScale, y: rotatedTranslation.y * camera.yScale)
+            camera.position = CGPoint(x: camera.position.x + translationInScene.x, y: camera.position.y + translationInScene.y)
+            sender.setTranslation(CGPoint.zero, in: self.view)
+
+            panVelocity = sender.velocity(in: self.view)
+            
+
+//        case .ended, .cancelled:
+//            applyPanInertia()
+
+        default:
+            break
+        }
     }
-    
+    func applyPanInertia() {
+        let decelerationRate: CGFloat = 0.75 // Ajuste conforme necessário
+        let minSpeed: CGFloat = 2.0  // Ajuste conforme necessário
+
+        let inertiaAction = SKAction.customAction(withDuration: 0.5) { [weak self] (_, elapsedTime) in
+            guard let self = self, let camera = self.camera else { return }
+            
+            let angle = camera.zRotation
+            let rotatedVelocity = CGPoint(x: cos(angle) * self.panVelocity.x + sin(angle) * self.panVelocity.y,
+                                          y: -sin(angle) * self.panVelocity.x + cos(angle) * self.panVelocity.y)
+            let velocityInScene = CGPoint(x: rotatedVelocity.x * -camera.xScale, y: rotatedVelocity.y * camera.yScale)
+            camera.position = CGPoint(x: camera.position.x + velocityInScene.x * CGFloat(elapsedTime),
+                                      y: camera.position.y + velocityInScene.y * CGFloat(elapsedTime))
+            
+            // Diminuir a velocidade
+            self.panVelocity.x *= decelerationRate
+            self.panVelocity.y *= decelerationRate
+            
+            // Parar a ação se a velocidade for muito baixa
+            if self.panVelocity.length() < minSpeed {
+                camera.removeAction(forKey: "panInertia")
+            }
+        }
+        camera?.run(inertiaAction, withKey: "panInertia")
+    }
     @objc func rotateGestureAction(_ sender: UIRotationGestureRecognizer) {
         guard let camera = self.camera else {
             return
@@ -176,7 +247,6 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         camera.zRotation += sender.rotation
         sender.rotation = 0
     }
-    
     @objc func pinchGestureAction(_ sender: UIPinchGestureRecognizer) {
         guard let camera = self.camera else {
             return
@@ -188,18 +258,17 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         camera.setScale(newScale)
         sender.scale = 1.0
     }
-    
     @objc func handleLongPress(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
             let locationInView = sender.location(in: self.view)
             let locationInScene = convertPoint(fromView: locationInView)
             if posicaoEhValida(x: locationInScene.x, y: locationInScene.y) {
-                Manager.shared.showView = true
                 Manager.shared.estrela = Estrela(reflexao: Reflexao(titulo: "", texto: ""), x: Double(locationInScene.x), y: Double(locationInScene.y))
+                Manager.shared.showView = true
+
             }
         }
     }
-
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer == pinchGesture || otherGestureRecognizer == pinchGesture {
             return false
@@ -219,6 +288,9 @@ extension ConstelacaoScene: UIGestureRecognizerDelegate {
 extension CGPoint {
     func distance(to point: CGPoint) -> CGFloat {
         return hypot(self.x - point.x, self.y - point.y)
+    }
+    func length() -> CGFloat {
+        return sqrt(self.x * self.x + self.y * self.y)
     }
 }
 
