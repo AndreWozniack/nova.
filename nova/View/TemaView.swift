@@ -20,8 +20,7 @@ struct TemaView: View {
                                 .autocorrectionDisabled()
                                 .cornerRadius(8)
                                 .font(
-                                    Font.custom("Kodchasan", size: 18)
-                                        .weight(.bold)
+                                    Font.custom("Kodchasan-Bold", size: 18)
                                 )
                                 .multilineTextAlignment(.center)
 //                            HStack(alignment: .center, spacing: 4) {
@@ -34,7 +33,7 @@ struct TemaView: View {
 //                            }
                             .padding(0)
                             Text("Essa estrela tem 1 hora de vida")
-                                .font(Font.custom("Inter", size: 9))
+                                .font(Font.custom("Kodchasan-Regular", size: 9))
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(.black)
                         }.padding(10)
@@ -63,6 +62,10 @@ struct TemaView: View {
                     .frame(width: 300, height: 445, alignment: .top)
                     .background(.white)
                     .cornerRadius(16)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(.black, lineWidth: 1)
+                    )
                 }
                 
                 VStack{

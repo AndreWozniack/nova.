@@ -24,14 +24,20 @@ struct DescriptionView: View {
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(.black)
                                 .padding(0)
-                            Text(formattedTime) // Exiba o tempo formatado
-                                .font(Font.custom("Inter", size: 9))
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(.black)
-                                .frame(width: 124, alignment: .top)
-                                .onReceive(timer) { _ in // Atualize a cada segundo
-                                    formattedTime = estrela.tempoRestanteString
-                                }
+                            HStack(spacing: 5){
+                                Text("Tempo restante:") // Exiba o tempo formatado
+                                    .font(.custom("Kodchasan-Regular", size: 12))
+                                    .foregroundColor(.black)
+                                    .onReceive(timer) { _ in
+                                        formattedTime = estrela.tempoRestanteString
+                                    }
+                                Text("\(formattedTime)") // Exiba o tempo formatado
+                                    .font(.custom("Kodchasan-Regular", size: 12))
+                                    .foregroundColor(.black)
+                                    .onReceive(timer) { _ in
+                                        formattedTime = estrela.tempoRestanteString
+                                    }
+                            }
                         }.padding(5)
                             .padding(.top, 85/2)
                         ScrollView{
@@ -55,7 +61,6 @@ struct DescriptionView: View {
                         .padding(.bottom, 24)
                         .padding(.top, 10)
                     }
-                    
                     .frame(width: 300, height: 445, alignment: .top)
                     .background(.white)
                     .cornerRadius(16)
@@ -91,6 +96,5 @@ struct DescriptionView_Previews: PreviewProvider {
 
 func geraEstrela() -> Estrela {
     let estrela = Estrela(reflexao: Reflexao(titulo: "Tema", texto: "A amizade é uma das joias mais preciosas que podemos encontrar ao longo da vida. Ela é como um jardim que requer cuidado constante, regado com amor, confiança e apoio mútuo. Assim como as flores desabrocham e crescem com o tempo, as verdadeiras amizades também se fortalecem com as experiências compartilhadas e os desafios enfrentados juntos."), x: 0, y: 0)
-    estrela.dataInicio = Date()
     return estrela
 }

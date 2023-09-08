@@ -8,6 +8,7 @@ class Manager : ObservableObject {
     @Published var showView = false
     @Published var showNewView = false
     @Published var showSubView = false
+    @Published var showSubDescriptionView = false
 
 
     private init() {}

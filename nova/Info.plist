@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Kodchasan-Bold</string>
+		<string>Kodchasan-BoldItalic</string>
+		<string>Kodchasan-ExtraLight</string>
+		<string>Kodchasan-ExtraLightItalic</string>
+		<string>Kodchasan-Italic</string>
+		<string>Kodchasan-Light</string>
+		<string>Kodchasan-LightItalic</string>
+		<string>Kodchasan-Medium</string>
+		<string>Kodchasan-MediumItalic</string>
+		<string>Kodchasan-Regular</string>
+		<string>Kodchasan-SemiBold</string>
+		<string>Kodchasan-SemiBoldItalic</string>
+	</array>
+</dict>
+</plist>

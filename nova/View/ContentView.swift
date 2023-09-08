@@ -19,9 +19,9 @@ struct ContentView: View {
                         print(EstrelaManager.shared.todasEstrelas)
                     } label: {
                         Text("Lista de estrelas")
+                            .font(.custom("Kodchasan-Bold", size: 15))
                             .padding(10)
                             .background(.white)
-                            .font(.system(size: 15))
                             .foregroundColor(.black)
                             .cornerRadius(12)
                     }
@@ -42,15 +42,16 @@ struct ContentView: View {
 
             
             if manager.showView {
-                // Fundo semi-transparente
-                Color.black.opacity(0.4)
-                    .edgesIgnoringSafeArea(.all)
-                    .onTapGesture {
-                        withAnimation {
-                            manager.showView = false
+                ZStack{
+                    Color.black.opacity(0.4)
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                            withAnimation {
+                                manager.showView = false
+                            }
                         }
-                    }
-                TemaView(estrela: manager.estrela)
+                    TemaView(estrela: manager.estrela)
+                }
                 
             }
             if manager.showNewView {
@@ -58,7 +59,7 @@ struct ContentView: View {
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
                         withAnimation {
-                            manager.showSubView = false
+                            manager.showNewView = false
                         }
                     }
                 DescriptionView(estrela: manager.estrelaTocada)
@@ -73,6 +74,16 @@ struct ContentView: View {
                         }
                     }
                 SubView()
+            }
+            if manager.showSubDescriptionView {
+                Color.black.opacity(0.4)
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        withAnimation {
+                            manager.showSubDescriptionView = false
+                        }
+                    }
+                SubDescriptionView(estrela: manager.estrelaTocada)
             }
         }
          
