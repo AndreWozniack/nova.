@@ -47,9 +47,7 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         setConstelacoes()
         
         if let ultimaEstrela = EstrelaManager.shared.todasEstrelas.last {
-            print(ultimaEstrela)
             cameraNode.position = CGPoint(x: ultimaEstrela.x, y: ultimaEstrela.y)
-            print("x: \(cameraNode.position.x), y: \(cameraNode.position.y)")
         }
     }
     
@@ -70,15 +68,45 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
             if subEstrela.reflexao.texto != "" {
                 self.estrelaCriada(subEstrela)
                 if let estrelaOrigemID = subEstrela.estrelaOrigem,let estrelaOrigem = self.todasEstrelas.first(where: { $0.id == estrelaOrigemID }) {
-                    estrelaOrigem.addChild(subEstrela)
+                    print(estrelaOrigem)
+                    self.addChild(subEstrela)
                 }
             }
         }.store(in: &cancellable)
-
     }
     
+    func tamanhoNivel(_ nivel:Int) -> CGFloat{
+        switch nivel {
+        case 0:
+            return CGFloat(40)
+        case 1:
+            return CGFloat(30)
+        case 2:
+            return CGFloat(20)
+        case 3:
+            return CGFloat(10)
+        default:
+            return CGFloat(40)
+        }
+    }
+    func tamanhoTituloNivel(_ nivel:Int) -> CGFloat{
+        switch nivel {
+        case 0:
+            return CGFloat(20)
+        case 1:
+            return CGFloat(15)
+        case 2:
+            return CGFloat(10)
+        case 3:
+            return CGFloat(5)
+        default:
+            return CGFloat(20)
+        }
+    }
+    
+    
     func adicionarEstrelaNaTela(_ estrela: Estrela) -> Estrela {
-        let novaEstrela = Estrela(reflexao: estrela.reflexao, x: estrela.x, y: estrela.y)
+        let novaEstrela = Estrela(reflexao: estrela.reflexao, x: estrela.x, y: estrela.y, tamanho: tamanhoNivel(estrela.nivel))
         novaEstrela.nivel = estrela.nivel
         novaEstrela.delegate = self
         novaEstrela.position = CGPoint(x: estrela.x, y: estrela.y)
@@ -90,31 +118,20 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         novaEstrela.isAlive = estrela.isAlive
         novaEstrela.estrelaOrigem = estrela.estrelaOrigem
         
-        
-        let titulo = SKLabelNode(text: estrela.reflexao.titulo)
-        titulo.zPosition = 3
-        titulo.position.y += 25
-        titulo.fontName = "Helvetica-Bold"
-        
-        novaEstrela.addChild(titulo)
+        if estrela.nivel == 0 {
+            addTitulo(novaEstrela)
+        }
         todasEstrelas.append(novaEstrela)
         
         return novaEstrela
     }
     
-    func conectarEstrelas(estrela1: Estrela, estrela2: Estrela) {
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: estrela1.x, y: estrela1.y))
-        path.addLine(to: CGPoint(x: estrela2.x, y: estrela2.y))
-        let linha = SKShapeNode(path: path.cgPath)
-        linha.strokeColor = SKColor.gray.withAlphaComponent(transparenciaParaNivel(estrela1.nivel))
-        linha.zPosition = -1
-        estrela1.addChild(estrela2)
-        self.addChild(linha)
-    }
-    
-    func transparenciaParaNivel(_ nivel: Int) -> CGFloat {
-        return 1.0 - CGFloat(nivel) * 0.4
+    func addTitulo(_ estrela: Estrela) {
+        let titleLabel = SKLabelNode(text: estrela.reflexao.titulo)
+        titleLabel.fontName = "Helvetica-Bold"
+        titleLabel.fontSize = 12 // Ajuste o tamanho da fonte conforme necessário
+        titleLabel.position = CGPoint(x: 0, y: tamanhoNivel(estrela.nivel)) // Posicione o título abaixo do círculo
+        estrela.addChild(titleLabel)
     }
     
     func posicaoEhValida(x: CGFloat, y: CGFloat) -> Bool {
@@ -129,23 +146,29 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
     
     func distanciaMaximaParaNivel(_ nivel: Int) -> CGFloat {
         switch nivel {
-        case 0: return 500
-        case 1: return 200
-        case 2: return 100
-        default: return 50
+        case 0: return 800
+        case 1: return 400
+        case 2: return 200
+        default: return 70
         }
     }
     
     func estrelaTocada(_ estrela: Estrela) {
         print(estrela)
         Manager.shared.estrelaTocada = estrela
-        Manager.shared.showNewView = true
+        if estrela.nivel == 0 {
+            Manager.shared.showNewView = true
+        } else {
+            Manager.shared.showSubDescriptionView = true
+        }
+        
     }
     
     func estrelaCriada(_ estrela: Estrela) {
         if estrela.nivel > 0 {
             let novaEstrela = adicionarEstrelaNaTela(estrela)
             todasEstrelas.append(novaEstrela)
+            ligaEstrela(novaEstrela)
         }
         let novaEstrela = adicionarEstrelaNaTela(estrela)
         todasEstrelas.append(novaEstrela)
@@ -154,26 +177,11 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
     
     func setConstelacoes() {
         for estrela in EstrelaManager.shared.todasEstrelas {
-            adicionarEstrelaNaTela(estrela)
-            percorrerTodosOsNosFilhos(estrela)
+            print(adicionarEstrelaNaTela(estrela))
+            ligaEstrela(estrela)
         }
     }
     
-    func percorrerTodosOsNosFilhos(_ estrela: Estrela) {
-        for filho in estrela.children {
-            if let filhoEstrela = filho as? Estrela {
-                print()
-                if let pai = estrela.parent as? Estrela {
-                    criarLinhaEntreEstrelas(pai, filhoEstrela)
-                    conectarEstrelas(estrela1: pai, estrela2: filhoEstrela)
-                }
-                // Verifique se o nó filho tem filhos e, se sim, percorra todos eles
-                if filhoEstrela.children.count > 0 {
-                    percorrerTodosOsNosFilhos(filhoEstrela)
-                }
-            }
-        }
-    }
 
     func criarLinhaEntreEstrelas(_ estrela1: Estrela, _ estrela2: Estrela) {
         let path = UIBezierPath()
@@ -187,6 +195,32 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         
         self.addChild(linha)
     }
+    
+    func ligaEstrela(_ estrela: Estrela) {
+        guard let origemID = estrela.estrelaOrigem else {
+            return
+        }
+        if let origem = todasEstrelas.first(where: { $0.id == origemID }) {
+            let path = UIBezierPath()
+            path.move(to: estrela.position)
+            path.addLine(to: origem.position)
+
+            let lineNode = SKShapeNode(path: path.cgPath)
+            lineNode.strokeColor = SKColor(white: 1.0, alpha: 0.5)
+            lineNode.lineWidth = 2.0
+            // Adicionar o nó de linha à cena
+            self.addChild(lineNode)
+        }
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        for i in todasEstrelas {
+            i.zRotation = cameraNode.zRotation
+        }
+    }
+    
+    
+    
 
     
     // MARK: - Gestos

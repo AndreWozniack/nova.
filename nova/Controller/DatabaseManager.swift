@@ -6,7 +6,7 @@ class EstrelaManager: ObservableObject {
     static let shared = EstrelaManager()
 
     @Published var todasEstrelas: [Estrela] = []
-    @Published var conexoes: [UUID: [UUID]] = [:]  // Mapeia uma estrela para suas conexões
+    @Published var estrelasExpiradas: [Estrela] = []
 
     private var cancellables: Set<AnyCancellable> = []
 
@@ -47,9 +47,6 @@ class EstrelaManager: ObservableObject {
         } else {
             print("Nenhum dado encontrado no UserDefaults.")
         }
-        for i in todasEstrelas {
-            print(i)
-        }
         filterExpiredEstrelas()
     }
 
@@ -61,19 +58,10 @@ class EstrelaManager: ObservableObject {
         saveToUserDefaults()
     }
 
-    func addConexao(from estrelaOrigem: Estrela, to estrelaDestino: Estrela) {
-        if conexoes[estrelaOrigem.id] != nil {
-            conexoes[estrelaOrigem.id]?.append(estrelaDestino.id)
-        } else {
-            conexoes[estrelaOrigem.id] = [estrelaDestino.id]
-        }
-    }
-
     func updateEstrela(_ updatedEstrela: Estrela) {
         guard let index = todasEstrelas.firstIndex(where: { $0.id == updatedEstrela.id }) else {
             return
         }
-
         todasEstrelas[index] = updatedEstrela
     }
     
@@ -83,18 +71,30 @@ class EstrelaManager: ObservableObject {
 
     func removeEstrela(_ estrela: Estrela) {
         todasEstrelas.removeAll { $0.id == estrela.id }
-        conexoes[estrela.id] = nil
     }
 
-    private func filterExpiredEstrelas() {
+    func filterExpiredEstrelas() {
         let currentDate = Date()
+        estrelasExpiradas = todasEstrelas.filter { estrela in
+            let endDate = estrela.dataInicio.addingTimeInterval(estrela.duracao)
+            return currentDate > endDate
+        }
+
         todasEstrelas = todasEstrelas.filter { estrela in
             let endDate = estrela.dataInicio.addingTimeInterval(estrela.duracao)
             return currentDate <= endDate
         }
     }
+    func getEstrelaDeOrigemParaEstrela(_ estrela: Estrela) -> Estrela? {
+        guard let estrelaOrigemID = estrela.estrelaOrigem else {
+            return nil
+        }
+        return todasEstrelas.first { $0.id == estrelaOrigemID }
+    }
+
     
     func clearSky(){
         todasEstrelas.removeAll()
+        print(todasEstrelas)
     }
 }

@@ -3,7 +3,7 @@ import SwiftUI
 struct SubDescriptionView: View {
     
     var estrela : Estrela
-    @State private var formattedTime: String = ""
+    @State private var formattedTime: String = "Calculando..."
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -14,33 +14,20 @@ struct SubDescriptionView: View {
                     VStack(alignment: .center, spacing: 5) {
                         Spacer()
                         VStack(alignment: .center, spacing: 4) {
+                           
                             Text(estrela.reflexao.titulo)
                                 .cornerRadius(8)
                                 .font(
-                                    Font.custom("Kodchasan", size: 18)
-                                        .weight(.bold)
+                                    Font.custom("Kodchasan-Regular", size: 18)
                                 )
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(.black)
                                 .padding(0)
+                            Text("Na constelação: \(EstrelaManager.shared.getEstrelaDeOrigemParaEstrela(estrela)!.reflexao.titulo)") // Exiba o tempo formatado
+                                .font(.custom("Kodchasan-Regular", size: 12))
+                                .fontWeight(.light)
+                                .foregroundColor(.black)
                             
-                            Text(estrela.reflexao.titulo)
-                                .cornerRadius(8)
-                                .font(
-                                    Font.custom("Kodchasan", size: 18)
-                                        .weight(.bold)
-                                )
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(.black)
-                                .padding(0)
-                            Text(formattedTime) // Exiba o tempo formatado
-                                .font(Font.custom("Inter", size: 9))
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(.black)
-                                .frame(width: 124, alignment: .top)
-                                .onReceive(timer) { _ in // Atualize a cada segundo
-                                    formattedTime = estrela.tempoRestanteString
-                                }
                         }.padding(5)
                             .padding(.top, 85/2)
                         ScrollView{
@@ -52,7 +39,7 @@ struct SubDescriptionView: View {
                         }
                         Button(action: {
                             Manager.shared.showSubView = true
-                            Manager.shared.showNewView = false
+                            Manager.shared.showSubDescriptionView = false
                         }) {
                             Text("Adicionar nova estrela")
                                 .padding(10)
@@ -64,7 +51,6 @@ struct SubDescriptionView: View {
                         .padding(.bottom, 24)
                         .padding(.top, 10)
                     }
-                    
                     .frame(width: 300, height: 445, alignment: .top)
                     .background(.white)
                     .cornerRadius(16)
@@ -92,7 +78,7 @@ struct SubDescriptionView: View {
 }
 
 
-struct SybDescriptionView_Previews: PreviewProvider {
+struct SubDescriptionView_Previews: PreviewProvider {
     static var previews: some View {
         DescriptionView(estrela: geraEstrela2())
     }

@@ -19,7 +19,6 @@ struct SubView: View {
                 VStack{
                     Spacer()
                     VStack(alignment: .center, spacing: 5) {
-                        Spacer()
                         VStack(alignment: .center, spacing: 4) {
                             Text("\(Manager.shared.estrelaTocada.reflexao.titulo)")
                                 .bold()
@@ -35,7 +34,7 @@ struct SubView: View {
                                 .multilineTextAlignment(.center)
                             
                             HStack(alignment: .center, spacing: 4) {
-                                Text("Planeta gasoso")
+                                Text("Gigante Amarela")
                                     .font(
                                         Font.custom("SF Pro", size: 9)
                                             .weight(.bold)
@@ -54,31 +53,63 @@ struct SubView: View {
                             .autocorrectionDisabled()
                             .padding(.horizontal, 12)
                             .padding(.vertical, 10)
-                            .frame(width: 260, height: 246, alignment: .topLeading)
-                        
-                        Button {
-                            let ponto = novoPontoAoRedorDe(x: Manager.shared.estrelaTocada.x, y: Manager.shared.estrelaTocada.y, nivel: Manager.shared.estrelaTocada.nivel)
-                            let novaEstrela = Estrela(reflexao: Reflexao(titulo: self.titulo, texto: self.texto), x: ponto.x, y: ponto.y)
+                            .frame(width: 260, height: 220, alignment: .topLeading)
                             
-                            if let estrelaOrigem = EstrelaManager.shared.getEstrela(byID: Manager.shared.estrelaTocada.id){
-                                novaEstrela.estrelaOrigem = estrelaOrigem.id
-                                novaEstrela.nivel = estrelaOrigem.nivel + 1
-                                Manager.shared.subEstrela = novaEstrela
-                                EstrelaManager.shared.addEstrela(novaEstrela)
-                                EstrelaManager.shared.updateEstrela(estrelaOrigem)
+                        
+                        HStack{
+                            Button {
+                                Manager.shared.showSubView = false
+                            } label: {
+                                HStack{
+                                    Text("Cancelar")
+                                        .font(.system(size: 13))
+                                        .foregroundColor(.white)
+                                    Text(.init(systemName: "x.circle.fill"))
+                                        .font(.system(size: 13))
+                                        .foregroundColor(.white)
+                                }
+                                .padding(.vertical, 16)
+                                .padding(.horizontal, 24)
+                                .background(Color.black)
+                                .font(.system(size: 15))
+                                .foregroundColor(.white)
+                                .cornerRadius(12)
+                            }
+                            Button {
+                                let ponto = novoPontoAoRedorDe(x: Manager.shared.estrelaTocada.x, y: Manager.shared.estrelaTocada.y, nivel: Manager.shared.estrelaTocada.nivel)
+                                let novaEstrela = Estrela(reflexao: Reflexao(titulo: self.titulo, texto: self.texto), x: ponto.x, y: ponto.y)
+                                
+                                if let estrelaOrigem = EstrelaManager.shared.getEstrela(byID: Manager.shared.estrelaTocada.id){
+                                    novaEstrela.estrelaOrigem = estrelaOrigem.id
+                                    novaEstrela.nivel = estrelaOrigem.nivel + 1
+                                    Manager.shared.subEstrela = novaEstrela
+                                    EstrelaManager.shared.addEstrela(novaEstrela)
+                                    EstrelaManager.shared.updateEstrela(estrelaOrigem)
+                                    print(estrelaOrigem)
+                                }
+                                
+                              
+                                Manager.shared.showSubView = false
+                                
+                            } label: {
+                                HStack{
+                                    Text("Adicionar")
+                                        .font(.system(size: 13))
+                                        .foregroundColor(.white)
+                                    Text(.init(systemName: "checkmark.circle.fill"))
+                                        .font(.system(size: 13))
+                                        .foregroundColor(.white)
+                                }
+                                .padding(.vertical, 16)
+                                .padding(.horizontal, 24)
+                                .background(Color.black)
+                                .font(.system(size: 15))
+                                .foregroundColor(.white)
+                                .cornerRadius(12)
                             }
                             
-                          
-                            Manager.shared.showSubView = false
-                            
-                        } label: {
-                            Text(.init(systemName: "plus.circle.fill"))
-                                .font(.system(size: 32))
-                                .foregroundColor(.black)
                         }
-
                         .padding(.bottom ,24)
-                        Spacer()
                     }
                     .padding(.top, 85/2)
                     .frame(width: 300, height: 445, alignment: .top)
@@ -108,7 +139,7 @@ struct SubView: View {
     func posicaoEhValida(x: CGFloat, y: CGFloat) -> Bool {
         let novaPosicao = CGPoint(x: x, y: y)
         for estrela in EstrelaManager.shared.todasEstrelas {
-            if estrela.position.distance(to: novaPosicao) < 50 {
+            if estrela.position.distance(to: novaPosicao) < 30 {
                 return false
             }
         }
@@ -117,10 +148,10 @@ struct SubView: View {
     
     func distanciaMaximaParaNivel(_ nivel: Int) -> CGFloat {
         switch nivel {
-        case 0: return 500
-        case 1: return 200
-        case 2: return 100
-        default: return 50
+        case 0: return 700
+        case 1: return 400
+        case 2: return 200
+        default: return 70
         }
     }
     

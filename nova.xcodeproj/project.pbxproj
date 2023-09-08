@@ -63,6 +63,19 @@
 		AF6C192F2A9FE0CC00D0A089 /* TemaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemaView.swift; sourceTree = "<group>"; };
 		AF7F2D5E2AA1287200F361F9 /* Reflexao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reflexao.swift; sourceTree = "<group>"; };
 		AF9FAE012AA9108700DE8FAE /* SubDescripitionVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubDescripitionVIew.swift; sourceTree = "<group>"; };
+		AF9FAE062AAB8B4500DE8FAE /* Kodchasan-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Medium.ttf"; sourceTree = "<group>"; };
+		AF9FAE072AAB8B4500DE8FAE /* Kodchasan-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-MediumItalic.ttf"; sourceTree = "<group>"; };
+		AF9FAE082AAB8B4500DE8FAE /* Kodchasan-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Italic.ttf"; sourceTree = "<group>"; };
+		AF9FAE092AAB8B4500DE8FAE /* Kodchasan-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		AF9FAE0A2AAB8B4500DE8FAE /* Kodchasan-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		AF9FAE0B2AAB8B4500DE8FAE /* Kodchasan-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-LightItalic.ttf"; sourceTree = "<group>"; };
+		AF9FAE0C2AAB8B4500DE8FAE /* Kodchasan-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-SemiBold.ttf"; sourceTree = "<group>"; };
+		AF9FAE0D2AAB8B4500DE8FAE /* Kodchasan-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Light.ttf"; sourceTree = "<group>"; };
+		AF9FAE0E2AAB8B4500DE8FAE /* Kodchasan-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-ExtraLight.ttf"; sourceTree = "<group>"; };
+		AF9FAE0F2AAB8B4600DE8FAE /* Kodchasan-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Regular.ttf"; sourceTree = "<group>"; };
+		AF9FAE102AAB8B4600DE8FAE /* Kodchasan-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-BoldItalic.ttf"; sourceTree = "<group>"; };
+		AF9FAE112AAB8B4600DE8FAE /* Kodchasan-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Bold.ttf"; sourceTree = "<group>"; };
+		AF9FAE122AAB8C1300DE8FAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AFA55EEF2AA1675E00163AB9 /* Estrela.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Estrela.swift; sourceTree = "<group>"; };
 		AFA55EF12AA25A3B00163AB9 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		AFA55EF32AA65DDB00163AB9 /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
@@ -127,11 +140,13 @@
 		AF6C18DD2A9FBCEF00D0A089 /* nova */ = {
 			isa = PBXGroup;
 			children = (
+				AF9FAE052AAB891800DE8FAE /* Fonts */,
 				AF6C18DE2A9FBCEF00D0A089 /* novaApp.swift */,
-				AF6C19332AA0D51400D0A089 /* Model */,
 				AF6C19502AA0D76E00D0A089 /* View */,
+				AF6C19332AA0D51400D0A089 /* Model */,
 				AFA55EF52AA7A9C400163AB9 /* Controller */,
 				AF6C18F02A9FBF5800D0A089 /* GoogleService-Info.plist */,
+				AF9FAE122AAB8C1300DE8FAE /* Info.plist */,
 				AF6C18E22A9FBCF000D0A089 /* Assets.xcassets */,
 				AF6C18E42A9FBCF000D0A089 /* Preview Content */,
 			);
@@ -167,6 +182,25 @@
 				AFA55EF82AA80FD300163AB9 /* SubView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		AF9FAE052AAB891800DE8FAE /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				AF9FAE112AAB8B4600DE8FAE /* Kodchasan-Bold.ttf */,
+				AF9FAE102AAB8B4600DE8FAE /* Kodchasan-BoldItalic.ttf */,
+				AF9FAE0E2AAB8B4500DE8FAE /* Kodchasan-ExtraLight.ttf */,
+				AF9FAE0A2AAB8B4500DE8FAE /* Kodchasan-ExtraLightItalic.ttf */,
+				AF9FAE082AAB8B4500DE8FAE /* Kodchasan-Italic.ttf */,
+				AF9FAE0D2AAB8B4500DE8FAE /* Kodchasan-Light.ttf */,
+				AF9FAE0B2AAB8B4500DE8FAE /* Kodchasan-LightItalic.ttf */,
+				AF9FAE062AAB8B4500DE8FAE /* Kodchasan-Medium.ttf */,
+				AF9FAE072AAB8B4500DE8FAE /* Kodchasan-MediumItalic.ttf */,
+				AF9FAE0F2AAB8B4600DE8FAE /* Kodchasan-Regular.ttf */,
+				AF9FAE0C2AAB8B4500DE8FAE /* Kodchasan-SemiBold.ttf */,
+				AF9FAE092AAB8B4500DE8FAE /* Kodchasan-SemiBoldItalic.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		AFA55EF52AA7A9C400163AB9 /* Controller */ = {
@@ -424,6 +458,7 @@
 				DEVELOPMENT_TEAM = L2AH2M48T4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = nova/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -436,7 +471,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = amigosestoaqui.nova.nova;
+				PRODUCT_BUNDLE_IDENTIFIER = amigosestoaqui.nova;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -458,6 +493,7 @@
 				DEVELOPMENT_TEAM = L2AH2M48T4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = nova/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -470,7 +506,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = amigosestoaqui.nova.nova;
+				PRODUCT_BUNDLE_IDENTIFIER = amigosestoaqui.nova;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

@@ -12,12 +12,7 @@ class Estrela: SKShapeNode, Codable{
     weak var delegate: EstrelaDelegate?
     var id  = UUID()
     var reflexao: Reflexao
-    var nivel: Int = 0 {
-        didSet {
-            self.fillColor = corParaNivel(nivel)
-            self.strokeColor = self.fillColor.withAlphaComponent(transparenciaParaNivel(nivel))
-        }
-    }
+    var nivel: Int = 0
     var x: CGFloat
     var y: CGFloat
     var estrelaOrigem: UUID?
@@ -73,17 +68,23 @@ class Estrela: SKShapeNode, Codable{
         try container.encode(isAlive, forKey: .isAlive)
     }
     
-    init(reflexao: Reflexao,x: CGFloat ,y: CGFloat ,tamanho: CGSize = CGSize(width: 40, height: 40), origem: Estrela? = nil) {
+    init(reflexao: Reflexao, x: CGFloat, y: CGFloat, tamanho: CGFloat = 40, origem: Estrela? = nil) {
         self.reflexao = reflexao
         self.x = x
         self.y = y
         self.dataInicio = Date()
         self.isAlive = true
         super.init()
-        
+
         self.estrelaOrigem = origem?.id  // Inicializando com o valor fornecido (pode ser nil)
-        self.path = UIBezierPath(ovalIn: CGRect(origin: CGPoint(x: -tamanho.width/2, y: -tamanho.height/2), size: tamanho)).cgPath
-        self.fillColor = .white
+
+        let circle = SKShapeNode(circleOfRadius: tamanho / 2)
+        circle.fillColor = .white
+        addChild(circle)
+        
+
+
+        self.position = CGPoint(x: x, y: y)
         self.isUserInteractionEnabled = true
         startUpdateTimer()
     }
@@ -94,20 +95,7 @@ class Estrela: SKShapeNode, Codable{
 
     
     override var description: String {
-        return "=============\nID = \(id)\nTema = \(reflexao.titulo)\nReflexão = \(reflexao.texto)\nData de Criação = \(dateFormatter.string(from: dataInicio))\nTempo Restante = \(formatTimeInterval())\nNivel = \(nivel)\nx:\(x) y:\(y)\nEStrela de origem: \(estrelaOrigem?.uuidString ?? "Sem origem") \n=============\n"
-    }
-    
-    func corParaNivel(_ nivel: Int) -> UIColor {
-        switch nivel {
-        case 0:
-            return .white
-        case 1:
-            return .green
-        case 2:
-            return .red
-        default:
-            return .blue
-        }
+        return "=============\nID = \(id)\nTema = \(reflexao.titulo)\nReflexão = \(reflexao.texto)\nData de Criação = \(dateFormatter.string(from: dataInicio))\nTempo Restante = \(formatTimeInterval(tempoRestante(dataInicio)))\nNivel = \(nivel)\nx:\(x) y:\(y)\nEstrela de origem: \(estrelaOrigem?.uuidString ?? "Sem origem") \n=============\n"
     }
 
     func transparenciaParaNivel(_ nivel: Int) -> CGFloat {
@@ -122,17 +110,23 @@ class Estrela: SKShapeNode, Codable{
         delegate?.estrelaTocada(self)
     }
     
-    func tempoRestante() -> TimeInterval {
-        dateFormatter.string(from: dataInicio)
+    func tempoRestante(_ data: Date) -> TimeInterval {
+        dateFormatter.string(from: data)
         let endDate = dataInicio.addingTimeInterval(duracao)
         return endDate.timeIntervalSince(Date())
     }
     
-    func formatTimeInterval() -> String {
-        let interval = Int(tempoRestante())
+    func formatTimeInterval(_ tempo: TimeInterval) -> String {
+        let interval = Int(tempo)
         let days = interval / (24 * 3600)
         let hours = (interval % (24 * 3600)) / 3600
         let minutes = (interval % 3600) / 60
+        if days == 0 {
+            if hours == 0{
+                return "\(minutes) minutos"
+            }
+            return "\(hours) horas, \(minutes) minutos"
+        }
         return "\(days) dias, \(hours) horas, \(minutes) minutos"
     }
 
@@ -147,14 +141,12 @@ class Estrela: SKShapeNode, Codable{
     func updateTime() {
         checkIfAlive()
         if isAlive {
-            tempoRestanteString = formatTimeInterval()
+            tempoRestanteString = formatTimeInterval(tempoRestante(dataInicio))
         } else {
-            tempoRestanteString = "A estrela não está mais viva."
+            tempoRestanteString = "Essa estrela não está mais viva."
             updateTimer?.invalidate() // Pare o timer se a estrela não estiver mais viva
         }
     }
-
-
     
     func checkIfAlive() {
         let endDate = dataInicio.addingTimeInterval(duracao)
