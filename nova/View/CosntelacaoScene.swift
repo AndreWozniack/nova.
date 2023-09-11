@@ -50,7 +50,6 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
             cameraNode.position = CGPoint(x: ultimaEstrela.x, y: ultimaEstrela.y)
         }
     }
-    
     func initSink() {
         Manager.shared.$estrela.sink { estrela in
             if estrela.reflexao.texto != "" {
@@ -67,8 +66,7 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         Manager.shared.$subEstrela.sink { subEstrela in
             if subEstrela.reflexao.texto != "" {
                 self.estrelaCriada(subEstrela)
-                if let estrelaOrigemID = subEstrela.estrelaOrigem,let estrelaOrigem = self.todasEstrelas.first(where: { $0.id == estrelaOrigemID }) {
-                    print(estrelaOrigem)
+                if let estrelaOrigemID = subEstrela.estrelaOrigem,let _ = self.todasEstrelas.first(where: { $0.id == estrelaOrigemID }) {
                     self.addChild(subEstrela)
                 }
             }
@@ -77,14 +75,12 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
     
     func tamanhoNivel(_ nivel:Int) -> CGFloat{
         switch nivel {
-        case 0:
-            return CGFloat(40)
         case 1:
-            return CGFloat(30)
-        case 2:
             return CGFloat(20)
-        case 3:
+        case 2:
             return CGFloat(10)
+        case 3:
+            return CGFloat(5)
         default:
             return CGFloat(40)
         }
@@ -110,6 +106,7 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         novaEstrela.nivel = estrela.nivel
         novaEstrela.delegate = self
         novaEstrela.position = CGPoint(x: estrela.x, y: estrela.y)
+        
         novaEstrela.zPosition = 1
         self.addChild(novaEstrela)
         
@@ -125,7 +122,6 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         
         return novaEstrela
     }
-    
     func addTitulo(_ estrela: Estrela) {
         let titleLabel = SKLabelNode(text: estrela.reflexao.titulo)
         titleLabel.fontName = "Helvetica-Bold"
@@ -133,7 +129,6 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         titleLabel.position = CGPoint(x: 0, y: tamanhoNivel(estrela.nivel)) // Posicione o título abaixo do círculo
         estrela.addChild(titleLabel)
     }
-    
     func posicaoEhValida(x: CGFloat, y: CGFloat) -> Bool {
         let novaPosicao = CGPoint(x: x, y: y)
         for estrela in todasEstrelas {
@@ -144,14 +139,6 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         return true
     }
     
-    func distanciaMaximaParaNivel(_ nivel: Int) -> CGFloat {
-        switch nivel {
-        case 0: return 800
-        case 1: return 400
-        case 2: return 200
-        default: return 70
-        }
-    }
     
     func estrelaTocada(_ estrela: Estrela) {
         print(estrela)
@@ -163,7 +150,6 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         }
         
     }
-    
     func estrelaCriada(_ estrela: Estrela) {
         if estrela.nivel > 0 {
             let novaEstrela = adicionarEstrelaNaTela(estrela)
@@ -174,7 +160,6 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         todasEstrelas.append(novaEstrela)
         EstrelaManager.shared.addEstrela(novaEstrela)
     }
-    
     func setConstelacoes() {
         for estrela in EstrelaManager.shared.todasEstrelas {
             print(adicionarEstrelaNaTela(estrela))
@@ -182,48 +167,73 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         }
     }
     
-
-    func criarLinhaEntreEstrelas(_ estrela1: Estrela, _ estrela2: Estrela) {
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: estrela1.x, y: estrela1.y))
-        path.addLine(to: CGPoint(x: estrela2.x, y: estrela2.y))
-        
-        let linha = SKShapeNode(path: path.cgPath)
-        linha.strokeColor = SKColor.gray
-        // Defina outras propriedades da linha, como espessura e transparência, conforme necessário
-        linha.zPosition = -2
-        
-        self.addChild(linha)
-    }
-    
     func ligaEstrela(_ estrela: Estrela) {
         guard let origemID = estrela.estrelaOrigem else {
             return
         }
         if let origem = todasEstrelas.first(where: { $0.id == origemID }) {
-            let path = UIBezierPath()
-            path.move(to: estrela.position)
-            path.addLine(to: origem.position)
-
-            let lineNode = SKShapeNode(path: path.cgPath)
+            let pathInicial = CGMutablePath()
+            pathInicial.move(to: origem.position)
+            pathInicial.addLine(to: origem.position)
+            
+            let lineNode = SKShapeNode(path: pathInicial)
             lineNode.strokeColor = SKColor(white: 1.0, alpha: 0.5)
             lineNode.lineWidth = 2.0
-            // Adicionar o nó de linha à cena
             self.addChild(lineNode)
+            
+            let duration: TimeInterval = 1.5
+            
+            let drawLineAction = SKAction.customAction(withDuration: duration) { node, elapsedTime in
+                guard let node = node as? SKShapeNode else { return }
+                
+                let path = CGMutablePath()
+                path.move(to: origem.position)
+                let t = min(1.0, CGFloat(elapsedTime) / CGFloat(duration))
+                let intermediatePoint = CGPoint(x: origem.position.x + t * (estrela.position.x - origem.position.x), y: origem.position.y + t * (estrela.position.y - origem.position.y))
+                
+                path.addLine(to: intermediatePoint)
+                node.path = path
+            }
+            
+            lineNode.run(drawLineAction)
         }
     }
-    
-    override func update(_ currentTime: TimeInterval) {
-        for i in todasEstrelas {
-            i.zRotation = cameraNode.zRotation
-        }
-    }
-    
-    
-    
 
+    override func update(_ currentTime: TimeInterval) {
+        for estrela in todasEstrelas {
+            estrela.zRotation = cameraNode.zRotation
+            if let titulo = estrela.children.first(where: { $0 is SKLabelNode }) as? SKLabelNode {
+                let escalaDaCamera = cameraNode.xScale
+                titulo.setScale(escalaDaCamera)
+            }
+        }
+    }
     
     // MARK: - Gestos
+    func applyPanInertia() {
+        let decelerationRate: CGFloat = 0.75 // Ajuste conforme necessário
+        let minSpeed: CGFloat = 2.0  // Ajuste conforme necessário
+
+        let inertiaAction = SKAction.customAction(withDuration: 0.5) { [weak self] (_, elapsedTime) in
+            guard let self = self, let camera = self.camera else { return }
+            
+            let angle = camera.zRotation
+            let rotatedVelocity = CGPoint(x: cos(angle) * self.panVelocity.x + sin(angle) * self.panVelocity.y,
+                                          y: -sin(angle) * self.panVelocity.x + cos(angle) * self.panVelocity.y)
+            let velocityInScene = CGPoint(x: rotatedVelocity.x * -camera.xScale, y: rotatedVelocity.y * camera.yScale)
+            camera.position = CGPoint(x: camera.position.x + velocityInScene.x * CGFloat(elapsedTime),
+                                      y: camera.position.y + velocityInScene.y * CGFloat(elapsedTime))
+            
+            // Diminuir a velocidade
+            self.panVelocity.x *= decelerationRate
+            self.panVelocity.y *= decelerationRate
+            
+            if self.panVelocity.length() < minSpeed {
+                camera.removeAction(forKey: "panInertia")
+            }
+        }
+        camera?.run(inertiaAction, withKey: "panInertia")
+    }
     @objc func panGestureAction(_ sender: UIPanGestureRecognizer) {
         guard let camera = self.camera else {
             return
@@ -248,31 +258,6 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         default:
             break
         }
-    }
-    func applyPanInertia() {
-        let decelerationRate: CGFloat = 0.75 // Ajuste conforme necessário
-        let minSpeed: CGFloat = 2.0  // Ajuste conforme necessário
-
-        let inertiaAction = SKAction.customAction(withDuration: 0.5) { [weak self] (_, elapsedTime) in
-            guard let self = self, let camera = self.camera else { return }
-            
-            let angle = camera.zRotation
-            let rotatedVelocity = CGPoint(x: cos(angle) * self.panVelocity.x + sin(angle) * self.panVelocity.y,
-                                          y: -sin(angle) * self.panVelocity.x + cos(angle) * self.panVelocity.y)
-            let velocityInScene = CGPoint(x: rotatedVelocity.x * -camera.xScale, y: rotatedVelocity.y * camera.yScale)
-            camera.position = CGPoint(x: camera.position.x + velocityInScene.x * CGFloat(elapsedTime),
-                                      y: camera.position.y + velocityInScene.y * CGFloat(elapsedTime))
-            
-            // Diminuir a velocidade
-            self.panVelocity.x *= decelerationRate
-            self.panVelocity.y *= decelerationRate
-            
-            // Parar a ação se a velocidade for muito baixa
-            if self.panVelocity.length() < minSpeed {
-                camera.removeAction(forKey: "panInertia")
-            }
-        }
-        camera?.run(inertiaAction, withKey: "panInertia")
     }
     @objc func rotateGestureAction(_ sender: UIRotationGestureRecognizer) {
         guard let camera = self.camera else {
@@ -318,7 +303,6 @@ extension ConstelacaoScene: UIGestureRecognizerDelegate {
         return atan2(deltaY, deltaX)
     }
 }
-
 extension CGPoint {
     func distance(to point: CGPoint) -> CGFloat {
         return hypot(self.x - point.x, self.y - point.y)
@@ -327,5 +311,3 @@ extension CGPoint {
         return sqrt(self.x * self.x + self.y * self.y)
     }
 }
-
-

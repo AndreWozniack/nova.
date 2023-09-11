@@ -1,11 +1,14 @@
 import SwiftUI
 import SpriteKit
+import UserNotifications
+
 
 struct ContentView: View {
     
     @State var zoom: CGFloat = 1.0
     @GestureState var gestureZoom: CGFloat = 1.0
     @ObservedObject var manager = Manager.shared
+    @EnvironmentObject var notificationManager: NotificationManager
     
     var body: some View {
     
@@ -86,7 +89,16 @@ struct ContentView: View {
                 SubDescriptionView(estrela: manager.estrelaTocada)
             }
         }
-         
+        .onAppear {
+            NotificationManager.shared.requestPermission()
+            NotificationManager.shared.scheduleNotification(title: "Um novo astro surgiu!", body: "Parece que há um novo astro em seu céu", timeInterval: 120, repeats: false)
+        }
+        .onReceive(notificationManager.$notificationResponse) { response in
+            if let response = response {
+
+                print("Notificação recebida com identificador: \(response.notification.request.identifier) \(response.description)")
+            }
+        }
     }
 }
 
@@ -109,6 +121,6 @@ struct ConstelacaoView: UIViewControllerRepresentable {
 
 struct Previews_ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(NotificationManager.shared)
     }
 }
