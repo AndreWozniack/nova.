@@ -80,6 +80,7 @@ class Estrela: SKShapeNode, Codable{
 
         let circle = SKShapeNode(circleOfRadius: tamanho / 2)
         circle.fillColor = .white
+        addGlow(to: circle, radius: Float(tamanho)*1.5)
         addChild(circle)
         
 
@@ -152,6 +153,22 @@ class Estrela: SKShapeNode, Codable{
         let endDate = dataInicio.addingTimeInterval(duracao)
         isAlive = Date() <= endDate
     }
+    
+    private func addGlow(to node: SKShapeNode, radius: Float = 40) {
+        let effectNode = SKEffectNode()
+        effectNode.shouldRasterize = true
+        self.addChild(effectNode)
+        effectNode.position = node.position
 
+        let texture = SKView().texture(from: node)
+        let effect = SKSpriteNode(texture: texture)
+        effect.color = .white //Fazer cor variar conforme o tipo
+        effect.colorBlendFactor = 1
+        effectNode.addChild(effect)
+        effectNode.filter = CIFilter(name: "CIGaussianBlur", parameters: ["inputRadius": radius])
+    }
 }
+
+
+
 

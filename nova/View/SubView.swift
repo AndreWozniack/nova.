@@ -77,7 +77,7 @@ struct SubView: View {
                             }
                             Button {
                                 let ponto = novoPontoAoRedorDe(x: Manager.shared.estrelaTocada.x, y: Manager.shared.estrelaTocada.y, nivel: Manager.shared.estrelaTocada.nivel)
-                                let novaEstrela = Estrela(reflexao: Reflexao(titulo: self.titulo, texto: self.texto), x: ponto.x, y: ponto.y)
+                                let novaEstrela = Estrela(reflexao: Reflexao(titulo: self.titulo, texto: self.texto), x: ponto.x, y: ponto.y, tamanho: tamanhoNivel(Manager.shared.estrelaTocada.nivel + 1))
                                 
                                 if let estrelaOrigem = EstrelaManager.shared.getEstrela(byID: Manager.shared.estrelaTocada.id){
                                     novaEstrela.estrelaOrigem = estrelaOrigem.id
@@ -157,23 +157,30 @@ struct SubView: View {
     
     func novoPontoAoRedorDe(x: CGFloat, y: CGFloat, nivel: Int) -> CGPoint {
         let distanciaMaxima = distanciaMaximaParaNivel(nivel)
+        let distanciaMinima = distanciaMaximaParaNivel(nivel - 1)
         
         while true {
-            // Gere um ângulo aleatório entre 0 e 2 * π
             let angulo = CGFloat.random(in: 0...(2 * .pi))
-            
-            // Calcule um deslocamento aleatório dentro da distância máxima permitida
             let distanciaAleatoria = CGFloat.random(in: 0...(distanciaMaxima / 2))
             
-            // Calcule as coordenadas do novo ponto com base no ângulo e distância
             let novoX = x + cos(angulo) * distanciaAleatoria
             let novoY = y + sin(angulo) * distanciaAleatoria
-            
-            // Verifique se a nova posição é válida usando a função posicaoEhValida
             if posicaoEhValida(x: novoX, y: novoY) {
                 return CGPoint(x: novoX, y: novoY)
             }
-            // Se a posição não for válida, continue gerando novos pontos
+        }
+    }
+    
+    func tamanhoNivel(_ nivel:Int) -> CGFloat{
+        switch nivel {
+        case 1:
+            return CGFloat(20)
+        case 2:
+            return CGFloat(10)
+        case 3:
+            return CGFloat(5)
+        default:
+            return CGFloat(40)
         }
     }
 

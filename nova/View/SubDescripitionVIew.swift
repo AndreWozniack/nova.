@@ -37,19 +37,37 @@ struct SubDescriptionView: View {
                                 .frame(width: 260, alignment: .topLeading)
                                 .foregroundColor(.black)
                         }
-                        Button(action: {
-                            Manager.shared.showSubView = true
-                            Manager.shared.showSubDescriptionView = false
-                        }) {
-                            Text("Adicionar nova estrela")
-                                .padding(10)
-                                .background(Color.black)
-                                .font(.system(size: 15))
-                                .foregroundColor(.white)
-                                .cornerRadius(12)
+                        
+                        if estrela.nivel < 3{
+                            Button(action: {
+                                Manager.shared.showSubView = true
+                                Manager.shared.showSubDescriptionView = false
+                            }) {
+                                Text("Adicionar nova estrela")
+                                    .padding(10)
+                                    .background(Color.black)
+                                    .font(.system(size: 15))
+                                    .foregroundColor(.white)
+                                    .cornerRadius(12)
+                            }
+                            .padding(.bottom, 24)
+                            .padding(.top, 10)
+                        } else {
+                            Button(action: {
+                                Manager.shared.showSubDescriptionView = false
+                            }) {
+                                Text("Fechar")
+                                    .padding(10)
+                                    .background(Color.black)
+                                    .font(.system(size: 15))
+                                    .foregroundColor(.white)
+                                    .cornerRadius(12)
+                            }
+                            .padding(.bottom, 24)
+                            .padding(.top, 10)
+                            
+                            
                         }
-                        .padding(.bottom, 24)
-                        .padding(.top, 10)
                     }
                     .frame(width: 300, height: 445, alignment: .top)
                     .background(.white)
