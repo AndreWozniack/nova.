@@ -5,98 +5,13 @@ class SoundManager {
     let audioEngine = AVAudioEngine()
     var soundDict: [Sound:AVAudioPlayer?] = [:]
     var soundPanPositions: [Sound: Float] = [:]
-
-    let audioEnvironment = AVAudioEnvironmentNode()
-    
-    func calculatePanPositionFromOrientation(_ orientation: CMQuaternion) -> Float {
-        // Aqui, você pode calcular a posição de pan com base na orientação angular.
-        // Por exemplo, você pode usar a inclinação (pitch) ou guinada (yaw) para ajustar a posição de pan.
-        // Lembre-se de mapear os valores para o intervalo -1.0 a 1.0, que representa o espectro completo de pan.
-        
-        // Para um exemplo simples, você pode usar a guinada (yaw) para ajustar a posição de pan.
-        let yaw = Float(atan2(2.0 * (orientation.y * orientation.w + orientation.x * orientation.z), 1.0 - 2.0 * (orientation.y * orientation.y + orientation.x * orientation.x)))
-        
-        // Mapeie o valor de guinada (yaw) para o intervalo -1.0 a 1.0
-        let panPosition = (yaw / Float.pi)
-        
-        return panPosition
-    }
-
     
     init() {
         for sound in Sound.allCases {
             soundDict[sound] = getAudioPlayer(sound: sound)
         }
-
-//        // Inicialize a posição de pan com base na orientação atual do dispositivo
-//        if let motion = motionManager.deviceMotion {
-//            let orientation = CMQuaternion(x: motion.attitude.quaternion.x, y: motion.attitude.quaternion.y, z: motion.attitude.quaternion.z, w: motion.attitude.quaternion.w)
-//            let panPosition = calculatePanPositionFromOrientation(orientation)
-//            
-//            for sound in Sound.allCases {
-//                guard let audioPlayer = soundDict[sound] else { continue }
-//                audioPlayer!.pan = panPosition
-//                soundPanPositions[sound] = panPosition
-//            }
-//        }
-//        
-//        audioEnvironment.renderingAlgorithm = .auto
-//        audioEngine.attach(audioEnvironment)
-//        audioEngine.connect(audioEnvironment, to: audioEngine.mainMixerNode, format: nil)
-//        audioEnvironment.listenerPosition = AVAudioMake3DPoint(0, 0, 0)
-//        
-//        do {
-//            try audioEngine.start()
-//        } catch {
-//            print("Erro ao iniciar o mecanismo de áudio: \(error)")
-//        }
     }
 
-    
-    let motionManager = CMMotionManager()
-
-    
-    func calculatePanPositionFromGyroData(_ gyroData: CMGyroData) -> Float {
-        // Use os dados do giroscópio para calcular a posição de pan com sensibilidade reduzida.
-        let yaw = Float(gyroData.rotationRate.y)
-        
-        // Reduza a sensibilidade dividindo o valor de rotação por um fator de escala menor (por exemplo, 10.0).
-        let panPosition = (yaw / 10.0) // Ajuste o fator de escala conforme necessário.
-        
-        return panPosition
-    }
-
-
-
-
-    func startMotionUpdates() {
-        if motionManager.isGyroAvailable {
-            motionManager.gyroUpdateInterval = 0.01
-            motionManager.startGyroUpdates(to: .main) { (gyroData, error) in
-                guard let gyroData = gyroData else { return }
-
-                // Use os dados do giroscópio para calcular a posição de pan
-                let panPosition = self.calculatePanPositionFromGyroData(gyroData)
-
-                // Atualize a posição de pan para cada som
-                for sound in Sound.allCases {
-                    guard let audioPlayer = self.soundDict[sound] else { continue }
-
-                    // Defina a posição de pan
-                    audioPlayer!.pan = panPosition
-
-                    // Atualize a posição de pan no dicionário
-                    self.soundPanPositions[sound] = panPosition
-                }
-            }
-            print("Gyro habilitado")
-        }
-    }
-
-
-
-
-        
     private func getAudioPlayer(sound: Sound) -> AVAudioPlayer? {
         guard let url = Bundle.main.url(
             forResource: sound.rawValue,
@@ -134,13 +49,31 @@ class SoundManager {
     }
     
     func lowVolume(sound: Sound) {
+        var count = 0
         guard let audioPlayer = soundDict[sound, default: nil] else { return }
-        audioPlayer.volume = 0.3
+        
+        Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
+            count+=1
+            audioPlayer.volume -= 0.1
+            if count == 3{
+                timer.invalidate()
+            }
+        }
     }
     
     func riseVolume(sound: Sound) {
+        var count = 0
         guard let audioPlayer = soundDict[sound, default: nil] else { return }
-        audioPlayer.volume = 1.0
+        
+        Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
+            count+=1
+            if audioPlayer.volume.isLessThanOrEqualTo(1.0){
+                audioPlayer.volume += 0.1
+            }
+            if count == 7{
+                timer.invalidate()
+            }
+        }
     }
     
     func stop(sound: Sound) {
@@ -152,7 +85,7 @@ class SoundManager {
     func left(sound: Sound){
         var count = 0
         guard let audioPlayer = soundDict[sound, default: nil] else { return }
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
             count+=1
             audioPlayer.pan -= 0.1
             if count == 7{
@@ -163,11 +96,42 @@ class SoundManager {
         }
     }
     
+    func leftAlt(sound: Sound){
+        guard let audioPlayer = soundDict[sound, default: nil] else { return }
+        audioPlayer.pan = -0.6
+    }
+    
+    func rightAlt(sound: Sound){
+        guard let audioPlayer = soundDict[sound, default: nil] else { return }
+        audioPlayer.pan = 0.7
+    }
+    
+    func recoverAlt(sound: Sound){
+        var count = 0
+        guard let audioPlayer = soundDict[sound, default: nil] else { return }
+        
+        print("Pan Inicial do \(sound.rawValue): \(audioPlayer.pan)")
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            count+=1
+            
+            if round(audioPlayer.pan) < 0.0{
+                audioPlayer.pan += 0.1
+            }else if round(audioPlayer.pan) > 0.0{
+                audioPlayer.pan -= 0.1
+            }else{
+                audioPlayer.pan = 0.0
+                print("Recover Final do \(sound.rawValue): \(audioPlayer.pan)")
+                timer.invalidate()
+            }
+            
+        }
+    }
+    
     func recover(sound: Sound, direction: String){
         var count = 0
         guard let audioPlayer = soundDict[sound, default: nil] else { return }
         
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
             count+=1
             if direction == "right"{
                 audioPlayer.pan -= 0.12
@@ -184,7 +148,7 @@ class SoundManager {
     func right(sound: Sound){
         var count = 0
         guard let audioPlayer = soundDict[sound, default: nil] else { return }
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
             count+=1
             audioPlayer.pan += 0.12
             if count == 7{
