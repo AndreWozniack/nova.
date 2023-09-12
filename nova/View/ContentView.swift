@@ -4,6 +4,9 @@ import UserNotifications
 
 
 struct ContentView: View {
+    ///FEEDBACK TÁTIL E SONORO
+    let soundManager = SoundManager()
+    let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
     
     @State var zoom: CGFloat = 1.0
     @GestureState var gestureZoom: CGFloat = 1.0
@@ -14,6 +17,31 @@ struct ContentView: View {
     
         ZStack {
             ConstelacaoView()
+                .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                    .onChanged({ value in
+                        soundManager.riseVolume(sound: .base1)
+                        soundManager.riseVolume(sound: .base2)
+                        soundManager.riseVolume(sound: .piano)
+                        
+                        
+                        if value.translation.width < 0 {
+//                            soundManager.leftAlt(sound: .base1)
+                            soundManager.leftAlt(sound: .base2)
+                            soundManager.leftAlt(sound: .piano)
+                        }
+
+                        if value.translation.width > 0 {
+//                            soundManager.rightAlt(sound: .base1)
+                            soundManager.rightAlt(sound: .base2)
+                            soundManager.rightAlt(sound: .piano)
+                        }
+                    })
+                    .onEnded({value in
+                            soundManager.recoverAlt(sound: .base1)
+                            soundManager.recoverAlt(sound: .base2)
+                            soundManager.recoverAlt(sound: .piano)
+                    })
+                )
                 .edgesIgnoringSafeArea(.all)
             
             VStack{
@@ -55,11 +83,20 @@ struct ContentView: View {
                     Color.black.opacity(0.4)
                         .edgesIgnoringSafeArea(.all)
                         .onTapGesture {
+                            soundManager.riseVolume(sound: .base1)
+                            soundManager.riseVolume(sound: .base2)
+                            soundManager.riseVolume(sound: .piano)
+                            
                             withAnimation {
                                 manager.showView = false
                             }
                         }
                     TemaView(estrela: manager.estrela)
+                        .onAppear{
+                            soundManager.lowVolume(sound: .base1)
+                            soundManager.lowVolume(sound: .base2)
+                            soundManager.lowVolume(sound: .piano)
+                        }
                 }
                 
             }
@@ -67,35 +104,67 @@ struct ContentView: View {
                 Color.black.opacity(0.4)
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
+                        soundManager.riseVolume(sound: .base1)
+                        soundManager.riseVolume(sound: .base2)
+                        soundManager.riseVolume(sound: .piano)
+                        
                         withAnimation {
                             manager.showNewView = false
                         }
                     }
                 DescriptionView(estrela: manager.estrelaTocada)
+                    .onAppear{
+                        soundManager.lowVolume(sound: .base1)
+                        soundManager.lowVolume(sound: .base2)
+                        soundManager.lowVolume(sound: .piano)
+                    }
                 
             }
             if manager.showSubView{
                 Color.black.opacity(0.4)
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
+                        soundManager.riseVolume(sound: .base1)
+                        soundManager.riseVolume(sound: .base2)
+                        soundManager.riseVolume(sound: .piano)
+                        
                         withAnimation {
                             manager.showSubView = false
                         }
                     }
                 SubView()
+                    .onAppear{
+                        soundManager.lowVolume(sound: .base1)
+                        soundManager.lowVolume(sound: .base2)
+                        soundManager.lowVolume(sound: .piano)
+                    }
             }
             if manager.showSubDescriptionView {
                 Color.black.opacity(0.4)
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
+                        soundManager.riseVolume(sound: .base1)
+                        soundManager.riseVolume(sound: .base2)
+                        soundManager.riseVolume(sound: .piano)
+                        
                         withAnimation {
                             manager.showSubDescriptionView = false
                         }
                     }
                 SubDescriptionView(estrela: manager.estrelaTocada)
+                    .onAppear{
+                        soundManager.lowVolume(sound: .base1)
+                        soundManager.lowVolume(sound: .base2)
+                        soundManager.lowVolume(sound: .piano)
+                    }
             }
         }
         .onAppear {
+            //play na musica de fundo com 3 camadas
+            soundManager.playLoop(sound: .base1)
+            soundManager.playLoop(sound: .base2)
+            soundManager.playLoop(sound: .piano)
+           
             print(EstrelaManager.shared.palavraDoDia as Any)
             NotificationManager.shared.requestPermission()
             NotificationManager.shared.scheduleDailyNotification(at: 13, minute: 00)

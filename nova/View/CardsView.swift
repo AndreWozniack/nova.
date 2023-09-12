@@ -13,12 +13,13 @@ struct CardsView: View {
     var body: some View {
         ZStack{
             ScrollView(.horizontal) {
-                LazyHGrid(rows: [GridItem(.fixed(200))], spacing: 20) {
+                TabView{
                     ForEach(EstrelaManager.shared.todasEstrelas, id: \.id) { estrela in
                         DescriptionView(estrela: estrela)
                             .padding(.horizontal, 25)
                     }
                 }
+                .tabViewStyle(.page)
                 .padding()
                 
             }
