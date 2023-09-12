@@ -1,139 +1,138 @@
-//
-//  SubView.swift
-//  nova
-//
-//  Created by André Wozniack on 05/09/23.
-//
-
 import SwiftUI
 
 struct SubView: View {
     
-    @State private var titulo: String = ""
-    @State private var texto: String = ""
-
+    @State var titulo: String = ""
+    @State var texto: String = ""
+    @State var novaEstrela = Estrela()
+    @State var showDica = false
+    
     
     var body: some View {
         ZStack{
-            ZStack{
-                VStack{
-                    Spacer()
-                    VStack(alignment: .center, spacing: 5) {
-                        VStack(alignment: .center, spacing: 4) {
-                            Text("\(Manager.shared.estrelaTocada.reflexao.titulo)")
-                                .bold()
-                                .font(.system(size: 15))
-                                .foregroundColor(.black)
-                            TextField("Tema", text: $titulo)
-                                .autocorrectionDisabled()
-                                .cornerRadius(8)
-                                .font(
-                                    Font.custom("Kodchasan", size: 18)
-                                        .weight(.bold)
-                                )
-                                .multilineTextAlignment(.center)
-                            
-                            HStack(alignment: .center, spacing: 4) {
-                                Text("Gigante Amarela")
-                                    .font(
-                                        Font.custom("SF Pro", size: 9)
-                                            .weight(.bold)
-                                    )
-                                    .foregroundColor(.black)
+            VStack{
+                VStack(alignment: .center, spacing: 6) {
+                    HStack{
+                        Spacer()
+                        Button {
+                            showDica.toggle()
+                        } label: {
+                            if showDica {
+                                Image(systemName: "lightbulb.circle.fill")
+                                    .font(.title2)
+                                    .foregroundColor(Color(uiColor: .blue))
+                            } else {
+                                Image(systemName: "lightbulb.circle.fill")
+                                    .font(.title2)
+                                    .foregroundColor(Color(uiColor: .systemGray))
                             }
-                            .padding(0)
-                            Text("Essa estrela tem 1 hora de vida")
-                                .font(Font.custom("Inter", size: 9))
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(.black)
-                        }.padding(10)
-                        
-                            
-                        TextField("Reflexão", text: $texto, axis: .vertical)
-                            .autocorrectionDisabled()
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 10)
-                            .frame(width: 260, height: 220, alignment: .topLeading)
-                            
-                        
-                        HStack{
-                            Button {
-                                Manager.shared.showSubView = false
-                            } label: {
-                                HStack{
-                                    Text("Cancelar")
-                                        .font(.system(size: 13))
-                                        .foregroundColor(.white)
-                                    Text(.init(systemName: "x.circle.fill"))
-                                        .font(.system(size: 13))
-                                        .foregroundColor(.white)
-                                }
-                                .padding(.vertical, 16)
-                                .padding(.horizontal, 24)
-                                .background(Color.black)
-                                .font(.system(size: 15))
-                                .foregroundColor(.white)
-                                .cornerRadius(12)
-                            }
-                            Button {
-                                let ponto = novoPontoAoRedorDe(x: Manager.shared.estrelaTocada.x, y: Manager.shared.estrelaTocada.y, nivel: Manager.shared.estrelaTocada.nivel)
-                                let novaEstrela = Estrela(reflexao: Reflexao(titulo: self.titulo, texto: self.texto), x: ponto.x, y: ponto.y, tamanho: tamanhoNivel(Manager.shared.estrelaTocada.nivel + 1))
-                                
-                                if let estrelaOrigem = EstrelaManager.shared.getEstrela(byID: Manager.shared.estrelaTocada.id){
-                                    novaEstrela.estrelaOrigem = estrelaOrigem.id
-                                    novaEstrela.nivel = estrelaOrigem.nivel + 1
-                                    Manager.shared.subEstrela = novaEstrela
-                                    EstrelaManager.shared.addEstrela(novaEstrela)
-                                    EstrelaManager.shared.updateEstrela(estrelaOrigem)
-                                    print(estrelaOrigem)
-                                }
-                                
-                              
-                                Manager.shared.showSubView = false
-                                
-                            } label: {
-                                HStack{
-                                    Text("Adicionar")
-                                        .font(.system(size: 13))
-                                        .foregroundColor(.white)
-                                    Text(.init(systemName: "checkmark.circle.fill"))
-                                        .font(.system(size: 13))
-                                        .foregroundColor(.white)
-                                }
-                                .padding(.vertical, 16)
-                                .padding(.horizontal, 24)
-                                .background(Color.black)
-                                .font(.system(size: 15))
-                                .foregroundColor(.white)
-                                .cornerRadius(12)
-                            }
-                            
                         }
-                        .padding(.bottom ,24)
                     }
-                    .padding(.top, 85/2)
-                    .frame(width: 300, height: 445, alignment: .top)
-                    .background(.white)
-                    .cornerRadius(16)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(.black, lineWidth: 1)
-                    )
-                }
-                
-                VStack{
-                    Circle()
-                        .strokeBorder(Color.white,lineWidth: 2)
-                        .background(Circle().foregroundColor(Color.black))
-                        .frame(width: 85, height: 85)
+                    VStack(alignment: .center, spacing: 10) {
+                        Text("\(Manager.shared.estrelaTocada.reflexao.titulo)")
+                            .bold()
+                            .font(.system(size: 15))
+                            .foregroundColor(.gray)
+                        TextField("Tema", text: $titulo)
+                            .autocorrectionDisabled()
+                            .cornerRadius(8)
+                            .font(Font.custom("Kodchasan-Bold", size: 20))
+                            .multilineTextAlignment(.center)
+                        
+                        Text(novaEstrela.tipo!.rawValue)
+                            .font(Font.custom("SF Pro", size: 12)
+                                    .weight(.bold))
+                            .foregroundColor(.black)
+                        Text("\(novaEstrela.getDuracao()) de vida")
+                            .font(Font.custom("Inter", size: 12))
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.black)
+                    }.padding(10)
+                    if showDica {
+                        Text("Como essa palavra se relacionou com o seu dia hoje?")
+                            .frame(width: 195, height: 28)
+                            .multilineTextAlignment(.center)
+                            .font(.caption2)
+                            .foregroundColor(Color(uiColor: .green))
+                            .padding(12)
+                            .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color(uiColor: .green), lineWidth: 2))
+                    }
+                    
+                    TextField("Reflexão", text: $texto, axis: .vertical)
+                        .autocorrectionDisabled()
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 10)
+                        .frame(width: 260, alignment: .topLeading)
+                    
                     Spacer()
+                    HStack{
+                        Button {
+                            Manager.shared.showSubView = false
+                        } label: {
+                            HStack{
+                                Text("Cancelar")
+                                    .font(.custom("Kodchasan-Bold", size: 13))
+                                    .foregroundColor(.white)
+                                    .font(.caption2)
+                                    .bold()
+                                Image(systemName: "xmark.circle.fill")
+                                    .font(.caption)
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 16)
+                            .background(.black)
+                            .cornerRadius(12)
+                        }
+                        Button {
+                            let ponto = novoPontoAoRedorDe(Manager.shared.estrelaTocada)
+                            novaEstrela = Estrela(reflexao: Reflexao(titulo: self.titulo, texto: self.texto), x: ponto.x, y: ponto.y, tipo: novaEstrela.tipo!)
+                            
+                            if let estrelaOrigem = EstrelaManager.shared.getEstrela(byID: Manager.shared.estrelaTocada.id){
+                                novaEstrela.estrelaOrigem = estrelaOrigem.id
+                                novaEstrela.nivel = estrelaOrigem.nivel + 1
+                                Manager.shared.subEstrela = novaEstrela
+                                EstrelaManager.shared.addEstrela(novaEstrela)
+                                EstrelaManager.shared.updateEstrela(estrelaOrigem)
+                            }
+                            Manager.shared.showSubView = false
+                            
+                        } label: {
+                            HStack{
+                                Text("Adicionar")
+                                    .font(.custom("Kodchasan-Bold", size: 13))
+                                    .foregroundColor(.white)
+                                    .font(.caption2)
+                                    .bold()
+                                Image(systemName: "checkmark.circle.fill")
+                                    .font(.caption)
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 16)
+                            .background(.black)
+                            .cornerRadius(12)
+                        }
+                        
+                    }
+                    .padding(.bottom ,24)
                 }
+                .padding()
+                .frame(width: 300, height: 500, alignment: .top)
+                .background(.white)
+                .cornerRadius(16)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(.black, lineWidth: 1)
+                )
             }
-            .frame(width: 300, height: 487.5)
+            .onAppear {
+                let _ = novaEstrela.tipoAleatorio()
+            }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-//        .background(.black)
-
+        
         
     }
     func posicaoEhValida(x: CGFloat, y: CGFloat) -> Bool {
@@ -155,16 +154,16 @@ struct SubView: View {
         }
     }
     
-    func novoPontoAoRedorDe(x: CGFloat, y: CGFloat, nivel: Int) -> CGPoint {
-        let distanciaMaxima = distanciaMaximaParaNivel(nivel)
-        let distanciaMinima = distanciaMaximaParaNivel(nivel - 1)
+    func novoPontoAoRedorDe(_ estrela: Estrela) -> CGPoint {
+        let distanciaMaxima = distanciaMaximaParaNivel(estrela.nivel)
+        let distanciaMinima = distanciaMaximaParaNivel(estrela.nivel - 1)
         
         while true {
             let angulo = CGFloat.random(in: 0...(2 * .pi))
-            let distanciaAleatoria = CGFloat.random(in: 0...(distanciaMaxima / 2))
+            let distanciaAleatoria = CGFloat.random(in: 0...(distanciaMaxima / 2)) + estrela.addTamanho()
             
-            let novoX = x + cos(angulo) * distanciaAleatoria
-            let novoY = y + sin(angulo) * distanciaAleatoria
+            let novoX = estrela.x + cos(angulo) * distanciaAleatoria
+            let novoY = estrela.y + sin(angulo) * distanciaAleatoria
             if posicaoEhValida(x: novoX, y: novoY) {
                 return CGPoint(x: novoX, y: novoY)
             }
@@ -183,10 +182,7 @@ struct SubView: View {
             return CGFloat(40)
         }
     }
-
-
 }
-
 
 struct SubView_Previews: PreviewProvider {
     static var previews: some View {
