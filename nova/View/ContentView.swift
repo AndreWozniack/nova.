@@ -4,6 +4,9 @@ import UserNotifications
 
 
 struct ContentView: View {
+    ///FEEDBACK TÁTIL E SONORO
+    let soundManager = SoundManager()
+    let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
     
     @State var zoom: CGFloat = 1.0
     @GestureState var gestureZoom: CGFloat = 1.0
@@ -90,6 +93,11 @@ struct ContentView: View {
             }
         }
         .onAppear {
+            //play na musica de fundo com 3 camadas
+            soundManager.playLoop(sound: .base1)
+            soundManager.playLoop(sound: .base2)
+            soundManager.playLoop(sound: .piano)
+            
             NotificationManager.shared.requestPermission()
             NotificationManager.shared.scheduleNotification(title: "Um novo astro surgiu!", body: "Parece que há um novo astro em seu céu", timeInterval: 120, repeats: false)
         }
