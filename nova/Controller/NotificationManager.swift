@@ -20,7 +20,7 @@ class NotificationManager: ObservableObject {
     
     func scheduleNotification(title: String, body: String, timeInterval: TimeInterval, repeats: Bool) {
         let content = UNMutableNotificationContent()
-        content.title = title
+        content.title = Manager.shared.palavraDoDia
         content.body = body
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: repeats)
@@ -42,7 +42,7 @@ class NotificationManager: ObservableObject {
         let center = UNUserNotificationCenter.current()
         
         let content = UNMutableNotificationContent()
-        content.title = "Palavra do dia"
+        content.title = Manager.shared.palavraDoDia
         content.body = "Confira a palavra do dia!"
         
         var dateComponents = DateComponents()

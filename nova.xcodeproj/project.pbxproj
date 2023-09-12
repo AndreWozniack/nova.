@@ -15,6 +15,18 @@
 		A9D5B10C2AB0AB5A007EB2AF /* base1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9D5B1052AB0AB59007EB2AF /* base1.mp3 */; };
 		A9D5B10D2AB0AB5A007EB2AF /* rootNote.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9D5B1062AB0AB59007EB2AF /* rootNote.mp3 */; };
 		A9D5B10E2AB0AB5A007EB2AF /* piano.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9D5B1072AB0AB5A007EB2AF /* piano.mp3 */; };
+		AF278EB82AAFAC7E0095DA92 /* Kodchasan-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EAD2AAFAC7D0095DA92 /* Kodchasan-ExtraLight.ttf */; };
+		AF278EB92AAFAC7E0095DA92 /* Kodchasan-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EAE2AAFAC7D0095DA92 /* Kodchasan-ExtraLightItalic.ttf */; };
+		AF278EBA2AAFAC7E0095DA92 /* Kodchasan-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EAF2AAFAC7D0095DA92 /* Kodchasan-Italic.ttf */; };
+		AF278EBB2AAFAC7E0095DA92 /* Kodchasan-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EB02AAFAC7D0095DA92 /* Kodchasan-BoldItalic.ttf */; };
+		AF278EBC2AAFAC7E0095DA92 /* Kodchasan-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EB12AAFAC7D0095DA92 /* Kodchasan-Light.ttf */; };
+		AF278EBD2AAFAC7E0095DA92 /* Kodchasan-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EB22AAFAC7D0095DA92 /* Kodchasan-SemiBold.ttf */; };
+		AF278EBE2AAFAC7E0095DA92 /* Kodchasan-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EB32AAFAC7D0095DA92 /* Kodchasan-SemiBoldItalic.ttf */; };
+		AF278EBF2AAFAC7E0095DA92 /* Kodchasan-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EB42AAFAC7E0095DA92 /* Kodchasan-LightItalic.ttf */; };
+		AF278EC02AAFAC7E0095DA92 /* Kodchasan-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EB52AAFAC7E0095DA92 /* Kodchasan-Regular.ttf */; };
+		AF278EC12AAFAC7E0095DA92 /* Kodchasan-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EB62AAFAC7E0095DA92 /* Kodchasan-Medium.ttf */; };
+		AF278EC22AAFAC7E0095DA92 /* Kodchasan-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EB72AAFAC7E0095DA92 /* Kodchasan-MediumItalic.ttf */; };
+		AF278EC52AB09B6B0095DA92 /* PalavraDoDIa.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF278EC42AB09B6B0095DA92 /* PalavraDoDIa.swift */; };
 		AF6C18DF2A9FBCEF00D0A089 /* novaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C18DE2A9FBCEF00D0A089 /* novaApp.swift */; };
 		AF6C18E12A9FBCEF00D0A089 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C18E02A9FBCEF00D0A089 /* ContentView.swift */; };
 		AF6C18E32A9FBCF000D0A089 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6C18E22A9FBCF000D0A089 /* Assets.xcassets */; };
@@ -69,6 +81,21 @@
 		A9D5B1052AB0AB59007EB2AF /* base1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = base1.mp3; sourceTree = "<group>"; };
 		A9D5B1062AB0AB59007EB2AF /* rootNote.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = rootNote.mp3; sourceTree = "<group>"; };
 		A9D5B1072AB0AB5A007EB2AF /* piano.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano.mp3; sourceTree = "<group>"; };
+
+		AF278EAC2AAFA9220095DA92 /* Kodchasan-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Bold.ttf"; sourceTree = "<group>"; };
+		AF278EAD2AAFAC7D0095DA92 /* Kodchasan-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-ExtraLight.ttf"; sourceTree = "<group>"; };
+		AF278EAE2AAFAC7D0095DA92 /* Kodchasan-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		AF278EAF2AAFAC7D0095DA92 /* Kodchasan-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Italic.ttf"; sourceTree = "<group>"; };
+		AF278EB02AAFAC7D0095DA92 /* Kodchasan-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-BoldItalic.ttf"; sourceTree = "<group>"; };
+		AF278EB12AAFAC7D0095DA92 /* Kodchasan-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Light.ttf"; sourceTree = "<group>"; };
+		AF278EB22AAFAC7D0095DA92 /* Kodchasan-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-SemiBold.ttf"; sourceTree = "<group>"; };
+		AF278EB32AAFAC7D0095DA92 /* Kodchasan-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		AF278EB42AAFAC7E0095DA92 /* Kodchasan-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-LightItalic.ttf"; sourceTree = "<group>"; };
+		AF278EB52AAFAC7E0095DA92 /* Kodchasan-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Regular.ttf"; sourceTree = "<group>"; };
+		AF278EB62AAFAC7E0095DA92 /* Kodchasan-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Medium.ttf"; sourceTree = "<group>"; };
+		AF278EB72AAFAC7E0095DA92 /* Kodchasan-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-MediumItalic.ttf"; sourceTree = "<group>"; };
+		AF278EC42AB09B6B0095DA92 /* PalavraDoDIa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalavraDoDIa.swift; sourceTree = "<group>"; };
+
 		AF6C18DB2A9FBCEF00D0A089 /* nova.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nova.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF6C18DE2A9FBCEF00D0A089 /* novaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = novaApp.swift; sourceTree = "<group>"; };
 		AF6C18E02A9FBCEF00D0A089 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -80,18 +107,6 @@
 		AF6C192F2A9FE0CC00D0A089 /* TemaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemaView.swift; sourceTree = "<group>"; };
 		AF7F2D5E2AA1287200F361F9 /* Reflexao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reflexao.swift; sourceTree = "<group>"; };
 		AF9FAE012AA9108700DE8FAE /* SubDescripitionVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubDescripitionVIew.swift; sourceTree = "<group>"; };
-		AF9FAE062AAB8B4500DE8FAE /* Kodchasan-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Medium.ttf"; sourceTree = "<group>"; };
-		AF9FAE072AAB8B4500DE8FAE /* Kodchasan-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-MediumItalic.ttf"; sourceTree = "<group>"; };
-		AF9FAE082AAB8B4500DE8FAE /* Kodchasan-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Italic.ttf"; sourceTree = "<group>"; };
-		AF9FAE092AAB8B4500DE8FAE /* Kodchasan-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		AF9FAE0A2AAB8B4500DE8FAE /* Kodchasan-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
-		AF9FAE0B2AAB8B4500DE8FAE /* Kodchasan-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-LightItalic.ttf"; sourceTree = "<group>"; };
-		AF9FAE0C2AAB8B4500DE8FAE /* Kodchasan-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-SemiBold.ttf"; sourceTree = "<group>"; };
-		AF9FAE0D2AAB8B4500DE8FAE /* Kodchasan-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Light.ttf"; sourceTree = "<group>"; };
-		AF9FAE0E2AAB8B4500DE8FAE /* Kodchasan-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-ExtraLight.ttf"; sourceTree = "<group>"; };
-		AF9FAE0F2AAB8B4600DE8FAE /* Kodchasan-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Regular.ttf"; sourceTree = "<group>"; };
-		AF9FAE102AAB8B4600DE8FAE /* Kodchasan-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-BoldItalic.ttf"; sourceTree = "<group>"; };
-		AF9FAE112AAB8B4600DE8FAE /* Kodchasan-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Bold.ttf"; sourceTree = "<group>"; };
 		AF9FAE122AAB8C1300DE8FAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AF9FAE132AABD50C00DE8FAE /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		AFA55EEF2AA1675E00163AB9 /* Estrela.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Estrela.swift; sourceTree = "<group>"; };
@@ -151,6 +166,23 @@
 				A9D5B1032AB0AB59007EB2AF /* swipeF.mp3 */,
 			);
 			path = "Song-Assets";
+		AF278EC32AAFB0450095DA92 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				AF278EAC2AAFA9220095DA92 /* Kodchasan-Bold.ttf */,
+				AF278EB02AAFAC7D0095DA92 /* Kodchasan-BoldItalic.ttf */,
+				AF278EAD2AAFAC7D0095DA92 /* Kodchasan-ExtraLight.ttf */,
+				AF278EAE2AAFAC7D0095DA92 /* Kodchasan-ExtraLightItalic.ttf */,
+				AF278EAF2AAFAC7D0095DA92 /* Kodchasan-Italic.ttf */,
+				AF278EB12AAFAC7D0095DA92 /* Kodchasan-Light.ttf */,
+				AF278EB42AAFAC7E0095DA92 /* Kodchasan-LightItalic.ttf */,
+				AF278EB62AAFAC7E0095DA92 /* Kodchasan-Medium.ttf */,
+				AF278EB72AAFAC7E0095DA92 /* Kodchasan-MediumItalic.ttf */,
+				AF278EB52AAFAC7E0095DA92 /* Kodchasan-Regular.ttf */,
+				AF278EB22AAFAC7D0095DA92 /* Kodchasan-SemiBold.ttf */,
+				AF278EB32AAFAC7D0095DA92 /* Kodchasan-SemiBoldItalic.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		AF6C18D22A9FBCEF00D0A089 = {
@@ -174,6 +206,7 @@
 			children = (
 				A9D5B1002AB0AB4E007EB2AF /* Song-Assets */,
 				AF9FAE052AAB891800DE8FAE /* Fonts */,
+				AF278EC32AAFB0450095DA92 /* Font */,
 				AF6C18DE2A9FBCEF00D0A089 /* novaApp.swift */,
 				AF6C19502AA0D76E00D0A089 /* View */,
 				AF6C19332AA0D51400D0A089 /* Model */,
@@ -200,6 +233,7 @@
 				A9D5B0FC2AB0AA50007EB2AF /* sound.swift */,
 				AF7F2D5E2AA1287200F361F9 /* Reflexao.swift */,
 				AFA55EEF2AA1675E00163AB9 /* Estrela.swift */,
+				AF278EC42AB09B6B0095DA92 /* PalavraDoDIa.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -207,34 +241,15 @@
 		AF6C19502AA0D76E00D0A089 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AF6C18E02A9FBCEF00D0A089 /* ContentView.swift */,
-				AF6C192F2A9FE0CC00D0A089 /* TemaView.swift */,
 				AF6C18EE2A9FBD5E00D0A089 /* CosntelacaoScene.swift */,
-				AFA55EF32AA65DDB00163AB9 /* DescriptionView.swift */,
-				AF9FAE012AA9108700DE8FAE /* SubDescripitionVIew.swift */,
+				AF6C18E02A9FBCEF00D0A089 /* ContentView.swift */,
 				AFA55EF62AA80AD100163AB9 /* CardsView.swift */,
+				AF6C192F2A9FE0CC00D0A089 /* TemaView.swift */,
+				AFA55EF32AA65DDB00163AB9 /* DescriptionView.swift */,
 				AFA55EF82AA80FD300163AB9 /* SubView.swift */,
+				AF9FAE012AA9108700DE8FAE /* SubDescripitionVIew.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		AF9FAE052AAB891800DE8FAE /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				AF9FAE112AAB8B4600DE8FAE /* Kodchasan-Bold.ttf */,
-				AF9FAE102AAB8B4600DE8FAE /* Kodchasan-BoldItalic.ttf */,
-				AF9FAE0E2AAB8B4500DE8FAE /* Kodchasan-ExtraLight.ttf */,
-				AF9FAE0A2AAB8B4500DE8FAE /* Kodchasan-ExtraLightItalic.ttf */,
-				AF9FAE082AAB8B4500DE8FAE /* Kodchasan-Italic.ttf */,
-				AF9FAE0D2AAB8B4500DE8FAE /* Kodchasan-Light.ttf */,
-				AF9FAE0B2AAB8B4500DE8FAE /* Kodchasan-LightItalic.ttf */,
-				AF9FAE062AAB8B4500DE8FAE /* Kodchasan-Medium.ttf */,
-				AF9FAE072AAB8B4500DE8FAE /* Kodchasan-MediumItalic.ttf */,
-				AF9FAE0F2AAB8B4600DE8FAE /* Kodchasan-Regular.ttf */,
-				AF9FAE0C2AAB8B4500DE8FAE /* Kodchasan-SemiBold.ttf */,
-				AF9FAE092AAB8B4500DE8FAE /* Kodchasan-SemiBoldItalic.ttf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		AFA55EF52AA7A9C400163AB9 /* Controller */ = {
@@ -344,6 +359,19 @@
 				A9D5B10A2AB0AB5A007EB2AF /* swipeF.mp3 in Resources */,
 				A9D5B10E2AB0AB5A007EB2AF /* piano.mp3 in Resources */,
 				A9D5B1092AB0AB5A007EB2AF /* long.mp3 in Resources */,
+				AF278EC22AAFAC7E0095DA92 /* Kodchasan-MediumItalic.ttf in Resources */,
+				AF278EC12AAFAC7E0095DA92 /* Kodchasan-Medium.ttf in Resources */,
+				AF278EC02AAFAC7E0095DA92 /* Kodchasan-Regular.ttf in Resources */,
+				AF278EBC2AAFAC7E0095DA92 /* Kodchasan-Light.ttf in Resources */,
+				AF278EBF2AAFAC7E0095DA92 /* Kodchasan-LightItalic.ttf in Resources */,
+				AF6C18E62A9FBCF000D0A089 /* Preview Assets.xcassets in Resources */,
+				AF278EBA2AAFAC7E0095DA92 /* Kodchasan-Italic.ttf in Resources */,
+				AF278EB92AAFAC7E0095DA92 /* Kodchasan-ExtraLightItalic.ttf in Resources */,
+				AF278EBB2AAFAC7E0095DA92 /* Kodchasan-BoldItalic.ttf in Resources */,
+				AF278EB82AAFAC7E0095DA92 /* Kodchasan-ExtraLight.ttf in Resources */,
+				AF6C18E32A9FBCF000D0A089 /* Assets.xcassets in Resources */,
+				AF278EBD2AAFAC7E0095DA92 /* Kodchasan-SemiBold.ttf in Resources */,
+				AF278EBE2AAFAC7E0095DA92 /* Kodchasan-SemiBoldItalic.ttf in Resources */,
 				AF6C18F12A9FBF5800D0A089 /* GoogleService-Info.plist in Resources */,
 				A9D5B10D2AB0AB5A007EB2AF /* rootNote.mp3 in Resources */,
 				A9D5B1082AB0AB5A007EB2AF /* base2.mp3 in Resources */,
@@ -367,6 +395,7 @@
 				AF9FAE142AABD50C00DE8FAE /* NotificationManager.swift in Sources */,
 				AFA55EF72AA80AD100163AB9 /* CardsView.swift in Sources */,
 				AF6C18EF2A9FBD5E00D0A089 /* CosntelacaoScene.swift in Sources */,
+				AF278EC52AB09B6B0095DA92 /* PalavraDoDIa.swift in Sources */,
 				AFA55EF22AA25A3B00163AB9 /* Manager.swift in Sources */,
 				AFA55EF92AA80FD300163AB9 /* SubView.swift in Sources */,
 				AF9FAE022AA9108700DE8FAE /* SubDescripitionVIew.swift in Sources */,

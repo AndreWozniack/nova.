@@ -25,6 +25,7 @@ struct YourApp: App {
             NavigationView {
                 ContentView()
                     .environmentObject(NotificationManager.shared)
+                    .environment(\.colorScheme, .light)
             }
         }
     }
