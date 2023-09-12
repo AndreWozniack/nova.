@@ -102,7 +102,8 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
     
     
     func adicionarEstrelaNaTela(_ estrela: Estrela) -> Estrela {
-        let novaEstrela = Estrela(reflexao: estrela.reflexao, x: estrela.x, y: estrela.y, tamanho: tamanhoNivel(estrela.nivel))
+        let novaEstrela = Estrela(reflexao: estrela.reflexao, x: estrela.x, y: estrela.y, tipo: estrela.tipo)
+        novaEstrela.tipo = estrela.tipo
         novaEstrela.nivel = estrela.nivel
         novaEstrela.delegate = self
         novaEstrela.position = CGPoint(x: estrela.x, y: estrela.y)
@@ -114,6 +115,7 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         novaEstrela.id = estrela.id
         novaEstrela.isAlive = estrela.isAlive
         novaEstrela.estrelaOrigem = estrela.estrelaOrigem
+
         
         if estrela.nivel == 0 {
             addTitulo(novaEstrela)
@@ -126,7 +128,7 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         let titleLabel = SKLabelNode(text: estrela.reflexao.titulo)
         titleLabel.fontName = "Helvetica-Bold"
         titleLabel.fontSize = 12 // Ajuste o tamanho da fonte conforme necessário
-        titleLabel.position = CGPoint(x: 0, y: tamanhoNivel(estrela.nivel)) // Posicione o título abaixo do círculo
+        titleLabel.position = CGPoint(x: 0, y: estrela.addTamanho()) // Posicione o título abaixo do círculo
         estrela.addChild(titleLabel)
     }
     func posicaoEhValida(x: CGFloat, y: CGFloat) -> Bool {
@@ -282,7 +284,8 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
             let locationInView = sender.location(in: self.view)
             let locationInScene = convertPoint(fromView: locationInView)
             if posicaoEhValida(x: locationInScene.x, y: locationInScene.y) {
-                Manager.shared.estrela = Estrela(reflexao: Reflexao(titulo: "", texto: ""), x: Double(locationInScene.x), y: Double(locationInScene.y))
+                let novaEstrela = Estrela()
+                Manager.shared.estrela = Estrela(reflexao: Reflexao(titulo: "", texto: ""), x: Double(locationInScene.x), y: Double(locationInScene.y), tipo: novaEstrela.tipoAleatorio())
                 Manager.shared.showView = true
 
             }

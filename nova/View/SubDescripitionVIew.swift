@@ -17,14 +17,12 @@ struct SubDescriptionView: View {
                            
                             Text(estrela.reflexao.titulo)
                                 .cornerRadius(8)
-                                .font(
-                                    Font.custom("Kodchasan-Regular", size: 18)
-                                )
+                                .font(Font.custom("Kodchasan-Regular", size: 18))
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(.black)
                                 .padding(0)
                             Text("Na constelação: \(EstrelaManager.shared.getEstrelaDeOrigemParaEstrela(estrela)!.reflexao.titulo)") // Exiba o tempo formatado
-                                .font(.custom("Kodchasan-Regular", size: 12))
+                                .font(.caption2)
                                 .fontWeight(.light)
                                 .foregroundColor(.black)
                             
@@ -103,7 +101,7 @@ struct SubDescriptionView_Previews: PreviewProvider {
 }
 
 func geraEstrela2() -> Estrela {
-    let estrela = Estrela(reflexao: Reflexao(titulo: "Tema", texto: "A amizade é uma das joias mais preciosas que podemos encontrar ao longo da vida. Ela é como um jardim que requer cuidado constante, regado com amor, confiança e apoio mútuo. Assim como as flores desabrocham e crescem com o tempo, as verdadeiras amizades também se fortalecem com as experiências compartilhadas e os desafios enfrentados juntos."), x: 0, y: 0)
+    let estrela = Estrela(reflexao: Reflexao(titulo: "Tema", texto: "A amizade é uma das joias mais preciosas que podemos encontrar ao longo da vida. Ela é como um jardim que requer cuidado constante, regado com amor, confiança e apoio mútuo. Assim como as flores desabrocham e crescem com o tempo, as verdadeiras amizades também se fortalecem com as experiências compartilhadas e os desafios enfrentados juntos."), x: 0, y: 0, tipo: .anaAmarela)
     estrela.dataInicio = Date()
     return estrela
 }

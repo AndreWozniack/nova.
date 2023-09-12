@@ -15,14 +15,19 @@ struct ContentView: View {
         ZStack {
             ConstelacaoView()
                 .edgesIgnoringSafeArea(.all)
+            
             VStack{
                 Spacer()
+                Text("Segure na tela para criar um novo astro")
+                    .foregroundColor(.gray)
+                
                 HStack{
                     Button {
                         print(EstrelaManager.shared.todasEstrelas)
+                        print(EstrelaManager.shared.estrelasExpiradas)
                     } label: {
                         Text("Lista de estrelas")
-                            .font(.custom("Kodchasan-Bold", size: 15))
+                            .font(.custom("Kodchasan", size: 15))
                             .padding(10)
                             .background(.white)
                             .foregroundColor(.black)
@@ -31,9 +36,10 @@ struct ContentView: View {
                     Button {
                         EstrelaManager.shared.clearSky()
                         manager.estrela = Estrela()
-                        
+
                     } label: {
                         Text("Limpar Estrelas")
+                            .font(.custom("Kodchasan", size: 15))
                             .padding(10)
                             .background(.white)
                             .font(.system(size: 15))
@@ -90,12 +96,13 @@ struct ContentView: View {
             }
         }
         .onAppear {
+            print(EstrelaManager.shared.palavraDoDia as Any)
             NotificationManager.shared.requestPermission()
-            NotificationManager.shared.scheduleNotification(title: "Um novo astro surgiu!", body: "Parece que há um novo astro em seu céu", timeInterval: 120, repeats: false)
+            NotificationManager.shared.scheduleDailyNotification(at: 13, minute: 00)
         }
         .onReceive(notificationManager.$notificationResponse) { response in
             if let response = response {
-
+                print("Palavra do dia: \(manager.palavraDoDia)")
                 print("Notificação recebida com identificador: \(response.notification.request.identifier) \(response.description)")
             }
         }
