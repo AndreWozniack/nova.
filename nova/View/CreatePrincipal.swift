@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TemaView: View {
+struct CreatePrincipal: View {
     
     var estrela: Estrela
     
@@ -21,7 +21,7 @@ struct TemaView: View {
                             if showDica {
                                 Image(systemName: "lightbulb.circle.fill")
                                     .font(.title2)
-                                    .foregroundColor(Color(uiColor: .blue))
+                                    .foregroundColor(Color("dica"))
                             } else {
                                 Image(systemName: "lightbulb.circle.fill")
                                     .font(.title2)
@@ -53,11 +53,11 @@ struct TemaView: View {
                             .frame(width: 195, height: 28)
                             .multilineTextAlignment(.center)
                             .font(.caption2)
-                            .foregroundColor(Color(uiColor: .green))
+                            .foregroundColor(Color("dica"))
                             .padding(12)
                             .overlay(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color(uiColor: .green), lineWidth: 2))
+                                        .stroke(Color("dica"), lineWidth: 2))
                     }
                     TextField("Escreva sua reflexão aqui", text: $texto, axis: .vertical)
                         .autocorrectionDisabled()
@@ -67,7 +67,7 @@ struct TemaView: View {
                     Spacer()
                     HStack(spacing: 12){
                         Button {
-                            Manager.shared.showView = false
+                            Manager.shared.showCreatePrincipal = false
                         } label: {
                             HStack{
                                 Text("Cancelar")
@@ -87,7 +87,7 @@ struct TemaView: View {
                         Button {
                             Manager.shared.estrela = Estrela(reflexao: Reflexao(titulo: self.titulo, texto: self.texto), x: estrela.x, y: estrela.y, tipo: estrela.tipo)
                             
-                            Manager.shared.showView = false
+                            Manager.shared.showCreatePrincipal = false
                         } label: {
                             HStack{
                                 Text("Adicionar")
@@ -110,10 +110,10 @@ struct TemaView: View {
                 .frame(width: 300, height: 445, alignment: .top)
                 .background(.white)
                 .cornerRadius(16)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(.black, lineWidth: 1)
-                )
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 16)
+//                        .stroke(.black, lineWidth: 1)
+//                )
                 
             }
         }
@@ -124,6 +124,6 @@ struct TemaView: View {
 
 struct TemaView_Previews: PreviewProvider {
     static var previews: some View {
-        TemaView(estrela: Estrela(reflexao: Reflexao(titulo: "Amor", texto: "Todos amam"), x: 0, y: 0, tipo: .anaBranca))
+        CreatePrincipal(estrela: Estrela(reflexao: Reflexao(titulo: "Amor", texto: "Todos amam"), x: 0, y: 0, tipo: .anaBranca))
     }
 }

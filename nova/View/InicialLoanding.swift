@@ -1,10 +1,3 @@
-//
-//  InicialLoanding.swift
-//  nova
-//
-//  Created by André Wozniack on 12/09/23.
-//
-
 import SwiftUI
 
 struct InicialLoanding: View {
