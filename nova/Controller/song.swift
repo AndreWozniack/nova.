@@ -2,11 +2,13 @@ import AVFoundation
 import CoreMotion
 
 class SoundManager {
+    static let shared = SoundManager()
+    
     let audioEngine = AVAudioEngine()
     var soundDict: [Sound:AVAudioPlayer?] = [:]
     var soundPanPositions: [Sound: Float] = [:]
     
-    init() {
+    private init() {
         for sound in Sound.allCases {
             soundDict[sound] = getAudioPlayer(sound: sound)
         }
@@ -55,7 +57,7 @@ class SoundManager {
         Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
             count+=1
             audioPlayer.volume -= 0.1
-            if count == 3{
+            if count == 6{
                 timer.invalidate()
             }
         }
@@ -110,7 +112,7 @@ class SoundManager {
         var count = 0
         guard let audioPlayer = soundDict[sound, default: nil] else { return }
         
-        print("Pan Inicial do \(sound.rawValue): \(audioPlayer.pan)")
+        //print("Pan Inicial do \(sound.rawValue): \(audioPlayer.pan)")
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
             count+=1
             
@@ -120,7 +122,7 @@ class SoundManager {
                 audioPlayer.pan -= 0.1
             }else{
                 audioPlayer.pan = 0.0
-                print("Recover Final do \(sound.rawValue): \(audioPlayer.pan)")
+                //print("Recover Final do \(sound.rawValue): \(audioPlayer.pan)")
                 timer.invalidate()
             }
             

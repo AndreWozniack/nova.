@@ -5,6 +5,8 @@ import Combine
 
 class ConstelacaoScene: SKScene, EstrelaDelegate {
     
+    let soundManager = SoundManager.shared
+    
     private var estrelaOriginal: Estrela?
     private var todasEstrelas: [Estrela] = []
     private var cameraNode = SKCameraNode()
@@ -359,6 +361,19 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
             sender.setTranslation(CGPoint.zero, in: self.view)
 
             panVelocity = sender.velocity(in: self.view)
+            
+            if translationInView.x > 0{
+                soundManager.rightAlt(sound: .base2)
+                soundManager.rightAlt(sound: .piano)
+            }else{
+                soundManager.leftAlt(sound: .base2)
+                soundManager.leftAlt(sound: .piano)
+            }
+        case .ended:
+            soundManager.recoverAlt(sound: .base1)
+            soundManager.recoverAlt(sound: .base2)
+            soundManager.recoverAlt(sound: .piano)
+            
 
         default:
             break

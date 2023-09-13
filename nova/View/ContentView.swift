@@ -5,7 +5,7 @@ import UserNotifications
 
 struct ContentView: View {
     ///FEEDBACK TÁTIL E SONORO
-    let soundManager = SoundManager()
+    let soundManager = SoundManager.shared
     let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
     
     @State var zoom: CGFloat = 1.0
@@ -16,6 +16,12 @@ struct ContentView: View {
     
     @AppStorage("lastVisitDate") private var lastVisitDate = Date()
     @AppStorage("hasViewedWordOfTheDay") private var hasViewedWordOfTheDay: Bool = false
+    
+    init(){
+        soundManager.playLoop(sound: .base1)
+        soundManager.playLoop(sound: .base2)
+        soundManager.playLoop(sound: .piano)
+    }
 
 
     
@@ -43,10 +49,6 @@ struct ContentView: View {
                     Color.black.opacity(0.4)
                         .edgesIgnoringSafeArea(.all)
                         .onTapGesture {
-                            soundManager.riseVolume(sound: .base1)
-                            soundManager.riseVolume(sound: .base2)
-                            soundManager.riseVolume(sound: .piano)
-                            
                             withAnimation {
                                 manager.showCreatePrincipal = false
                             }
@@ -57,6 +59,11 @@ struct ContentView: View {
                             soundManager.lowVolume(sound: .base2)
                             soundManager.lowVolume(sound: .piano)
                         }
+                        .onDisappear{
+                            soundManager.riseVolume(sound: .base1)
+                            soundManager.riseVolume(sound: .base2)
+                            soundManager.riseVolume(sound: .piano)
+                        }
                 }
                 
             }
@@ -65,10 +72,6 @@ struct ContentView: View {
                     Color.black.opacity(0.4)
                         .edgesIgnoringSafeArea(.all)
                         .onTapGesture {
-                            soundManager.riseVolume(sound: .base1)
-                            soundManager.riseVolume(sound: .base2)
-                            soundManager.riseVolume(sound: .piano)
-                            
                             withAnimation {
                                 manager.showPrincipalDescription = false
                             }
@@ -79,6 +82,11 @@ struct ContentView: View {
                             soundManager.lowVolume(sound: .base2)
                             soundManager.lowVolume(sound: .piano)
                         }
+                        .onDisappear{
+                            soundManager.riseVolume(sound: .base1)
+                            soundManager.riseVolume(sound: .base2)
+                            soundManager.riseVolume(sound: .piano)
+                        }
                 }
                 
             }
@@ -86,10 +94,6 @@ struct ContentView: View {
                 Color.black.opacity(0.4)
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
-                        soundManager.riseVolume(sound: .base1)
-                        soundManager.riseVolume(sound: .base2)
-                        soundManager.riseVolume(sound: .piano)
-                        
                         withAnimation {
                             manager.showSubCreate = false
                         }
@@ -100,16 +104,17 @@ struct ContentView: View {
                         soundManager.lowVolume(sound: .base2)
                         soundManager.lowVolume(sound: .piano)
                     }
+                    .onDisappear{
+                        soundManager.riseVolume(sound: .base1)
+                        soundManager.riseVolume(sound: .base2)
+                        soundManager.riseVolume(sound: .piano)
+                    }
             }
             if manager.showSubDescription {
                 ZStack{
                     Color.black.opacity(0.4)
                         .edgesIgnoringSafeArea(.all)
                         .onTapGesture {
-                            soundManager.riseVolume(sound: .base1)
-                            soundManager.riseVolume(sound: .base2)
-                            soundManager.riseVolume(sound: .piano)
-                            
                             withAnimation {
                                 manager.showSubDescription = false
                             }
@@ -120,14 +125,17 @@ struct ContentView: View {
                             soundManager.lowVolume(sound: .base2)
                             soundManager.lowVolume(sound: .piano)
                         }
+                        .onDisappear{
+                            soundManager.riseVolume(sound: .base1)
+                            soundManager.riseVolume(sound: .base2)
+                            soundManager.riseVolume(sound: .piano)
+                        }
                 }
             }
         }
         .onAppear {
             //play na musica de fundo com 3 camadas
-            soundManager.playLoop(sound: .base1)
-            soundManager.playLoop(sound: .base2)
-            soundManager.playLoop(sound: .piano)
+            
            
             print(EstrelaManager.shared.palavraDoDia as Any)
             checkForDailyPopup()
