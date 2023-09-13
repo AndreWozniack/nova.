@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A9C36F3F2AB1D156005854C8 /* CosntelacaoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C36F3E2AB1D156005854C8 /* CosntelacaoScene.swift */; };
+		A9C36F482AB1D54B005854C8 /* swipeF.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9C36F412AB1D54A005854C8 /* swipeF.mp3 */; };
+		A9C36F492AB1D54B005854C8 /* swipe1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9C36F422AB1D54A005854C8 /* swipe1.mp3 */; };
+		A9C36F4A2AB1D54B005854C8 /* long.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9C36F432AB1D54A005854C8 /* long.mp3 */; };
+		A9C36F4B2AB1D54B005854C8 /* base2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9C36F442AB1D54A005854C8 /* base2.mp3 */; };
+		A9C36F4C2AB1D54B005854C8 /* base1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9C36F452AB1D54A005854C8 /* base1.mp3 */; };
+		A9C36F4D2AB1D54B005854C8 /* piano.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9C36F462AB1D54A005854C8 /* piano.mp3 */; };
+		A9C36F4E2AB1D54B005854C8 /* rootNote.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9C36F472AB1D54B005854C8 /* rootNote.mp3 */; };
 		AF278EB82AAFAC7E0095DA92 /* Kodchasan-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EAD2AAFAC7D0095DA92 /* Kodchasan-ExtraLight.ttf */; };
 		AF278EB92AAFAC7E0095DA92 /* Kodchasan-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EAE2AAFAC7D0095DA92 /* Kodchasan-ExtraLightItalic.ttf */; };
 		AF278EBA2AAFAC7E0095DA92 /* Kodchasan-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EAF2AAFAC7D0095DA92 /* Kodchasan-Italic.ttf */; };
@@ -64,14 +72,19 @@
 		AFF35E172AB144C9000F71C6 /* InicialLoanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E132AB144C9000F71C6 /* InicialLoanding.swift */; };
 		AFF35E182AB144C9000F71C6 /* Onboarding3.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E142AB144C9000F71C6 /* Onboarding3.swift */; };
 		AFF35E192AB144C9000F71C6 /* Onboarding2.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E152AB144C9000F71C6 /* Onboarding2.swift */; };
-		AFF35E1B2AB145A3000F71C6 /* CosntelacaoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E1A2AB145A3000F71C6 /* CosntelacaoScene.swift */; };
 		AFF35E1D2AB14612000F71C6 /* sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E1C2AB14611000F71C6 /* sound.swift */; };
-		AFF35E1F2AB14624000F71C6 /* Song-Assets in Resources */ = {isa = PBXBuildFile; fileRef = AFF35E1E2AB14624000F71C6 /* Song-Assets */; };
 		AFF35E212AB14712000F71C6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E202AB14712000F71C6 /* ContentView.swift */; };
-		AFF35E232AB14737000F71C6 /* Songs in Resources */ = {isa = PBXBuildFile; fileRef = AFF35E222AB14737000F71C6 /* Songs */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A9C36F3E2AB1D156005854C8 /* CosntelacaoScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosntelacaoScene.swift; sourceTree = "<group>"; };
+		A9C36F412AB1D54A005854C8 /* swipeF.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swipeF.mp3; sourceTree = "<group>"; };
+		A9C36F422AB1D54A005854C8 /* swipe1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swipe1.mp3; sourceTree = "<group>"; };
+		A9C36F432AB1D54A005854C8 /* long.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = long.mp3; sourceTree = "<group>"; };
+		A9C36F442AB1D54A005854C8 /* base2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = base2.mp3; sourceTree = "<group>"; };
+		A9C36F452AB1D54A005854C8 /* base1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = base1.mp3; sourceTree = "<group>"; };
+		A9C36F462AB1D54A005854C8 /* piano.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano.mp3; sourceTree = "<group>"; };
+		A9C36F472AB1D54B005854C8 /* rootNote.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = rootNote.mp3; sourceTree = "<group>"; };
 		AF278EAC2AAFA9220095DA92 /* Kodchasan-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Bold.ttf"; sourceTree = "<group>"; };
 		AF278EAD2AAFAC7D0095DA92 /* Kodchasan-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-ExtraLight.ttf"; sourceTree = "<group>"; };
 		AF278EAE2AAFAC7D0095DA92 /* Kodchasan-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -105,11 +118,8 @@
 		AFF35E132AB144C9000F71C6 /* InicialLoanding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InicialLoanding.swift; sourceTree = "<group>"; };
 		AFF35E142AB144C9000F71C6 /* Onboarding3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding3.swift; sourceTree = "<group>"; };
 		AFF35E152AB144C9000F71C6 /* Onboarding2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding2.swift; sourceTree = "<group>"; };
-		AFF35E1A2AB145A3000F71C6 /* CosntelacaoScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CosntelacaoScene.swift; path = "../../../../Downloads/nova.-ConectStars/nova/View/CosntelacaoScene.swift"; sourceTree = "<group>"; };
 		AFF35E1C2AB14611000F71C6 /* sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sound.swift; sourceTree = "<group>"; };
-		AFF35E1E2AB14624000F71C6 /* Song-Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Song-Assets"; sourceTree = "<group>"; };
 		AFF35E202AB14712000F71C6 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		AFF35E222AB14737000F71C6 /* Songs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Songs; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +160,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A9C36F402AB1D535005854C8 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				A9C36F452AB1D54A005854C8 /* base1.mp3 */,
+				A9C36F442AB1D54A005854C8 /* base2.mp3 */,
+				A9C36F432AB1D54A005854C8 /* long.mp3 */,
+				A9C36F462AB1D54A005854C8 /* piano.mp3 */,
+				A9C36F472AB1D54B005854C8 /* rootNote.mp3 */,
+				A9C36F422AB1D54A005854C8 /* swipe1.mp3 */,
+				A9C36F412AB1D54A005854C8 /* swipeF.mp3 */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
 		AF278EC32AAFB0450095DA92 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,14 +212,13 @@
 		AF6C18DD2A9FBCEF00D0A089 /* nova */ = {
 			isa = PBXGroup;
 			children = (
+				A9C36F402AB1D535005854C8 /* Music */,
 				AF278EC32AAFB0450095DA92 /* Font */,
 				AF6C18DE2A9FBCEF00D0A089 /* novaApp.swift */,
 				AF6C19502AA0D76E00D0A089 /* View */,
 				AF6C19332AA0D51400D0A089 /* Model */,
 				AFA55EF52AA7A9C400163AB9 /* Controller */,
 				AF6C18F02A9FBF5800D0A089 /* GoogleService-Info.plist */,
-				AFF35E222AB14737000F71C6 /* Songs */,
-				AFF35E1E2AB14624000F71C6 /* Song-Assets */,
 				AF9FAE122AAB8C1300DE8FAE /* Info.plist */,
 				AF6C18E22A9FBCF000D0A089 /* Assets.xcassets */,
 				AF6C18E42A9FBCF000D0A089 /* Preview Content */,
@@ -229,7 +252,7 @@
 				AFF35E152AB144C9000F71C6 /* Onboarding2.swift */,
 				AFF35E142AB144C9000F71C6 /* Onboarding3.swift */,
 				AFF35E202AB14712000F71C6 /* ContentView.swift */,
-				AFF35E1A2AB145A3000F71C6 /* CosntelacaoScene.swift */,
+				A9C36F3E2AB1D156005854C8 /* CosntelacaoScene.swift */,
 				AFA55EF62AA80AD100163AB9 /* CardsView.swift */,
 				AF6C192F2A9FE0CC00D0A089 /* TemaView.swift */,
 				AFA55EF32AA65DDB00163AB9 /* DescriptionView.swift */,
@@ -344,18 +367,23 @@
 				AF278EC12AAFAC7E0095DA92 /* Kodchasan-Medium.ttf in Resources */,
 				AF278EC02AAFAC7E0095DA92 /* Kodchasan-Regular.ttf in Resources */,
 				AF278EBC2AAFAC7E0095DA92 /* Kodchasan-Light.ttf in Resources */,
+				A9C36F4B2AB1D54B005854C8 /* base2.mp3 in Resources */,
 				AF278EBF2AAFAC7E0095DA92 /* Kodchasan-LightItalic.ttf in Resources */,
-				AFF35E1F2AB14624000F71C6 /* Song-Assets in Resources */,
+				A9C36F4E2AB1D54B005854C8 /* rootNote.mp3 in Resources */,
 				AF6C18E62A9FBCF000D0A089 /* Preview Assets.xcassets in Resources */,
 				AF278EBA2AAFAC7E0095DA92 /* Kodchasan-Italic.ttf in Resources */,
 				AF278EB92AAFAC7E0095DA92 /* Kodchasan-ExtraLightItalic.ttf in Resources */,
 				AF278EBB2AAFAC7E0095DA92 /* Kodchasan-BoldItalic.ttf in Resources */,
 				AF278EB82AAFAC7E0095DA92 /* Kodchasan-ExtraLight.ttf in Resources */,
+				A9C36F4C2AB1D54B005854C8 /* base1.mp3 in Resources */,
+				A9C36F482AB1D54B005854C8 /* swipeF.mp3 in Resources */,
 				AF6C18E32A9FBCF000D0A089 /* Assets.xcassets in Resources */,
 				AF278EBD2AAFAC7E0095DA92 /* Kodchasan-SemiBold.ttf in Resources */,
+				A9C36F4D2AB1D54B005854C8 /* piano.mp3 in Resources */,
 				AF278EBE2AAFAC7E0095DA92 /* Kodchasan-SemiBoldItalic.ttf in Resources */,
+				A9C36F492AB1D54B005854C8 /* swipe1.mp3 in Resources */,
 				AF6C18F12A9FBF5800D0A089 /* GoogleService-Info.plist in Resources */,
-				AFF35E232AB14737000F71C6 /* Songs in Resources */,
+				A9C36F4A2AB1D54B005854C8 /* long.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,9 +398,9 @@
 				AF6C192C2A9FD38400D0A089 /* DatabaseManager.swift in Sources */,
 				AFA55EF42AA65DDB00163AB9 /* DescriptionView.swift in Sources */,
 				AF6C19302A9FE0CC00D0A089 /* TemaView.swift in Sources */,
-				AFF35E1B2AB145A3000F71C6 /* CosntelacaoScene.swift in Sources */,
 				AFF35E172AB144C9000F71C6 /* InicialLoanding.swift in Sources */,
 				AFF35E1D2AB14612000F71C6 /* sound.swift in Sources */,
+				A9C36F3F2AB1D156005854C8 /* CosntelacaoScene.swift in Sources */,
 				AF6C18DF2A9FBCEF00D0A089 /* novaApp.swift in Sources */,
 				AFF35E212AB14712000F71C6 /* ContentView.swift in Sources */,
 				AF9FAE142AABD50C00DE8FAE /* NotificationManager.swift in Sources */,

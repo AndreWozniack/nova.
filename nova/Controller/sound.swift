@@ -98,12 +98,12 @@ class SoundManager {
     
     func leftAlt(sound: Sound){
         guard let audioPlayer = soundDict[sound, default: nil] else { return }
-        audioPlayer.pan = -0.6
+        audioPlayer.pan = -0.8
     }
     
     func rightAlt(sound: Sound){
         guard let audioPlayer = soundDict[sound, default: nil] else { return }
-        audioPlayer.pan = 0.7
+        audioPlayer.pan = 0.8
     }
     
     func recoverAlt(sound: Sound){
