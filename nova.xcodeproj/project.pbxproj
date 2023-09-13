@@ -45,7 +45,7 @@
 		AFF35E172AB144C9000F71C6 /* InicialLoanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E132AB144C9000F71C6 /* InicialLoanding.swift */; };
 		AFF35E182AB144C9000F71C6 /* Onboarding3.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E142AB144C9000F71C6 /* Onboarding3.swift */; };
 		AFF35E192AB144C9000F71C6 /* Onboarding2.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E152AB144C9000F71C6 /* Onboarding2.swift */; };
-		AFF35E1D2AB14612000F71C6 /* sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E1C2AB14611000F71C6 /* sound.swift */; };
+		AFF35E1D2AB14612000F71C6 /* song.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E1C2AB14611000F71C6 /* song.swift */; };
 		AFF35E212AB14712000F71C6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E202AB14712000F71C6 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -92,7 +92,7 @@
 		AFF35E132AB144C9000F71C6 /* InicialLoanding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InicialLoanding.swift; sourceTree = "<group>"; };
 		AFF35E142AB144C9000F71C6 /* Onboarding3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding3.swift; sourceTree = "<group>"; };
 		AFF35E152AB144C9000F71C6 /* Onboarding2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding2.swift; sourceTree = "<group>"; };
-		AFF35E1C2AB14611000F71C6 /* sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sound.swift; sourceTree = "<group>"; };
+		AFF35E1C2AB14611000F71C6 /* song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = song.swift; sourceTree = "<group>"; };
 		AFF35E202AB14712000F71C6 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -221,7 +221,7 @@
 		AFA55EF52AA7A9C400163AB9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				AFF35E1C2AB14611000F71C6 /* sound.swift */,
+				AFF35E1C2AB14611000F71C6 /* song.swift */,
 				AF6C192B2A9FD38300D0A089 /* DatabaseManager.swift */,
 				AFA55EF12AA25A3B00163AB9 /* Manager.swift */,
 				AF9FAE132AABD50C00DE8FAE /* NotificationManager.swift */,
@@ -327,7 +327,7 @@
 				AFA55EF42AA65DDB00163AB9 /* PrincipalDescriptionView.swift in Sources */,
 				AF6C19302A9FE0CC00D0A089 /* CreatePrincipal.swift in Sources */,
 				AFF35E172AB144C9000F71C6 /* InicialLoanding.swift in Sources */,
-				AFF35E1D2AB14612000F71C6 /* sound.swift in Sources */,
+				AFF35E1D2AB14612000F71C6 /* song.swift in Sources */,
 				AF6C18DF2A9FBCEF00D0A089 /* novaApp.swift in Sources */,
 				AFF35E212AB14712000F71C6 /* ContentView.swift in Sources */,
 				AF9FAE142AABD50C00DE8FAE /* NotificationManager.swift in Sources */,
@@ -470,7 +470,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"nova/Preview Content\"";
-				DEVELOPMENT_TEAM = L2AH2M48T4;
+				DEVELOPMENT_TEAM = K6W38SA3SY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = nova/Info.plist;
@@ -507,7 +507,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"nova/Preview Content\"";
-				DEVELOPMENT_TEAM = L2AH2M48T4;
+				DEVELOPMENT_TEAM = K6W38SA3SY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = nova/Info.plist;
