@@ -1,5 +1,4 @@
 import SwiftUI
-import FirebaseCore
 import UIKit
 import UserNotifications
 
