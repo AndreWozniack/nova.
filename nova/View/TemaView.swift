@@ -28,8 +28,8 @@ struct TemaView: View {
                                     .foregroundColor(Color(uiColor: .systemGray))
                             }
                         }
-                        
                     }
+                    
                     VStack(alignment: .center, spacing: 4) {
                         TextField("Tema", text: $titulo)
                             .autocorrectionDisabled()

@@ -23,9 +23,7 @@ struct YourApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                ContentView()
-                    .environmentObject(NotificationManager.shared)
-                    .environment(\.colorScheme, .light)
+                InicialLoanding()
             }
         }
     }

@@ -20,10 +20,8 @@
 		AF278EC22AAFAC7E0095DA92 /* Kodchasan-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EB72AAFAC7E0095DA92 /* Kodchasan-MediumItalic.ttf */; };
 		AF278EC52AB09B6B0095DA92 /* PalavraDoDia.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF278EC42AB09B6B0095DA92 /* PalavraDoDia.swift */; };
 		AF6C18DF2A9FBCEF00D0A089 /* novaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C18DE2A9FBCEF00D0A089 /* novaApp.swift */; };
-		AF6C18E12A9FBCEF00D0A089 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C18E02A9FBCEF00D0A089 /* ContentView.swift */; };
 		AF6C18E32A9FBCF000D0A089 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6C18E22A9FBCF000D0A089 /* Assets.xcassets */; };
 		AF6C18E62A9FBCF000D0A089 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6C18E52A9FBCF000D0A089 /* Preview Assets.xcassets */; };
-		AF6C18EF2A9FBD5E00D0A089 /* CosntelacaoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C18EE2A9FBD5E00D0A089 /* CosntelacaoScene.swift */; };
 		AF6C18F12A9FBF5800D0A089 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF6C18F02A9FBF5800D0A089 /* GoogleService-Info.plist */; };
 		AF6C18F62A9FCCF600D0A089 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = AF6C18F52A9FCCF600D0A089 /* FirebaseAnalytics */; };
 		AF6C18F82A9FCCF600D0A089 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = AF6C18F72A9FCCF600D0A089 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -62,6 +60,15 @@
 		AFA55EF42AA65DDB00163AB9 /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA55EF32AA65DDB00163AB9 /* DescriptionView.swift */; };
 		AFA55EF72AA80AD100163AB9 /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA55EF62AA80AD100163AB9 /* CardsView.swift */; };
 		AFA55EF92AA80FD300163AB9 /* SubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA55EF82AA80FD300163AB9 /* SubView.swift */; };
+		AFF35E162AB144C9000F71C6 /* Onboarding1.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E122AB144C9000F71C6 /* Onboarding1.swift */; };
+		AFF35E172AB144C9000F71C6 /* InicialLoanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E132AB144C9000F71C6 /* InicialLoanding.swift */; };
+		AFF35E182AB144C9000F71C6 /* Onboarding3.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E142AB144C9000F71C6 /* Onboarding3.swift */; };
+		AFF35E192AB144C9000F71C6 /* Onboarding2.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E152AB144C9000F71C6 /* Onboarding2.swift */; };
+		AFF35E1B2AB145A3000F71C6 /* CosntelacaoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E1A2AB145A3000F71C6 /* CosntelacaoScene.swift */; };
+		AFF35E1D2AB14612000F71C6 /* sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E1C2AB14611000F71C6 /* sound.swift */; };
+		AFF35E1F2AB14624000F71C6 /* Song-Assets in Resources */ = {isa = PBXBuildFile; fileRef = AFF35E1E2AB14624000F71C6 /* Song-Assets */; };
+		AFF35E212AB14712000F71C6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E202AB14712000F71C6 /* ContentView.swift */; };
+		AFF35E232AB14737000F71C6 /* Songs in Resources */ = {isa = PBXBuildFile; fileRef = AFF35E222AB14737000F71C6 /* Songs */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,10 +87,8 @@
 		AF278EC42AB09B6B0095DA92 /* PalavraDoDia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalavraDoDia.swift; sourceTree = "<group>"; };
 		AF6C18DB2A9FBCEF00D0A089 /* nova.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nova.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF6C18DE2A9FBCEF00D0A089 /* novaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = novaApp.swift; sourceTree = "<group>"; };
-		AF6C18E02A9FBCEF00D0A089 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AF6C18E22A9FBCF000D0A089 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF6C18E52A9FBCF000D0A089 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		AF6C18EE2A9FBD5E00D0A089 /* CosntelacaoScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosntelacaoScene.swift; sourceTree = "<group>"; };
 		AF6C18F02A9FBF5800D0A089 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AF6C192B2A9FD38300D0A089 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		AF6C192F2A9FE0CC00D0A089 /* TemaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemaView.swift; sourceTree = "<group>"; };
@@ -96,6 +101,15 @@
 		AFA55EF32AA65DDB00163AB9 /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
 		AFA55EF62AA80AD100163AB9 /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
 		AFA55EF82AA80FD300163AB9 /* SubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubView.swift; sourceTree = "<group>"; };
+		AFF35E122AB144C9000F71C6 /* Onboarding1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding1.swift; sourceTree = "<group>"; };
+		AFF35E132AB144C9000F71C6 /* InicialLoanding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InicialLoanding.swift; sourceTree = "<group>"; };
+		AFF35E142AB144C9000F71C6 /* Onboarding3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding3.swift; sourceTree = "<group>"; };
+		AFF35E152AB144C9000F71C6 /* Onboarding2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding2.swift; sourceTree = "<group>"; };
+		AFF35E1A2AB145A3000F71C6 /* CosntelacaoScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CosntelacaoScene.swift; path = "../../../../Downloads/nova.-ConectStars/nova/View/CosntelacaoScene.swift"; sourceTree = "<group>"; };
+		AFF35E1C2AB14611000F71C6 /* sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sound.swift; sourceTree = "<group>"; };
+		AFF35E1E2AB14624000F71C6 /* Song-Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Song-Assets"; sourceTree = "<group>"; };
+		AFF35E202AB14712000F71C6 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AFF35E222AB14737000F71C6 /* Songs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Songs; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +194,8 @@
 				AF6C19332AA0D51400D0A089 /* Model */,
 				AFA55EF52AA7A9C400163AB9 /* Controller */,
 				AF6C18F02A9FBF5800D0A089 /* GoogleService-Info.plist */,
+				AFF35E222AB14737000F71C6 /* Songs */,
+				AFF35E1E2AB14624000F71C6 /* Song-Assets */,
 				AF9FAE122AAB8C1300DE8FAE /* Info.plist */,
 				AF6C18E22A9FBCF000D0A089 /* Assets.xcassets */,
 				AF6C18E42A9FBCF000D0A089 /* Preview Content */,
@@ -208,8 +224,12 @@
 		AF6C19502AA0D76E00D0A089 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AF6C18EE2A9FBD5E00D0A089 /* CosntelacaoScene.swift */,
-				AF6C18E02A9FBCEF00D0A089 /* ContentView.swift */,
+				AFF35E132AB144C9000F71C6 /* InicialLoanding.swift */,
+				AFF35E122AB144C9000F71C6 /* Onboarding1.swift */,
+				AFF35E152AB144C9000F71C6 /* Onboarding2.swift */,
+				AFF35E142AB144C9000F71C6 /* Onboarding3.swift */,
+				AFF35E202AB14712000F71C6 /* ContentView.swift */,
+				AFF35E1A2AB145A3000F71C6 /* CosntelacaoScene.swift */,
 				AFA55EF62AA80AD100163AB9 /* CardsView.swift */,
 				AF6C192F2A9FE0CC00D0A089 /* TemaView.swift */,
 				AFA55EF32AA65DDB00163AB9 /* DescriptionView.swift */,
@@ -222,6 +242,7 @@
 		AFA55EF52AA7A9C400163AB9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AFF35E1C2AB14611000F71C6 /* sound.swift */,
 				AF6C192B2A9FD38300D0A089 /* DatabaseManager.swift */,
 				AFA55EF12AA25A3B00163AB9 /* Manager.swift */,
 				AF9FAE132AABD50C00DE8FAE /* NotificationManager.swift */,
@@ -324,6 +345,7 @@
 				AF278EC02AAFAC7E0095DA92 /* Kodchasan-Regular.ttf in Resources */,
 				AF278EBC2AAFAC7E0095DA92 /* Kodchasan-Light.ttf in Resources */,
 				AF278EBF2AAFAC7E0095DA92 /* Kodchasan-LightItalic.ttf in Resources */,
+				AFF35E1F2AB14624000F71C6 /* Song-Assets in Resources */,
 				AF6C18E62A9FBCF000D0A089 /* Preview Assets.xcassets in Resources */,
 				AF278EBA2AAFAC7E0095DA92 /* Kodchasan-Italic.ttf in Resources */,
 				AF278EB92AAFAC7E0095DA92 /* Kodchasan-ExtraLightItalic.ttf in Resources */,
@@ -333,6 +355,7 @@
 				AF278EBD2AAFAC7E0095DA92 /* Kodchasan-SemiBold.ttf in Resources */,
 				AF278EBE2AAFAC7E0095DA92 /* Kodchasan-SemiBoldItalic.ttf in Resources */,
 				AF6C18F12A9FBF5800D0A089 /* GoogleService-Info.plist in Resources */,
+				AFF35E232AB14737000F71C6 /* Songs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,19 +367,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFA55EF02AA1675E00163AB9 /* Estrela.swift in Sources */,
-				AF6C18E12A9FBCEF00D0A089 /* ContentView.swift in Sources */,
 				AF6C192C2A9FD38400D0A089 /* DatabaseManager.swift in Sources */,
 				AFA55EF42AA65DDB00163AB9 /* DescriptionView.swift in Sources */,
 				AF6C19302A9FE0CC00D0A089 /* TemaView.swift in Sources */,
+				AFF35E1B2AB145A3000F71C6 /* CosntelacaoScene.swift in Sources */,
+				AFF35E172AB144C9000F71C6 /* InicialLoanding.swift in Sources */,
+				AFF35E1D2AB14612000F71C6 /* sound.swift in Sources */,
 				AF6C18DF2A9FBCEF00D0A089 /* novaApp.swift in Sources */,
+				AFF35E212AB14712000F71C6 /* ContentView.swift in Sources */,
 				AF9FAE142AABD50C00DE8FAE /* NotificationManager.swift in Sources */,
 				AFA55EF72AA80AD100163AB9 /* CardsView.swift in Sources */,
-				AF6C18EF2A9FBD5E00D0A089 /* CosntelacaoScene.swift in Sources */,
+				AFF35E192AB144C9000F71C6 /* Onboarding2.swift in Sources */,
 				AF278EC52AB09B6B0095DA92 /* PalavraDoDia.swift in Sources */,
 				AFA55EF22AA25A3B00163AB9 /* Manager.swift in Sources */,
 				AFA55EF92AA80FD300163AB9 /* SubView.swift in Sources */,
+				AFF35E162AB144C9000F71C6 /* Onboarding1.swift in Sources */,
 				AF9FAE022AA9108700DE8FAE /* SubDescripitionVIew.swift in Sources */,
 				AF7F2D5F2AA1287200F361F9 /* Reflexao.swift in Sources */,
+				AFF35E182AB144C9000F71C6 /* Onboarding3.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
