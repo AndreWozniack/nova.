@@ -157,6 +157,7 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         } else {
             Manager.shared.showSubDescription = true
         }
+        Manager.shared.estrelaConnections = obterSubRede(estrela: estrela)
         
     }
     
