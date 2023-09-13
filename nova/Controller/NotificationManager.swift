@@ -38,6 +38,17 @@ class NotificationManager: ObservableObject {
         print("Tentativa de agendar uma notificação")
     }
     
+    func scheduleDailyNotifications() {
+        let times = [(hour: 9, minute: 0), (hour: 13, minute: 0), (hour: 18, minute: 0)]
+        
+        for time in times {
+            scheduleDailyNotification(at: time.hour, minute: time.minute)
+        }
+    }
+    func cancelAllNotifications() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+    }
+    
     func scheduleDailyNotification(at hour: Int, minute: Int) {
         let center = UNUserNotificationCenter.current()
         

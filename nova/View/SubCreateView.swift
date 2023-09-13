@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SubView: View {
+struct SubCreateView: View {
     
     @State var titulo: String = ""
     @State var texto: String = ""
@@ -69,7 +69,7 @@ struct SubView: View {
                     Spacer()
                     HStack{
                         Button {
-                            Manager.shared.showSubView = false
+                            Manager.shared.showSubCreate = false
                         } label: {
                             HStack{
                                 Text("Cancelar")
@@ -97,7 +97,7 @@ struct SubView: View {
                                 EstrelaManager.shared.addEstrela(novaEstrela)
                                 EstrelaManager.shared.updateEstrela(estrelaOrigem)
                             }
-                            Manager.shared.showSubView = false
+                            Manager.shared.showSubCreate = false
                             
                         } label: {
                             HStack{
@@ -130,6 +130,7 @@ struct SubView: View {
             }
             .onAppear {
                 let _ = novaEstrela.tipoAleatorio()
+                Manager.shared.showPrincipalDescription = false
             }
         }
         
@@ -186,6 +187,6 @@ struct SubView: View {
 
 struct SubView_Previews: PreviewProvider {
     static var previews: some View {
-        SubView()
+        SubCreateView()
     }
 }

@@ -6,7 +6,7 @@ protocol EstrelaDelegate: AnyObject {
     func estrelaTocada(_ estrela: Estrela)
 }
 
-class Estrela: SKShapeNode, Codable{
+class Estrela: SKShapeNode, Codable, Identifiable {
 
     @Published var tempoRestanteString: String = ""
     weak var delegate: EstrelaDelegate?
@@ -96,6 +96,14 @@ class Estrela: SKShapeNode, Codable{
         self.position = CGPoint(x: x, y: y)
         self.isUserInteractionEnabled = true
         startUpdateTimer()
+    }
+    
+    static func == (lhs: Estrela, rhs: Estrela) -> Bool {
+        return lhs.id == rhs.id
+    }
+
+    override var hash: Int {
+        return id.hashValue
     }
     
     func getDuracao() -> String {

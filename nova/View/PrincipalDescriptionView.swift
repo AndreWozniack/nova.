@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct DescriptionView: View {
+struct PrincipalDescriptionView: View {
     
     var estrela : Estrela
     @State private var formattedTime: String = ""
@@ -18,6 +18,13 @@ struct DescriptionView: View {
                     VStack(alignment: .center) {
                         VStack(spacing: 6){
                             HStack{
+//                                Button {
+//                                    Manager.shared.showPrincipalDescription = false
+//                                } label: {
+//                                    Image(systemName: "x.circle.fill")
+//                                        .font(.title2)
+//                                        .foregroundColor(Color(uiColor: .systemGray))
+//                                }
                                 Spacer()
                                 Button {
                                     editing.toggle()
@@ -25,7 +32,7 @@ struct DescriptionView: View {
                                     if editing {
                                         Image(systemName: "pencil.circle.fill")
                                             .font(.title2)
-                                            .foregroundColor(Color(uiColor: .blue))
+                                            .foregroundColor(Color("dica"))
                                     } else {
                                         Image(systemName: "pencil.circle.fill")
                                             .font(.title2)
@@ -33,13 +40,13 @@ struct DescriptionView: View {
                                     }
                                 }
                             }
-                            .padding(.trailing)
+                            .padding(.horizontal)
                             Text(estrela.reflexao.titulo)
                                 .font(.custom("Kodchasan-Bold", size: 20))
                                 .fontWeight(.bold)
                                 .padding(.top, -20)
                             //tema da estrela
-                            VStack(spacing: 2){
+                            VStack(spacing: 4){
                                 HStack(alignment: .center, spacing: 4){
                                     Image(systemName: "star.fill")
                                         .font(.caption2)
@@ -87,8 +94,8 @@ struct DescriptionView: View {
                         if !editing {
                             HStack(spacing: 12){
                                 Button {
-                                    Manager.shared.showSubView = true
-                                    Manager.shared.showNewView = false
+                                    Manager.shared.showSubCreate = true
+                                    Manager.shared.showCreatePrincipal = false
                                 } label: {
                                     HStack{
                                         Text("Adicionar outro astro.")
@@ -177,7 +184,7 @@ struct DescriptionView: View {
             }
             .frame(width: 300, height: 487.5)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+
         
         
     }
@@ -186,7 +193,7 @@ struct DescriptionView: View {
 
 struct DescriptionView_Previews: PreviewProvider {
     static var previews: some View {
-        DescriptionView(estrela: geraEstrela())
+        PrincipalDescriptionView(estrela: geraEstrela())
     }
 }
 
