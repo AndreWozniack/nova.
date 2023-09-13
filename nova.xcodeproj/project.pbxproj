@@ -26,7 +26,11 @@
 		AF278EC02AAFAC7E0095DA92 /* Kodchasan-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EB52AAFAC7E0095DA92 /* Kodchasan-Regular.ttf */; };
 		AF278EC12AAFAC7E0095DA92 /* Kodchasan-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EB62AAFAC7E0095DA92 /* Kodchasan-Medium.ttf */; };
 		AF278EC22AAFAC7E0095DA92 /* Kodchasan-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EB72AAFAC7E0095DA92 /* Kodchasan-MediumItalic.ttf */; };
-		AF278EC52AB09B6B0095DA92 /* PalavraDoDIa.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF278EC42AB09B6B0095DA92 /* PalavraDoDIa.swift */; };
+		AF278EC52AB09B6B0095DA92 /* PalavraDoDia.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF278EC42AB09B6B0095DA92 /* PalavraDoDia.swift */; };
+		AF278EC72AB0EE4A0095DA92 /* InicialLoanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF278EC62AB0EE4A0095DA92 /* InicialLoanding.swift */; };
+		AF278EC92AB0F0110095DA92 /* Onboarding1.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF278EC82AB0F0110095DA92 /* Onboarding1.swift */; };
+		AF278ECB2AB0F0230095DA92 /* Onboarding2.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF278ECA2AB0F0230095DA92 /* Onboarding2.swift */; };
+		AF278ECD2AB0F0310095DA92 /* Onboarding3.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF278ECC2AB0F0310095DA92 /* Onboarding3.swift */; };
 		AF6C18DF2A9FBCEF00D0A089 /* novaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C18DE2A9FBCEF00D0A089 /* novaApp.swift */; };
 		AF6C18E12A9FBCEF00D0A089 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C18E02A9FBCEF00D0A089 /* ContentView.swift */; };
 		AF6C18E32A9FBCF000D0A089 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6C18E22A9FBCF000D0A089 /* Assets.xcassets */; };
@@ -94,8 +98,12 @@
 		AF278EB52AAFAC7E0095DA92 /* Kodchasan-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Regular.ttf"; sourceTree = "<group>"; };
 		AF278EB62AAFAC7E0095DA92 /* Kodchasan-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Medium.ttf"; sourceTree = "<group>"; };
 		AF278EB72AAFAC7E0095DA92 /* Kodchasan-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-MediumItalic.ttf"; sourceTree = "<group>"; };
+		AF278EC42AB09B6B0095DA92 /* PalavraDoDia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalavraDoDia.swift; sourceTree = "<group>"; };
+		AF278EC62AB0EE4A0095DA92 /* InicialLoanding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InicialLoanding.swift; sourceTree = "<group>"; };
+		AF278EC82AB0F0110095DA92 /* Onboarding1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding1.swift; sourceTree = "<group>"; };
+		AF278ECA2AB0F0230095DA92 /* Onboarding2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding2.swift; sourceTree = "<group>"; };
+		AF278ECC2AB0F0310095DA92 /* Onboarding3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding3.swift; sourceTree = "<group>"; };
 		AF278EC42AB09B6B0095DA92 /* PalavraDoDIa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalavraDoDIa.swift; sourceTree = "<group>"; };
-
 		AF6C18DB2A9FBCEF00D0A089 /* nova.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nova.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF6C18DE2A9FBCEF00D0A089 /* novaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = novaApp.swift; sourceTree = "<group>"; };
 		AF6C18E02A9FBCEF00D0A089 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -185,6 +193,16 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		AF278ECE2AB0F03D0095DA92 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				AF278EC82AB0F0110095DA92 /* Onboarding1.swift */,
+				AF278ECA2AB0F0230095DA92 /* Onboarding2.swift */,
+				AF278ECC2AB0F0310095DA92 /* Onboarding3.swift */,
+			);
+			name = Onboarding;
+			sourceTree = "<group>";
+		};
 		AF6C18D22A9FBCEF00D0A089 = {
 			isa = PBXGroup;
 			children = (
@@ -233,7 +251,7 @@
 				A9D5B0FC2AB0AA50007EB2AF /* sound.swift */,
 				AF7F2D5E2AA1287200F361F9 /* Reflexao.swift */,
 				AFA55EEF2AA1675E00163AB9 /* Estrela.swift */,
-				AF278EC42AB09B6B0095DA92 /* PalavraDoDIa.swift */,
+				AF278EC42AB09B6B0095DA92 /* PalavraDoDia.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -241,6 +259,8 @@
 		AF6C19502AA0D76E00D0A089 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AF278EC62AB0EE4A0095DA92 /* InicialLoanding.swift */,
+				AF278ECE2AB0F03D0095DA92 /* Onboarding */,
 				AF6C18EE2A9FBD5E00D0A089 /* CosntelacaoScene.swift */,
 				AF6C18E02A9FBCEF00D0A089 /* ContentView.swift */,
 				AFA55EF62AA80AD100163AB9 /* CardsView.swift */,
@@ -385,17 +405,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF278ECD2AB0F0310095DA92 /* Onboarding3.swift in Sources */,
+				AF278EC92AB0F0110095DA92 /* Onboarding1.swift in Sources */,
 				AFA55EF02AA1675E00163AB9 /* Estrela.swift in Sources */,
 				AF6C18E12A9FBCEF00D0A089 /* ContentView.swift in Sources */,
+				AF278EC72AB0EE4A0095DA92 /* InicialLoanding.swift in Sources */,
 				AF6C192C2A9FD38400D0A089 /* DatabaseManager.swift in Sources */,
 				AFA55EF42AA65DDB00163AB9 /* DescriptionView.swift in Sources */,
+				AF278ECB2AB0F0230095DA92 /* Onboarding2.swift in Sources */,
 				AF6C19302A9FE0CC00D0A089 /* TemaView.swift in Sources */,
 				A9D5B0FD2AB0AA50007EB2AF /* sound.swift in Sources */,
 				AF6C18DF2A9FBCEF00D0A089 /* novaApp.swift in Sources */,
 				AF9FAE142AABD50C00DE8FAE /* NotificationManager.swift in Sources */,
 				AFA55EF72AA80AD100163AB9 /* CardsView.swift in Sources */,
 				AF6C18EF2A9FBD5E00D0A089 /* CosntelacaoScene.swift in Sources */,
-				AF278EC52AB09B6B0095DA92 /* PalavraDoDIa.swift in Sources */,
+				AF278EC52AB09B6B0095DA92 /* PalavraDoDia.swift in Sources */,
 				AFA55EF22AA25A3B00163AB9 /* Manager.swift in Sources */,
 				AFA55EF92AA80FD300163AB9 /* SubView.swift in Sources */,
 				AF9FAE022AA9108700DE8FAE /* SubDescripitionVIew.swift in Sources */,

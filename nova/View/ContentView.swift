@@ -46,35 +46,36 @@ struct ContentView: View {
             
             VStack{
                 Spacer()
-                Text("Segure na tela para criar um novo astro")
+                Text("Segure na tela para\ncriar um novo astro")
                     .foregroundColor(.gray)
+                    .padding(.bottom, 25)
                 
-                HStack{
-                    Button {
-                        print(EstrelaManager.shared.todasEstrelas)
-                        print(EstrelaManager.shared.estrelasExpiradas)
-                    } label: {
-                        Text("Lista de estrelas")
-                            .font(.custom("Kodchasan", size: 15))
-                            .padding(10)
-                            .background(.white)
-                            .foregroundColor(.black)
-                            .cornerRadius(12)
-                    }
-                    Button {
-                        EstrelaManager.shared.clearSky()
-                        manager.estrela = Estrela()
-
-                    } label: {
-                        Text("Limpar Estrelas")
-                            .font(.custom("Kodchasan", size: 15))
-                            .padding(10)
-                            .background(.white)
-                            .font(.system(size: 15))
-                            .foregroundColor(.black)
-                            .cornerRadius(12)
-                    }
-                }
+//                HStack{
+//                    Button {
+//                        print(EstrelaManager.shared.todasEstrelas)
+//                        print(EstrelaManager.shared.estrelasExpiradas)
+//                    } label: {
+//                        Text("Lista de estrelas")
+//                            .font(.custom("Kodchasan", size: 15))
+//                            .padding(10)
+//                            .background(.white)
+//                            .foregroundColor(.black)
+//                            .cornerRadius(12)
+//                    }
+//                    Button {
+//                        EstrelaManager.shared.clearSky()
+//                        manager.estrela = Estrela()
+//
+//                    } label: {
+//                        Text("Limpar Estrelas")
+//                            .font(.custom("Kodchasan", size: 15))
+//                            .padding(10)
+//                            .background(.white)
+//                            .font(.system(size: 15))
+//                            .foregroundColor(.black)
+//                            .cornerRadius(12)
+//                    }
+//                }
             }
 
             

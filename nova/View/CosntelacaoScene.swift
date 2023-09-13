@@ -16,6 +16,10 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
     var longPressGesture : UILongPressGestureRecognizer!
     var cancellable = Set<AnyCancellable>()
     var panVelocity: CGPoint = .zero
+    var currentTime: TimeInterval = 0
+    var lastTouchTime: TimeInterval?
+    var touch : Bool = false
+
     
     
     override func didMove(to view: SKView) {
@@ -23,7 +27,7 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         anchorPoint = CGPoint(x: 0, y: 0)
         
         cameraNode.position = anchorPoint
-        cameraNode.setScale(1)
+        cameraNode.setScale(4)
         camera = cameraNode
         addChild(cameraNode)
         
@@ -48,9 +52,7 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         initSink()
         setConstelacoes()
         
-        if let ultimaEstrela = EstrelaManager.shared.todasEstrelas.last {
-            cameraNode.position = CGPoint(x: ultimaEstrela.x, y: ultimaEstrela.y)
-        }
+        moveCameraToLastStar()
     }
     func initSink() {
         Manager.shared.$estrela.sink { estrela in
@@ -167,9 +169,33 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
     func setConstelacoes() {
         for estrela in EstrelaManager.shared.todasEstrelas {
             print(adicionarEstrelaNaTela(estrela))
-            ligaEstrela(estrela)
+            ligaEstrela(estrela, 5)
         }
     }
+    
+    func moveCameraToLastStar() {
+        guard let camera = self.camera else {
+            return
+        }
+        guard let ultimaEstrela = todasEstrelas.last else {
+            return
+        }
+        let novaEscala: CGFloat = 1.5
+        let novaPosicao = CGPoint(x: ultimaEstrela.x, y: ultimaEstrela.y)
+        
+        let escalaAcao = SKAction.scale(to: novaEscala, duration: 2.0)
+        escalaAcao.timingMode = .easeInEaseOut
+        
+        let movimentoAcao = SKAction.move(to: novaPosicao, duration: 2.0)
+        movimentoAcao.timingMode = .easeInEaseOut
+        
+        let grupoAcao = SKAction.group([escalaAcao, movimentoAcao])
+        let sequenciaAcao = SKAction.sequence([SKAction.wait(forDuration: 2.0), grupoAcao])
+        
+        camera.run(sequenciaAcao)
+    }
+
+
     
     func ligaEstrela(_ estrela: Estrela) {
         guard let origemID = estrela.estrelaOrigem else {
@@ -202,6 +228,37 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
             lineNode.run(drawLineAction)
         }
     }
+    func ligaEstrela(_ estrela: Estrela, _ tempo : Double) {
+        guard let origemID = estrela.estrelaOrigem else {
+            return
+        }
+        if let origem = todasEstrelas.first(where: { $0.id == origemID }) {
+            let pathInicial = CGMutablePath()
+            pathInicial.move(to: origem.position)
+            pathInicial.addLine(to: origem.position)
+            
+            let lineNode = SKShapeNode(path: pathInicial)
+            lineNode.strokeColor = SKColor(white: 1.0, alpha: 0.5)
+            lineNode.lineWidth = 2.0
+            self.addChild(lineNode)
+            
+            let duration: TimeInterval = tempo
+            
+            let drawLineAction = SKAction.customAction(withDuration: duration) { node, elapsedTime in
+                guard let node = node as? SKShapeNode else { return }
+                
+                let path = CGMutablePath()
+                path.move(to: origem.position)
+                let t = min(1.0, CGFloat(elapsedTime) / CGFloat(duration))
+                let intermediatePoint = CGPoint(x: origem.position.x + t * (estrela.position.x - origem.position.x), y: origem.position.y + t * (estrela.position.y - origem.position.y))
+                
+                path.addLine(to: intermediatePoint)
+                node.path = path
+            }
+            
+            lineNode.run(drawLineAction)
+        }
+    }
 
     override func update(_ currentTime: TimeInterval) {
         for estrela in todasEstrelas {
@@ -211,33 +268,44 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
                 titulo.setScale(escalaDaCamera)
             }
         }
+        
+        if let lastTouchTime = lastTouchTime, currentTime - lastTouchTime > 4 {
+            startIdleCameraAnimation()
+        }
+        
+    }
+    func startIdleCameraAnimation() {
+        let zoomOutAction = SKAction.scale(to: 10.0, duration: 5)
+        zoomOutAction.timingMode = .easeInEaseOut
+        
+        let moveActionForward = SKAction.move(by: CGVector(dx: 100, dy: 100), duration: 5)
+        moveActionForward.timingMode = .easeInEaseOut
+        
+        let moveActionBackward = moveActionForward.reversed()
+        let moveAction = SKAction.sequence([moveActionForward, moveActionBackward])
+        let rotateActionForward = SKAction.rotate(byAngle: CGFloat.pi / 4, duration: 10)
+        rotateActionForward.timingMode = .easeInEaseOut
+        let rotateActionBackward = rotateActionForward.reversed()
+        let rotateAction = SKAction.sequence([rotateActionForward, rotateActionBackward])
+
+        // Agrupando as ações de mover e rotacionar para que ocorram simultaneamente
+        let groupAction = SKAction.group([moveAction, rotateAction])
+
+        // Criando uma sequência onde o zoom é seguido pelo grupo de ações de mover e rotacionar
+        let sequenceAction = SKAction.sequence([zoomOutAction, groupAction])
+
+        let repeatAction = SKAction.repeatForever(sequenceAction)
+        cameraNode.run(repeatAction, withKey: "idleAction")
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        lastTouchTime = currentTime
+        cameraNode.removeAction(forKey: "idleAction")
+
+        
     }
     
     // MARK: - Gestos
-    func applyPanInertia() {
-        let decelerationRate: CGFloat = 0.75 // Ajuste conforme necessário
-        let minSpeed: CGFloat = 2.0  // Ajuste conforme necessário
-
-        let inertiaAction = SKAction.customAction(withDuration: 0.5) { [weak self] (_, elapsedTime) in
-            guard let self = self, let camera = self.camera else { return }
-            
-            let angle = camera.zRotation
-            let rotatedVelocity = CGPoint(x: cos(angle) * self.panVelocity.x + sin(angle) * self.panVelocity.y,
-                                          y: -sin(angle) * self.panVelocity.x + cos(angle) * self.panVelocity.y)
-            let velocityInScene = CGPoint(x: rotatedVelocity.x * -camera.xScale, y: rotatedVelocity.y * camera.yScale)
-            camera.position = CGPoint(x: camera.position.x + velocityInScene.x * CGFloat(elapsedTime),
-                                      y: camera.position.y + velocityInScene.y * CGFloat(elapsedTime))
-            
-            // Diminuir a velocidade
-            self.panVelocity.x *= decelerationRate
-            self.panVelocity.y *= decelerationRate
-            
-            if self.panVelocity.length() < minSpeed {
-                camera.removeAction(forKey: "panInertia")
-            }
-        }
-        camera?.run(inertiaAction, withKey: "panInertia")
-    }
     @objc func panGestureAction(_ sender: UIPanGestureRecognizer) {
         guard let camera = self.camera else {
             return
@@ -254,9 +322,6 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
             sender.setTranslation(CGPoint.zero, in: self.view)
 
             panVelocity = sender.velocity(in: self.view)
-
-//        case .ended, .cancelled:
-//            applyPanInertia()
 
         default:
             break
@@ -279,6 +344,7 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         newScale = max(minScale, min(maxScale, newScale))
         camera.setScale(newScale)
         sender.scale = 1.0
+        
     }
     @objc func handleLongPress(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
@@ -301,6 +367,9 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
         }
         return true
     }
+    
+
+
 
 }
 extension ConstelacaoScene: UIGestureRecognizerDelegate {
