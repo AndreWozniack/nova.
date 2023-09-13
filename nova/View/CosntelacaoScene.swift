@@ -3,6 +3,9 @@ import SpriteKit
 import Combine
 
 class ConstelacaoScene: SKScene, EstrelaDelegate {
+    ///FEEDBACK TÁTIL E SONORO
+    let soundManager = SoundManager()
+    let impactFeedback = UIImpactFeedbackGenerator(style: .heavy)
     
     private var estrelaOriginal: Estrela?
     private var todasEstrelas: [Estrela] = []
@@ -20,7 +23,6 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
     
     
     override func didMove(to view: SKView) {
-        
         self.backgroundColor = SKColor.black
         anchorPoint = CGPoint(x: 0, y: 0)
         
@@ -346,13 +348,16 @@ class ConstelacaoScene: SKScene, EstrelaDelegate {
     }
     @objc func handleLongPress(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
+            //Dois feedbacks de vibração
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            impactFeedback.impactOccurred()
+            
             let locationInView = sender.location(in: self.view)
             let locationInScene = convertPoint(fromView: locationInView)
             if posicaoEhValida(x: locationInScene.x, y: locationInScene.y) {
                 let novaEstrela = Estrela()
                 Manager.shared.estrela = Estrela(reflexao: Reflexao(titulo: "", texto: ""), x: Double(locationInScene.x), y: Double(locationInScene.y), tipo: novaEstrela.tipoAleatorio())
                 Manager.shared.showView = true
-
             }
         }
     }
