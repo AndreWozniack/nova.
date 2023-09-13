@@ -28,13 +28,13 @@ struct SubView: View {
                             }
                         }
                     }
-                    
                     VStack(alignment: .center, spacing: 10) {
                         Text("\(Manager.shared.estrelaTocada.reflexao.titulo)")
                             .bold()
                             .font(.system(size: 15))
                             .foregroundColor(.gray)
                         TextField("Tema", text: $titulo)
+                            .autocorrectionDisabled()
                             .cornerRadius(8)
                             .font(Font.custom("Kodchasan-Bold", size: 20))
                             .multilineTextAlignment(.center)
@@ -61,6 +61,7 @@ struct SubView: View {
                     }
                     
                     TextField("Reflexão", text: $texto, axis: .vertical)
+                        .autocorrectionDisabled()
                         .padding(.horizontal, 12)
                         .padding(.vertical, 10)
                         .frame(width: 260, alignment: .topLeading)
