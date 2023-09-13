@@ -1,5 +1,6 @@
 import SwiftUI
 
+
 struct TemaView: View {
     
     var estrela: Estrela
@@ -32,7 +33,6 @@ struct TemaView: View {
                     }
                     VStack(alignment: .center, spacing: 4) {
                         TextField("Tema", text: $titulo)
-                            .autocorrectionDisabled()
                             .cornerRadius(8)
                             .font(Font.custom("Kodchasan-Bold", size: 20))
                             .multilineTextAlignment(.center)
@@ -60,7 +60,6 @@ struct TemaView: View {
                                         .stroke(Color(uiColor: .green), lineWidth: 2))
                     }
                     TextField("Escreva sua reflexão aqui", text: $texto, axis: .vertical)
-                        .autocorrectionDisabled()
                         .padding(.horizontal, 12)
                         .padding(.vertical, 10)
                         .frame(width: 260, alignment: .topLeading)
