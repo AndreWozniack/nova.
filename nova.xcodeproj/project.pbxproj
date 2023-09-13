@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A9C36F3F2AB1D156005854C8 /* CosntelacaoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C36F3E2AB1D156005854C8 /* CosntelacaoScene.swift */; };
 		AF278EB82AAFAC7E0095DA92 /* Kodchasan-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EAD2AAFAC7D0095DA92 /* Kodchasan-ExtraLight.ttf */; };
 		AF278EB92AAFAC7E0095DA92 /* Kodchasan-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EAE2AAFAC7D0095DA92 /* Kodchasan-ExtraLightItalic.ttf */; };
 		AF278EBA2AAFAC7E0095DA92 /* Kodchasan-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF278EAF2AAFAC7D0095DA92 /* Kodchasan-Italic.ttf */; };
@@ -64,7 +65,6 @@
 		AFF35E172AB144C9000F71C6 /* InicialLoanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E132AB144C9000F71C6 /* InicialLoanding.swift */; };
 		AFF35E182AB144C9000F71C6 /* Onboarding3.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E142AB144C9000F71C6 /* Onboarding3.swift */; };
 		AFF35E192AB144C9000F71C6 /* Onboarding2.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E152AB144C9000F71C6 /* Onboarding2.swift */; };
-		AFF35E1B2AB145A3000F71C6 /* CosntelacaoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E1A2AB145A3000F71C6 /* CosntelacaoScene.swift */; };
 		AFF35E1D2AB14612000F71C6 /* sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E1C2AB14611000F71C6 /* sound.swift */; };
 		AFF35E1F2AB14624000F71C6 /* Song-Assets in Resources */ = {isa = PBXBuildFile; fileRef = AFF35E1E2AB14624000F71C6 /* Song-Assets */; };
 		AFF35E212AB14712000F71C6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E202AB14712000F71C6 /* ContentView.swift */; };
@@ -72,6 +72,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A9C36F3E2AB1D156005854C8 /* CosntelacaoScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosntelacaoScene.swift; sourceTree = "<group>"; };
 		AF278EAC2AAFA9220095DA92 /* Kodchasan-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-Bold.ttf"; sourceTree = "<group>"; };
 		AF278EAD2AAFAC7D0095DA92 /* Kodchasan-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-ExtraLight.ttf"; sourceTree = "<group>"; };
 		AF278EAE2AAFAC7D0095DA92 /* Kodchasan-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kodchasan-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -105,7 +106,6 @@
 		AFF35E132AB144C9000F71C6 /* InicialLoanding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InicialLoanding.swift; sourceTree = "<group>"; };
 		AFF35E142AB144C9000F71C6 /* Onboarding3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding3.swift; sourceTree = "<group>"; };
 		AFF35E152AB144C9000F71C6 /* Onboarding2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding2.swift; sourceTree = "<group>"; };
-		AFF35E1A2AB145A3000F71C6 /* CosntelacaoScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CosntelacaoScene.swift; path = "../../../../Downloads/nova.-ConectStars/nova/View/CosntelacaoScene.swift"; sourceTree = "<group>"; };
 		AFF35E1C2AB14611000F71C6 /* sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sound.swift; sourceTree = "<group>"; };
 		AFF35E1E2AB14624000F71C6 /* Song-Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Song-Assets"; sourceTree = "<group>"; };
 		AFF35E202AB14712000F71C6 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -229,7 +229,7 @@
 				AFF35E152AB144C9000F71C6 /* Onboarding2.swift */,
 				AFF35E142AB144C9000F71C6 /* Onboarding3.swift */,
 				AFF35E202AB14712000F71C6 /* ContentView.swift */,
-				AFF35E1A2AB145A3000F71C6 /* CosntelacaoScene.swift */,
+				A9C36F3E2AB1D156005854C8 /* CosntelacaoScene.swift */,
 				AFA55EF62AA80AD100163AB9 /* CardsView.swift */,
 				AF6C192F2A9FE0CC00D0A089 /* TemaView.swift */,
 				AFA55EF32AA65DDB00163AB9 /* DescriptionView.swift */,
@@ -370,9 +370,9 @@
 				AF6C192C2A9FD38400D0A089 /* DatabaseManager.swift in Sources */,
 				AFA55EF42AA65DDB00163AB9 /* DescriptionView.swift in Sources */,
 				AF6C19302A9FE0CC00D0A089 /* TemaView.swift in Sources */,
-				AFF35E1B2AB145A3000F71C6 /* CosntelacaoScene.swift in Sources */,
 				AFF35E172AB144C9000F71C6 /* InicialLoanding.swift in Sources */,
 				AFF35E1D2AB14612000F71C6 /* sound.swift in Sources */,
+				A9C36F3F2AB1D156005854C8 /* CosntelacaoScene.swift in Sources */,
 				AF6C18DF2A9FBCEF00D0A089 /* novaApp.swift in Sources */,
 				AFF35E212AB14712000F71C6 /* ContentView.swift in Sources */,
 				AF9FAE142AABD50C00DE8FAE /* NotificationManager.swift in Sources */,
