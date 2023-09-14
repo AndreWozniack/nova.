@@ -57,8 +57,10 @@ struct ContentView: View {
                     }label: {
                         Image(systemName: check ? "speaker.wave.2" : "speaker.slash")
                             .foregroundColor(.gray)
+                            .font(.system(size: 30))
                     }
-                }.padding(40)
+                }.padding(.top, 70)
+                    .padding(.trailing, 15)
                 Spacer()
                 Text("Segure na tela para\ncriar um novo astro")
                     .foregroundColor(.gray)
