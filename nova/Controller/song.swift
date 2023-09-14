@@ -108,6 +108,11 @@ class SoundManager {
         audioPlayer.pan = 0.8
     }
     
+    func printPan(sound: Sound){
+        guard let audioPlayer = soundDict[sound, default: nil] else { return }
+        print(audioPlayer.pan)
+    }
+    
     func recoverAlt(sound: Sound){
         var count = 0
         guard let audioPlayer = soundDict[sound, default: nil] else { return }

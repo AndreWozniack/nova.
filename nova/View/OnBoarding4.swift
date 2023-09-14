@@ -1,14 +1,14 @@
 //
-//  Onboarding2.swift
+//  OnBoarding4.swift
 //  nova
 //
-//  Created by André Wozniack on 12/09/23.
+//  Created by Afonso Rekbaim on 14/09/23.
 //
 
 import SwiftUI
 
-struct Onboarding2: View {
-    @Binding var currentTab : Int
+struct OnBoarding4: View {
+    @Binding var showOnboarding : Bool
     var body: some View {
         ZStack{
             VStack(alignment: .center, spacing: 10) {
@@ -20,15 +20,13 @@ struct Onboarding2: View {
                 VStack(alignment: .center, spacing: 32) {
                     
                     ZStack{
-                        Image("glow")
-                        Image("Lua")
-                            .scaleEffect(0.5)
+                        Image("constelacao2")
                             .frame(height: 195)
                     }
                     
                     VStack(alignment: .center, spacing: 16) {
                         HStack(alignment: .center, spacing: 10) {
-                            Image(systemName: "moon.fill")
+                            Image(systemName: "hand.draw")
                               .font(.system(size: 48)
                                   .weight(.light)
                               )
@@ -38,7 +36,7 @@ struct Onboarding2: View {
                             VStack(alignment: .center, spacing: 6) {
                                 
                                 HStack{
-                                    Text("A cada dia um astro surge com um novo tema para ajudar você a refletir.")
+                                    Text("Navegue pelo seu mapa para ver e apreciar suas constelações.")
                                       .font(.system(size: 14))
                                       .foregroundColor(.white)
                                       .lineLimit(3)
@@ -53,7 +51,7 @@ struct Onboarding2: View {
                         .padding(0)
                         
                         HStack(alignment: .center, spacing: 10) {
-                            Image(systemName: "sparkles")
+                            Image(systemName: "hand.tap")
                               .font(.system(size: 48)
                                   .weight(.light)
                               )
@@ -62,7 +60,7 @@ struct Onboarding2: View {
                               .frame(width: 55, alignment: .top)
                             VStack(alignment: .center, spacing: 6) {
                                 HStack{
-                                    Text("Se preferir, altere o tema do astro para criar reflexões personalizadas.")
+                                    Text("Clique no astro que quiser para ler ou editar a sua reflexão")
                                       .font(.system(size: 14))
                                       .foregroundColor(.white)
                                       .lineLimit(3)
@@ -76,7 +74,7 @@ struct Onboarding2: View {
                         }
                         .padding(0)
                         HStack(alignment: .center, spacing: 10) {
-                            Image(systemName: "moon.stars.fill")
+                            Image(systemName: "bubbles.and.sparkles.fill")
                               .font(.system(size: 48)
                                   .weight(.light)
                               )
@@ -85,7 +83,7 @@ struct Onboarding2: View {
                               .frame(width: 55, alignment: .top)
                             VStack(alignment: .center, spacing: 6) {
                                 HStack{
-                                    Text("Adicione outros astros para formar suas constelações e anotar mais reflexões.")
+                                    Text("Revisite suas reflexões antes antes que elas virem poeira espacial.")
                                       .font(.system(size: 14))
                                       .foregroundColor(.white)
                                       .lineLimit(3)
@@ -108,7 +106,7 @@ struct Onboarding2: View {
                   .background(Color(red: 0.85, green: 0.85, blue: 0.85).opacity(0))
                 
                 Button{
-                    currentTab = 2
+                    showOnboarding.toggle()
                 } label:{
                     HStack(alignment: .top, spacing: 0) {
                         HStack(alignment: .bottom, spacing: 8) {
@@ -143,8 +141,8 @@ struct Onboarding2: View {
     }
 }
 
-struct Onboarding2_Previews: PreviewProvider {
+struct OnBoarding4_Previews: PreviewProvider {
     static var previews: some View {
-        Onboarding2(currentTab: .constant(0))
+        OnBoarding4(showOnboarding: .constant(true))
     }
 }
