@@ -4,6 +4,7 @@ import UserNotifications
 
 
 struct ContentView: View {
+    @State var check = true
     ///FEEDBACK TÁTIL E SONORO
     let soundManager = SoundManager.shared
     let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
@@ -18,9 +19,17 @@ struct ContentView: View {
     @AppStorage("hasViewedWordOfTheDay") private var hasViewedWordOfTheDay: Bool = false
     
     init(){
+        soundManager.printPan(sound: .base1)
+        soundManager.printPan(sound: .base2)
+        soundManager.printPan(sound: .piano)
+        
         soundManager.playLoop(sound: .base1)
         soundManager.playLoop(sound: .base2)
         soundManager.playLoop(sound: .piano)
+        
+        soundManager.recoverAlt(sound: .base1)
+        soundManager.recoverAlt(sound: .base2)
+        soundManager.recoverAlt(sound: .piano)
     }
 
 
@@ -30,8 +39,26 @@ struct ContentView: View {
         ZStack {
             ConstelacaoView()
                 .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    soundManager.printPan(sound: .base1)
+                    soundManager.printPan(sound: .base2)
+                    soundManager.printPan(sound: .piano)
+                }
             
             VStack{
+                HStack{
+                    Spacer()
+                    Button{
+                        check ? soundManager.stop(sound: .base1) : soundManager.playLoop(sound: .base1)
+                        check ? soundManager.stop(sound: .base2) : soundManager.playLoop(sound: .base2)
+                        check ? soundManager.stop(sound: .piano) : soundManager.playLoop(sound: .piano)
+                        
+                        check.toggle()
+                    }label: {
+                        Image(systemName: check ? "speaker.wave.2" : "speaker.slash")
+                            .foregroundColor(.gray)
+                    }
+                }.padding(40)
                 Spacer()
                 Text("Segure na tela para\ncriar um novo astro")
                     .foregroundColor(.gray)
