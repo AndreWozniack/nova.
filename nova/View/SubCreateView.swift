@@ -40,27 +40,27 @@ struct SubCreateView: View {
                             .multilineTextAlignment(.center)
                         
                         Text(novaEstrela.tipo!.rawValue)
-                            .font(Font.custom("SF Pro", size: 12)
-                                    .weight(.bold))
-                            .foregroundColor(.black)
+                            .font(.system(size: 12))
+                            .bold()
+                            .foregroundColor(.gray)
                         Text("\(novaEstrela.getDuracao()) de vida")
-                            .font(Font.custom("Inter", size: 12))
+                            .font(.system(size: 12))
                             .multilineTextAlignment(.center)
-                            .foregroundColor(.black)
+                            .foregroundColor(.gray)
                     }.padding(10)
                     if showDica {
                         Text("Como essa palavra se relacionou com o seu dia hoje?")
                             .frame(width: 195, height: 28)
                             .multilineTextAlignment(.center)
                             .font(.caption2)
-                            .foregroundColor(Color(uiColor: .green))
+                            .foregroundColor(Color("dica"))
                             .padding(12)
                             .overlay(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color(uiColor: .green), lineWidth: 2))
+                                        .stroke(Color("dica"), lineWidth: 2))
                     }
                     
-                    TextField("Reflexão", text: $texto, axis: .vertical)
+                    TextField("Escreva sua Sub-Reflexão", text: $texto, axis: .vertical)
                         .autocorrectionDisabled()
                         .padding(.horizontal, 12)
                         .padding(.vertical, 10)
@@ -123,10 +123,6 @@ struct SubCreateView: View {
                 .frame(width: 300, height: 500, alignment: .top)
                 .background(.white)
                 .cornerRadius(16)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(.black, lineWidth: 1)
-                )
             }
             .onAppear {
                 let _ = novaEstrela.tipoAleatorio()

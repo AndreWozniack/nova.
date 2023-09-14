@@ -9,6 +9,7 @@ class Manager : ObservableObject {
     @Published var showPrincipalDescription = false
     @Published var showSubCreate = false
     @Published var showSubDescription = false
+    @Published var useWord = false
     @Published var palavraDoDia: String = EstrelaManager.shared.palavraDoDia!
     @Published var estrelaConnections: [Estrela: [Estrela]] = [:]
     

@@ -7,8 +7,10 @@ struct PrincipalDescriptionView: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     @State var textoEditado = ""
+    @State var tituloEditado = ""
     @State var editing = false
     @State var textoOriginal = ""
+    @State var tituloOriginal = ""
     
     var body: some View {
         ZStack{
@@ -18,13 +20,6 @@ struct PrincipalDescriptionView: View {
                     VStack(alignment: .center) {
                         VStack(spacing: 6){
                             HStack{
-//                                Button {
-//                                    Manager.shared.showPrincipalDescription = false
-//                                } label: {
-//                                    Image(systemName: "x.circle.fill")
-//                                        .font(.title2)
-//                                        .foregroundColor(Color(uiColor: .systemGray))
-//                                }
                                 Spacer()
                                 Button {
                                     editing.toggle()
@@ -41,10 +36,18 @@ struct PrincipalDescriptionView: View {
                                 }
                             }
                             .padding(.horizontal)
-                            Text(estrela.reflexao.titulo)
-                                .font(.custom("Kodchasan-Bold", size: 20))
-                                .fontWeight(.bold)
-                                .padding(.top, -20)
+                            if editing {
+                                TextField("Título", text: $tituloEditado)
+                                    .font(.custom("Kodchasan-Bold", size: 20))
+                                    .padding(.top, -20)
+                                    .padding(.horizontal, 20)
+                                    .multilineTextAlignment(.center)
+                            } else {
+                                Text(estrela.reflexao.titulo)
+                                    .font(.custom("Kodchasan-Bold", size: 20))
+                                    .fontWeight(.bold)
+                                    .padding(.top, -20)
+                            }
                             //tema da estrela
                             VStack(spacing: 4){
                                 HStack(alignment: .center, spacing: 4){
@@ -90,6 +93,9 @@ struct PrincipalDescriptionView: View {
                         .onAppear{
                             textoEditado = estrela.reflexao.texto
                             textoOriginal = textoEditado
+                            
+                            tituloEditado = estrela.reflexao.titulo
+                            tituloOriginal = tituloEditado
                         }
                         if !editing {
                             HStack(spacing: 12){
@@ -137,7 +143,7 @@ struct PrincipalDescriptionView: View {
                                 }
                                 Button {
                                     estrela.reflexao.texto = textoEditado
-//                                    estrela.reflexao.titulo = tituloEditado
+                                    estrela.reflexao.titulo = tituloEditado
                                     EstrelaManager.shared.updateEstrela(estrela)
                                     editing.toggle()
                                 } label: {
@@ -162,10 +168,6 @@ struct PrincipalDescriptionView: View {
                     .frame(width: 300, height: 445, alignment: .top)
                     .background(.white)
                     .cornerRadius(16)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(.black, lineWidth: 1)
-                    )
                 }
                 
                 VStack{
@@ -176,7 +178,7 @@ struct PrincipalDescriptionView: View {
                             .frame(width: 85, height: 85)
                         Image(estrela.getIcon())
                             .resizable()
-                            .frame(width: 60, height: 60)
+                            .frame(width: 80, height: 80)
                     }
                     Spacer()
                 }

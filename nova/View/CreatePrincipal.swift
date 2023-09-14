@@ -4,7 +4,7 @@ struct CreatePrincipal: View {
     
     var estrela: Estrela
     
-    @State private var titulo: String = Manager.shared.palavraDoDia
+    @State private var titulo: String = ""
     @State private var texto: String = ""
     @State var showDica = false
 
@@ -34,19 +34,17 @@ struct CreatePrincipal: View {
                         TextField("Tema", text: $titulo)
                             .autocorrectionDisabled()
                             .cornerRadius(8)
-                            .font(Font.custom("Kodchasan-Bold", size: 20))
+                            .font(Font.custom("Kodchasan-Regular", size: 20))
+                            .bold()
                             .multilineTextAlignment(.center)
                         
                         Text(estrela.tipo!.rawValue)
-                            .font(
-                                Font.custom("SF Pro", size: 12)
-                                    .weight(.bold)
-                            )
-                            .foregroundColor(.black)
+                            .font(.system(size: 12))
+                            .foregroundColor(.gray)
                         Text("\(estrela.getDuracao()) de vida")
-                            .font(Font.custom("Kodchasan-Regular", size: 12))
+                            .font(.system(size: 12))
                             .multilineTextAlignment(.center)
-                            .foregroundColor(.black)
+                            .foregroundColor(.gray)
                     }.padding(10)
                     if showDica {
                         Text("Como essa palavra se relacionou com o seu dia hoje?")
@@ -71,9 +69,8 @@ struct CreatePrincipal: View {
                         } label: {
                             HStack{
                                 Text("Cancelar")
-                                    .font(.custom("Kodchasan-Bold", size: 13))
+                                    .font(.custom("Kodchasan-Regular", size: 13))
                                     .foregroundColor(.white)
-                                    .font(.caption2)
                                     .bold()
                                 Image(systemName: "xmark.circle.fill")
                                     .font(.caption)
@@ -91,9 +88,8 @@ struct CreatePrincipal: View {
                         } label: {
                             HStack{
                                 Text("Adicionar")
-                                    .font(.custom("Kodchasan-Bold", size: 13))
+                                    .font(.custom("Kodchasan-Regular", size: 13))
                                     .foregroundColor(.white)
-                                    .font(.caption2)
                                     .bold()
                                 Image(systemName: "checkmark.circle.fill")
                                     .font(.caption)
@@ -115,6 +111,11 @@ struct CreatePrincipal: View {
 //                        .stroke(.black, lineWidth: 1)
 //                )
                 
+            }
+            .onAppear() {
+                if Manager.shared.useWord {
+                    titulo = Manager.shared.palavraDoDia
+                }
             }
         }
     }
