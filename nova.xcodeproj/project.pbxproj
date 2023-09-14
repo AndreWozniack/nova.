@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A9587CF12AB3290E006E9DED /* OnBoarding4.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9587CF02AB3290E006E9DED /* OnBoarding4.swift */; };
 		A9C36F482AB1D54B005854C8 /* swipeF.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9C36F412AB1D54A005854C8 /* swipeF.mp3 */; };
 		A9C36F492AB1D54B005854C8 /* swipe1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9C36F422AB1D54A005854C8 /* swipe1.mp3 */; };
 		A9C36F4A2AB1D54B005854C8 /* long.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A9C36F432AB1D54A005854C8 /* long.mp3 */; };
@@ -50,6 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A9587CF02AB3290E006E9DED /* OnBoarding4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoarding4.swift; sourceTree = "<group>"; };
 		A9C36F3E2AB1D156005854C8 /* CosntelacaoScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosntelacaoScene.swift; sourceTree = "<group>"; };
 		A9C36F412AB1D54A005854C8 /* swipeF.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swipeF.mp3; sourceTree = "<group>"; };
 		A9C36F422AB1D54A005854C8 /* swipe1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swipe1.mp3; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				AFF35E122AB144C9000F71C6 /* Onboarding1.swift */,
 				AFF35E152AB144C9000F71C6 /* Onboarding2.swift */,
 				AFF35E142AB144C9000F71C6 /* Onboarding3.swift */,
+				A9587CF02AB3290E006E9DED /* OnBoarding4.swift */,
 				AFF35E202AB14712000F71C6 /* ContentView.swift */,
 				AFA55EF62AA80AD100163AB9 /* CardsView.swift */,
 				AF6C192F2A9FE0CC00D0A089 /* CreatePrincipal.swift */,
@@ -333,6 +336,7 @@
 				AF9FAE142AABD50C00DE8FAE /* NotificationManager.swift in Sources */,
 				AFA55EF72AA80AD100163AB9 /* CardsView.swift in Sources */,
 				AFF35E192AB144C9000F71C6 /* Onboarding2.swift in Sources */,
+				A9587CF12AB3290E006E9DED /* OnBoarding4.swift in Sources */,
 				AF278EC52AB09B6B0095DA92 /* PalavraDoDia.swift in Sources */,
 				AFA55EF22AA25A3B00163AB9 /* Manager.swift in Sources */,
 				AFA55EF92AA80FD300163AB9 /* SubCreateView.swift in Sources */,
