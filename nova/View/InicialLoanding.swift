@@ -13,16 +13,18 @@ struct InicialLoanding: View {
     var body: some View {
         VStack{
             ZStack{
-                if showOnboarding {
+                if !showOnboarding {
                     TabView(selection: $currentTab) {
-                        Onboarding1()
+                        Onboarding1(currentTab: $currentTab)
                             .tag(0)
-                        Onboarding2()
+                        Onboarding2(currentTab: $currentTab)
                             .tag(1)
-                        Onboarding3(showOnboarding: $showOnboarding).opacity(viewOpacity)
+                        Onboarding3(currentTab: $currentTab)
                             .tag(2)
+                        OnBoarding4(showOnboarding: $showOnboarding).opacity(viewOpacity)
+                            .tag(3)
                     }.tabViewStyle(PageTabViewStyle())
-                        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+                        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
                 } else {
                     ContentView()
                         .environmentObject(NotificationManager.shared)
