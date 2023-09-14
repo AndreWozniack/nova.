@@ -4,7 +4,7 @@ import UserNotifications
 
 
 struct ContentView: View {
-    ///FEEDBACK TÁTIL E SONORO
+    
     let soundManager = SoundManager.shared
     let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
     
@@ -12,7 +12,7 @@ struct ContentView: View {
     @GestureState var gestureZoom: CGFloat = 1.0
     @ObservedObject var manager = Manager.shared
     @EnvironmentObject var notificationManager: NotificationManager
-    @State var showPopup = true
+    @State var showPopup = false
     
     @AppStorage("lastVisitDate") private var lastVisitDate = Date()
     @AppStorage("hasViewedWordOfTheDay") private var hasViewedWordOfTheDay: Bool = false
