@@ -4,12 +4,9 @@ import UserNotifications
 
 
 struct ContentView: View {
-<<<<<<< HEAD
-    
-=======
+
     @State var check = true
-    ///FEEDBACK TÁTIL E SONORO
->>>>>>> main
+
     let soundManager = SoundManager.shared
     let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
     
@@ -19,7 +16,7 @@ struct ContentView: View {
     @EnvironmentObject var notificationManager: NotificationManager
     @State var showPopup = false
     
-    @AppStorage("lastVisitDate") private var lastVisitDate = Date()
+    @AppStorage("lastVisitDate") private var lastVisitDate = Date()//.addingTimeInterval(-86400)
     @AppStorage("hasViewedWordOfTheDay") private var hasViewedWordOfTheDay: Bool = false
     
     init(){
@@ -42,7 +39,7 @@ struct ContentView: View {
     
         ZStack {
             ConstelacaoView()
-                .edgesIgnoringSafeArea(.all)
+                .ignoresSafeArea()
                 .onTapGesture {
                     soundManager.printPan(sound: .base1)
                     soundManager.printPan(sound: .base2)
@@ -167,9 +164,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            //play na musica de fundo com 3 camadas
             
-           
             print(EstrelaManager.shared.palavraDoDia as Any)
             checkForDailyPopup()
             NotificationManager.shared.requestPermission()
@@ -193,11 +188,16 @@ struct ContentView: View {
         let today = calendar.startOfDay(for: Date())
         let lastVisitDay = calendar.startOfDay(for: lastVisitDate)
         
+        print("Today: \(today), Last visit day: \(lastVisitDay)") // Adicione esta linha para debug
+        
         if today != lastVisitDay {
             self.showPopup = true
             self.lastVisitDate = Date()
+            manager.useWord = true
+            print("Show popup") // Adicione esta linha para debug
         }
     }
+
 
 }
 
@@ -222,38 +222,79 @@ struct PopupView: View {
     var closeAction: () -> Void
     
     @Binding var hasViewedWordOfTheDay: Bool
+    var estrela = Estrela()
     
     var body: some View {
-        VStack {
-            Text("A palavra do dia é:")
-                .padding()
-            Text(Manager.shared.palavraDoDia)
-                .font(.title2)
-            
-            HStack{
-                Button(action: {
-                    closeAction()
-                    hasViewedWordOfTheDay = true
-                }) {
-                    Text("Fechar")
+        ZStack{
+            Color.black.opacity(0.4)
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture {
+                            withAnimation {
+                                closeAction()
+                                hasViewedWordOfTheDay = true
+                            }
+                        }
+            VStack{
+                Image(estrela.getIcon())
+                    .frame(width: 45)
+                    .scaledToFit()
+                VStack {
+                    VStack(spacing: 6){
+                        Text("O tema do dia é:")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 15))
+                        Text(Manager.shared.palavraDoDia)
+                            .font(.custom("Kodchasan-Regular", size: 26))
+                            .bold()
+                        
+                        Text(estrela.tipo!.rawValue)
+                            .font(.system(size: 12))
+                            .bold()
+                            .foregroundColor(.gray)
+                        Text("\(estrela.getDuracao()) de vida")
+                            .font(.system(size: 12))
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.gray)
+                    }.padding(.top, 20)
+                    Spacer()
+                    HStack{
+                        Button(action: {
+                            closeAction()
+                            hasViewedWordOfTheDay = true
+                        }) {
+                            Text("Fechar")
+                                .foregroundColor(.white)
+                                .font(.custom("Kodchasan-Regular", size: 15))
+                                .bold()
+                        }
+                        .frame(width: 121, height: 49)
+                        .background(.black)
+                        .cornerRadius(12)
+                        
+                        Button {
+                            closeAction()
+                            hasViewedWordOfTheDay = true
+                            Manager.shared.estrela = estrela
+                            Manager.shared.showCreatePrincipal.toggle()
+                        } label: {
+                            Text("Criar")
+                                .foregroundColor(.white)
+                                .font(.custom("Kodchasan-Regular", size: 15))
+                                .bold()
+                        }
+                        .frame(width: 121, height: 49)
+                        .background(.black)
+                        .cornerRadius(12)
+                        
+                    }.padding(.bottom)
                 }
+                .frame(width: 300, height: 200)
+                .background(Color.white)
+                .cornerRadius(10)
+                .shadow(radius: 10)
                 .padding()
-                Button {
-                    closeAction()
-                    hasViewedWordOfTheDay = true
-                    Manager.shared.showCreatePrincipal.toggle()
-                } label: {
-                    Text("Criar Astro")
-                }
-
             }
         }
-        .frame(width: 300)
-        .background(Color.white)
-        .cornerRadius(10)
-        .shadow(radius: 10)
-        .padding()
-
     }
 }
 

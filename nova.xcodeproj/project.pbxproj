@@ -30,7 +30,6 @@
 		AF6C18DF2A9FBCEF00D0A089 /* novaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C18DE2A9FBCEF00D0A089 /* novaApp.swift */; };
 		AF6C18E32A9FBCF000D0A089 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6C18E22A9FBCF000D0A089 /* Assets.xcassets */; };
 		AF6C18E62A9FBCF000D0A089 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6C18E52A9FBCF000D0A089 /* Preview Assets.xcassets */; };
-		AF6C18F12A9FBF5800D0A089 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF6C18F02A9FBF5800D0A089 /* GoogleService-Info.plist */; };
 		AF6C192C2A9FD38400D0A089 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C192B2A9FD38300D0A089 /* DatabaseManager.swift */; };
 		AF6C19302A9FE0CC00D0A089 /* CreatePrincipal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6C192F2A9FE0CC00D0A089 /* CreatePrincipal.swift */; };
 		AF7460682AB22BA400C84A11 /* CosntelacaoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7460672AB22BA400C84A11 /* CosntelacaoScene.swift */; };
@@ -77,7 +76,6 @@
 		AF6C18DE2A9FBCEF00D0A089 /* novaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = novaApp.swift; sourceTree = "<group>"; };
 		AF6C18E22A9FBCF000D0A089 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF6C18E52A9FBCF000D0A089 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		AF6C18F02A9FBF5800D0A089 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AF6C192B2A9FD38300D0A089 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		AF6C192F2A9FE0CC00D0A089 /* CreatePrincipal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePrincipal.swift; sourceTree = "<group>"; };
 		AF7460672AB22BA400C84A11 /* CosntelacaoScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosntelacaoScene.swift; sourceTree = "<group>"; };
@@ -168,7 +166,6 @@
 				AF6C19502AA0D76E00D0A089 /* View */,
 				AF6C19332AA0D51400D0A089 /* Model */,
 				AFA55EF52AA7A9C400163AB9 /* Controller */,
-				AF6C18F02A9FBF5800D0A089 /* GoogleService-Info.plist */,
 				AF9FAE122AAB8C1300DE8FAE /* Info.plist */,
 				AF6C18E22A9FBCF000D0A089 /* Assets.xcassets */,
 				AF6C18E42A9FBCF000D0A089 /* Preview Content */,
@@ -313,7 +310,6 @@
 				A9C36F4D2AB1D54B005854C8 /* piano.mp3 in Resources */,
 				AF278EBE2AAFAC7E0095DA92 /* Kodchasan-SemiBoldItalic.ttf in Resources */,
 				A9C36F492AB1D54B005854C8 /* swipe1.mp3 in Resources */,
-				AF6C18F12A9FBF5800D0A089 /* GoogleService-Info.plist in Resources */,
 				A9C36F4A2AB1D54B005854C8 /* long.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

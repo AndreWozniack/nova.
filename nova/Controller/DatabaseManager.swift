@@ -559,7 +559,7 @@ class EstrelaManager: ObservableObject {
     }
     
     func tipoAleatorio() -> TipoEstrela {
-        let tipos = [TipoEstrela.anaAmarela, TipoEstrela.anaBranca, TipoEstrela.giganteAzul, TipoEstrela.giganteVermelha]
+        let tipos = TipoEstrela.allCases
         return tipos.randomElement()!
     }
 }

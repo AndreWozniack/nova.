@@ -115,7 +115,7 @@ class Estrela: SKShapeNode, Codable, Identifiable {
     }
 
     func tipoAleatorio() -> TipoEstrela {
-        let tipos = [TipoEstrela.anaAmarela, TipoEstrela.anaBranca, TipoEstrela.giganteAzul, TipoEstrela.giganteVermelha]
+        let tipos = TipoEstrela.allCases
         return tipos.randomElement()!
     }
     
@@ -188,19 +188,43 @@ class Estrela: SKShapeNode, Codable, Identifiable {
     func addDuracao() -> TimeInterval {
         switch tipo {
         case .anaAmarela:
-            duracao = 30 * 24 * 60 * 60
+            duracao = 60 * 24 * 60 * 60
             return 30 * 24 * 60 * 60
         case .giganteVermelha:
-            duracao = 60 * 24 * 60 * 60
+            duracao = 90 * 24 * 60 * 60
             return 60 * 24 * 60 * 60
         case .giganteAzul:
-            duracao = 90 * 24 * 60 * 60
+            duracao = 120 * 24 * 60 * 60
             return 90 * 24 * 60 * 60
         case .anaBranca:
-            duracao = 15 * 24 * 60 * 60
+            duracao = 40 * 24 * 60 * 60
             return 15 * 24 * 60 * 60
         case .none:
             duracao = 30 * 24 * 60 * 60
+            return 30 * 24 * 60 * 60
+        case .terra:
+            duracao = 30 * 24 * 60 * 60
+            return 30 * 24 * 60 * 60
+        case .mercurio:
+            duracao = 15 * 24 * 60 * 60
+            return 30 * 24 * 60 * 60
+        case .venus:
+            duracao = 30 * 24 * 60 * 60
+            return 30 * 24 * 60 * 60
+        case .marte:
+            duracao = 30 * 24 * 60 * 60
+            return 30 * 24 * 60 * 60
+        case .jupiter:
+            duracao = 45 * 24 * 60 * 60
+            return 30 * 24 * 60 * 60
+        case .saturno:
+            duracao = 45 * 24 * 60 * 60
+            return 30 * 24 * 60 * 60
+        case .urano:
+            duracao = 45 * 24 * 60 * 60
+            return 30 * 24 * 60 * 60
+        case .netuno:
+            duracao = 45 * 24 * 60 * 60
             return 30 * 24 * 60 * 60
         }
     }
@@ -215,6 +239,23 @@ class Estrela: SKShapeNode, Codable, Identifiable {
             return 40
         case .anaBranca:
             return 30
+        case .terra:
+            return 50
+        case .mercurio:
+            return 20
+        case .venus:
+            return 45
+        case .marte:
+            return 40
+        case .jupiter:
+            return 100
+        case .saturno:
+            return 90
+        case .urano:
+            return 80
+        case .netuno:
+            return 70
+        
         }
     }
     
@@ -228,6 +269,22 @@ class Estrela: SKShapeNode, Codable, Identifiable {
             return "anaAmarela"
         case .anaBranca:
             return "anaBranca"
+        case .terra:
+            return "terra"
+        case .mercurio:
+            return "mercurio"
+        case .venus:
+            return "venus"
+        case .marte:
+            return "marte"
+        case .jupiter:
+            return "jupter"
+        case .saturno:
+            return "saturno"
+        case .urano:
+            return "urano"
+        case .netuno:
+            return "netuno"
         }
         
     }
@@ -250,6 +307,8 @@ class Estrela: SKShapeNode, Codable, Identifiable {
             effect.color = .blue
         case .anaBranca:
             effect.color = .white
+        case .terra, .mercurio, .venus, .marte, .jupiter, .saturno, .urano, .netuno:
+            effect.color = .white
         }
         
         effect.colorBlendFactor = 2
@@ -258,9 +317,22 @@ class Estrela: SKShapeNode, Codable, Identifiable {
     }
 }
 
-enum TipoEstrela: String, Codable {
+enum TipoEstrela: String, Codable, CaseIterable {
     case giganteVermelha = "Gigante Vermelha"
     case giganteAzul = "Gigante Azul"
     case anaAmarela = "Anã Amarela"
     case anaBranca = "Anã Branca"
+    case terra = "Terra"
+    case mercurio = "Mercúrio"
+    case venus = "Vênus"
+    case marte = "Marte"
+    case jupiter = "Júpiter"
+    case saturno = "Saturno"
+    case urano = "Urano"
+    case netuno = "Netuno"
+    
+    static func allValues() -> [TipoEstrela] {
+        return TipoEstrela.allCases
+    }
 }
+

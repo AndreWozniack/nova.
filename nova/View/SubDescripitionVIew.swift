@@ -7,8 +7,10 @@ struct SubDescriptionView: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     @State var textoEditado = ""
+    @State var tituloEditado = ""
     @State var editing = false
     @State var textoOriginal = ""
+    @State var tituloOriginal = ""
     
     var body: some View {
         
@@ -19,13 +21,7 @@ struct SubDescriptionView: View {
                     VStack(alignment: .center) {
                         VStack(alignment: .center, spacing: 6) {
                             HStack{
-//                                Button {
-//                                    Manager.shared.showPrincipalDescription = false
-//                                } label: {
-//                                    Image(systemName: "x.circle.fill")
-//                                        .font(.title2)
-//                                        .foregroundColor(Color(uiColor: .systemGray))
-//                                }
+
                                 Spacer()
                                 Button {
                                     editing.toggle()
@@ -42,10 +38,18 @@ struct SubDescriptionView: View {
                                 }
                             }
                             .padding(.horizontal)
-                            Text(estrela.reflexao.titulo)
-                                .font(.custom("Kodchasan-Bold", size: 20))
-                                .fontWeight(.bold)
-                                .padding(.top, -20)
+                            if editing {
+                                TextField("Título", text: $tituloEditado)
+                                    .font(.custom("Kodchasan-Bold", size: 20))
+                                    .padding(.top, -20)
+                                    .padding(.horizontal, 20)
+                                    .multilineTextAlignment(.center)
+                            } else {
+                                Text(estrela.reflexao.titulo)
+                                    .font(.custom("Kodchasan-Bold", size: 20))
+                                    .fontWeight(.bold)
+                                    .padding(.top, -20)
+                            }
                             VStack(spacing: 4){
                                 HStack(alignment: .center, spacing: 4){
                                     Image(systemName: "star.fill")
@@ -58,10 +62,10 @@ struct SubDescriptionView: View {
                                         .foregroundColor(Color(uiColor: .systemGray))
                                     //nome do astro
                                 }
-                                Text("Ligada a estrela: \(EstrelaManager.shared.getEstrelaDeOrigemParaEstrela(estrela)?.reflexao.titulo ?? "ESTRELA")") // Exiba o tempo formatado
-                                    .font(.caption2)
-                                    .fontWeight(.light)
-                                    .foregroundColor(.black)
+                                Text("Na constelação \(EstrelaManager.shared.getEstrelaDeOrigemParaEstrela(estrela)?.reflexao.titulo ?? "ESTRELA")") // Exiba o tempo formatado
+                                    .font(.system(size: 12))
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(.gray)
                             }
                             
                         }
@@ -78,6 +82,9 @@ struct SubDescriptionView: View {
                         .onAppear{
                             textoEditado = estrela.reflexao.texto
                             textoOriginal = textoEditado
+                            
+                            tituloEditado = estrela.reflexao.titulo
+                            tituloOriginal = tituloEditado
                         }
                         
                         if estrela.nivel < 3 && !editing {
@@ -126,7 +133,8 @@ struct SubDescriptionView: View {
                                 }
                                 Button {
                                     estrela.reflexao.texto = textoEditado
-//                                    estrela.reflexao.titulo = tituloEditado
+                                    estrela.reflexao.titulo = tituloEditado
+                                    
                                     EstrelaManager.shared.updateEstrela(estrela)
                                     editing.toggle()
                                 } label: {
@@ -158,12 +166,16 @@ struct SubDescriptionView: View {
                             .stroke(.black, lineWidth: 1)
                     )
                 }
-                
                 VStack{
-                    Circle()
-                        .strokeBorder(Color.white,lineWidth: 2)
-                        .background(Circle().foregroundColor(Color.black))
-                        .frame(width: 85, height: 85)
+                    ZStack{
+                        Circle()
+                            .strokeBorder(Color.white,lineWidth: 2)
+                            .background(Circle().foregroundColor(Color.black))
+                            .frame(width: 85, height: 85)
+                        Image(estrela.getIcon())
+                            .resizable()
+                            .frame(width: 80, height: 80)
+                    }
                     Spacer()
                 }
                 
@@ -184,6 +196,6 @@ struct SubDescriptionView_Previews: PreviewProvider {
 }
 
 func geraEstrela2() -> Estrela {
-    let estrela = Estrela(reflexao: Reflexao(titulo: "Tema", texto: "A amizade é uma das joias mais preciosas que podemos encontrar ao longo da vida. Ela é como um jardim que requer cuidado constante, regado com amor, confiança e apoio mútuo. Assim como as flores desabrocham e crescem com o tempo, as verdadeiras amizades também se fortalecem com as experiências compartilhadas e os desafios enfrentados juntos."), x: 0, y: 0, tipo: .anaAmarela)
+    let estrela = Estrela(reflexao: Reflexao(titulo: "Tema", texto: "A amizade é uma das joias mais preciosas que podemos encontrar ao longo da vida. Ela é como um jardim que requer cuidado constante, regado com amor, confiança e apoio mútuo. Assim como as flores desabrocham e crescem com o tempo, as verdadeiras amizades também se fortalecem com as experiências compartilhadas e os desafios enfrentados juntos."), x: 0, y: 0, tipo: .saturno)
     return estrela
 }

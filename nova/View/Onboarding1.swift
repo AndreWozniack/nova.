@@ -154,6 +154,7 @@ struct Onboarding1: View {
                         .cornerRadius(12)
                     }
                     .padding(0)
+//                    .padding(.bottom, 20)
                     .frame(width: 316, alignment: .topLeading)
                 }
             }
