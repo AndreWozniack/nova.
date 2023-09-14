@@ -13,7 +13,7 @@ struct InicialLoanding: View {
     var body: some View {
         VStack{
             ZStack{
-                if !showOnboarding {
+                if showOnboarding {
                     TabView(selection: $currentTab) {
                         Onboarding1(currentTab: $currentTab)
                             .tag(0)
