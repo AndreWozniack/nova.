@@ -17,6 +17,11 @@ class EstrelaManager: ObservableObject {
             UserDefaults.standard.set(palavrasUsadas, forKey: "PalavrasUsadas")
         }
     }
+    @Published var ultimaVisita: Date? {
+        didSet {
+            UserDefaults.standard.set(ultimaVisita, forKey: "UltimaVisita")
+        }
+    }
     
     private var ultimaDataGerada: Date? {
         get {
@@ -418,6 +423,10 @@ class EstrelaManager: ObservableObject {
     init() {
         loadFromUserDefaults()
         setupBindings()
+        
+        if let ultimaVisitaData = UserDefaults.standard.object(forKey: "UltimaVisita") as? Date {
+            self.ultimaVisita = ultimaVisitaData
+        }
 
         if UserDefaults.standard.string(forKey: "PalavraDoDia") == nil {
             gerarNovaPalavra()
@@ -425,6 +434,7 @@ class EstrelaManager: ObservableObject {
             self.palavraDoDia = UserDefaults.standard.string(forKey: "PalavraDoDia")
         }
         self.palavrasUsadas = UserDefaults.standard.stringArray(forKey: "PalavrasUsadas") ?? []
+        
     }
 
     private func setupBindings() {
@@ -562,4 +572,5 @@ class EstrelaManager: ObservableObject {
         let tipos = TipoEstrela.allCases
         return tipos.randomElement()!
     }
+    
 }
