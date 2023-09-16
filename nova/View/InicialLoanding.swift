@@ -8,7 +8,6 @@ struct InicialLoanding: View {
     @State private var viewOpacity = 0.0
     
     @AppStorage("showOnboarding") private var showOnboarding = true
-//    @State var showOnboarding = true
     
     
     var body: some View {

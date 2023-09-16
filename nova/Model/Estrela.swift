@@ -270,21 +270,21 @@ class Estrela: SKShapeNode, Codable, Identifiable {
         case .anaBranca:
             return "anaBranca"
         case .terra:
-            return "terra"
+            return "Terra"
         case .mercurio:
-            return "mercurio"
+            return "Mercurio"
         case .venus:
-            return "venus"
+            return "Venus"
         case .marte:
-            return "marte"
+            return "Marte"
         case .jupiter:
-            return "jupter"
+            return "Jupiter"
         case .saturno:
-            return "saturno"
+            return "Saturno"
         case .urano:
-            return "urano"
+            return "Urano"
         case .netuno:
-            return "netuno"
+            return "Netuno"
         }
         
     }

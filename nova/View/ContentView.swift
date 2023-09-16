@@ -14,10 +14,9 @@ struct ContentView: View {
     @GestureState var gestureZoom: CGFloat = 1.0
     @ObservedObject var manager = Manager.shared
     @EnvironmentObject var notificationManager: NotificationManager
-    @State var showPopup = false
     
-    @AppStorage("lastVisitDate") private var lastVisitDate = Date()//.addingTimeInterval(-86400)
-    @AppStorage("hasViewedWordOfTheDay") private var hasViewedWordOfTheDay: Bool = false
+    @AppStorage("lastVisitDate") var lastVisitDate: Date = Date().addingTimeInterval(-86400)
+    @State private var showPopup: Bool = true
     
     init(){
         soundManager.printPan(sound: .base1)
@@ -31,6 +30,8 @@ struct ContentView: View {
         soundManager.recoverAlt(sound: .base1)
         soundManager.recoverAlt(sound: .base2)
         soundManager.recoverAlt(sound: .piano)
+        
+        checkFirstVisitToday()
     }
 
 
@@ -39,7 +40,6 @@ struct ContentView: View {
     
         ZStack {
             ConstelacaoView()
-                .ignoresSafeArea()
                 .onTapGesture {
                     soundManager.printPan(sound: .base1)
                     soundManager.printPan(sound: .base2)
@@ -69,8 +69,8 @@ struct ContentView: View {
             }
             if showPopup {
                 PopupView(closeAction: {
-                    self.showPopup = false
-                }, hasViewedWordOfTheDay: $hasViewedWordOfTheDay )
+                    showPopup.toggle()
+                })
             }
 
             
@@ -165,14 +165,16 @@ struct ContentView: View {
         }
         .onAppear {
             
-            print(EstrelaManager.shared.palavraDoDia as Any)
-            checkForDailyPopup()
+            checkFirstVisitToday()
+
+            print(EstrelaManager.shared.palavraDoDia!)
             NotificationManager.shared.requestPermission()
             NotificationManager.shared.scheduleDailyNotifications()
+            NotificationManager.shared.scheduleNotification(timeInterval: 60 * 60 * 4, repeats: true)
             
-            if hasViewedWordOfTheDay {
-                NotificationManager.shared.cancelAllNotifications()
-            }
+//            if hasViewedWordOfTheDay {
+//                NotificationManager.shared.cancelAllNotifications()
+//            }
             
         }
         .onReceive(notificationManager.$notificationResponse) { response in
@@ -183,22 +185,17 @@ struct ContentView: View {
         }
     }
     
-    func checkForDailyPopup() {
+    func checkFirstVisitToday() {
         let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
-        let lastVisitDay = calendar.startOfDay(for: lastVisitDate)
-        
-        print("Today: \(today), Last visit day: \(lastVisitDay)") // Adicione esta linha para debug
-        
-        if today != lastVisitDay {
-            self.showPopup = true
-            self.lastVisitDate = Date()
-            manager.useWord = true
-            print("Show popup") // Adicione esta linha para debug
+
+        // Se a última data de visita não for hoje, mostramos o popup
+        if !calendar.isDateInToday(lastVisitDate) {
+            showPopup = true
         }
+
+        // Atualizamos a última data de visita para agora
+        lastVisitDate = Date()
     }
-
-
 }
 
 
@@ -220,8 +217,6 @@ struct ConstelacaoView: UIViewControllerRepresentable {
 struct PopupView: View {
     
     var closeAction: () -> Void
-    
-    @Binding var hasViewedWordOfTheDay: Bool
     var estrela = Estrela()
     
     var body: some View {
@@ -231,7 +226,6 @@ struct PopupView: View {
                         .onTapGesture {
                             withAnimation {
                                 closeAction()
-                                hasViewedWordOfTheDay = true
                             }
                         }
             VStack{
@@ -260,7 +254,6 @@ struct PopupView: View {
                     HStack{
                         Button(action: {
                             closeAction()
-                            hasViewedWordOfTheDay = true
                         }) {
                             Text("Fechar")
                                 .foregroundColor(.white)
@@ -273,9 +266,9 @@ struct PopupView: View {
                         
                         Button {
                             closeAction()
-                            hasViewedWordOfTheDay = true
                             Manager.shared.estrela = estrela
                             Manager.shared.showCreatePrincipal.toggle()
+                            Manager.shared.useWord.toggle()
                         } label: {
                             Text("Criar")
                                 .foregroundColor(.white)

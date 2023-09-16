@@ -23,6 +23,9 @@ struct YourApp: App {
         WindowGroup {
             NavigationView {
                 InicialLoanding()
+//                    .adaptsToKeyboard()
+                   
+                
             }
         }
     }

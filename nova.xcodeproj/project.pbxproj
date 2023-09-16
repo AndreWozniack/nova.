@@ -41,6 +41,7 @@
 		AFA55EF42AA65DDB00163AB9 /* PrincipalDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA55EF32AA65DDB00163AB9 /* PrincipalDescriptionView.swift */; };
 		AFA55EF72AA80AD100163AB9 /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA55EF62AA80AD100163AB9 /* CardsView.swift */; };
 		AFA55EF92AA80FD300163AB9 /* SubCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA55EF82AA80FD300163AB9 /* SubCreateView.swift */; };
+		AFE4D0AA2AB396B6005E6A1D /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE4D0A92AB396B6005E6A1D /* Keyboard.swift */; };
 		AFF35E162AB144C9000F71C6 /* Onboarding1.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E122AB144C9000F71C6 /* Onboarding1.swift */; };
 		AFF35E172AB144C9000F71C6 /* InicialLoanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E132AB144C9000F71C6 /* InicialLoanding.swift */; };
 		AFF35E182AB144C9000F71C6 /* Onboarding3.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF35E142AB144C9000F71C6 /* Onboarding3.swift */; };
@@ -80,6 +81,7 @@
 		AF6C192F2A9FE0CC00D0A089 /* CreatePrincipal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePrincipal.swift; sourceTree = "<group>"; };
 		AF7460672AB22BA400C84A11 /* CosntelacaoScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosntelacaoScene.swift; sourceTree = "<group>"; };
 		AF7F2D5E2AA1287200F361F9 /* Reflexao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reflexao.swift; sourceTree = "<group>"; };
+		AF9C28672AB53A40004A8168 /* nova.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = nova.entitlements; sourceTree = "<group>"; };
 		AF9FAE012AA9108700DE8FAE /* SubDescripitionVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubDescripitionVIew.swift; sourceTree = "<group>"; };
 		AF9FAE122AAB8C1300DE8FAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AF9FAE132AABD50C00DE8FAE /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 		AFA55EF32AA65DDB00163AB9 /* PrincipalDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrincipalDescriptionView.swift; sourceTree = "<group>"; };
 		AFA55EF62AA80AD100163AB9 /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
 		AFA55EF82AA80FD300163AB9 /* SubCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCreateView.swift; sourceTree = "<group>"; };
+		AFE4D0A92AB396B6005E6A1D /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		AFF35E122AB144C9000F71C6 /* Onboarding1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding1.swift; sourceTree = "<group>"; };
 		AFF35E132AB144C9000F71C6 /* InicialLoanding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InicialLoanding.swift; sourceTree = "<group>"; };
 		AFF35E142AB144C9000F71C6 /* Onboarding3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding3.swift; sourceTree = "<group>"; };
@@ -160,6 +163,7 @@
 		AF6C18DD2A9FBCEF00D0A089 /* nova */ = {
 			isa = PBXGroup;
 			children = (
+				AF9C28672AB53A40004A8168 /* nova.entitlements */,
 				A9C36F402AB1D535005854C8 /* Music */,
 				AF278EC32AAFB0450095DA92 /* Font */,
 				AF6C18DE2A9FBCEF00D0A089 /* novaApp.swift */,
@@ -206,6 +210,7 @@
 				AFA55EF82AA80FD300163AB9 /* SubCreateView.swift */,
 				AFA55EF32AA65DDB00163AB9 /* PrincipalDescriptionView.swift */,
 				AF9FAE012AA9108700DE8FAE /* SubDescripitionVIew.swift */,
+				AFE4D0A92AB396B6005E6A1D /* Keyboard.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -337,6 +342,7 @@
 				AFA55EF22AA25A3B00163AB9 /* Manager.swift in Sources */,
 				AFA55EF92AA80FD300163AB9 /* SubCreateView.swift in Sources */,
 				AFF35E162AB144C9000F71C6 /* Onboarding1.swift in Sources */,
+				AFE4D0AA2AB396B6005E6A1D /* Keyboard.swift in Sources */,
 				AF7460682AB22BA400C84A11 /* CosntelacaoScene.swift in Sources */,
 				AF9FAE022AA9108700DE8FAE /* SubDescripitionVIew.swift in Sources */,
 				AF7F2D5F2AA1287200F361F9 /* Reflexao.swift in Sources */,
@@ -467,6 +473,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = nova/nova.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"nova/Preview Content\"";
@@ -486,7 +493,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = academy.andrewozniack.nova;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -504,6 +511,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = nova/nova.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"nova/Preview Content\"";
@@ -523,7 +531,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = academy.andrewozniack.nova;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

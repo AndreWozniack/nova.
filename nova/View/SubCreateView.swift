@@ -6,7 +6,7 @@ struct SubCreateView: View {
     @State var texto: String = ""
     @State var novaEstrela = Estrela()
     @State var showDica = false
-    
+    @FocusState var isFocused: Bool
     
     var body: some View {
         ZStack{
@@ -61,10 +61,11 @@ struct SubCreateView: View {
                     }
                     
                     TextField("Escreva sua Sub-Reflexão", text: $texto, axis: .vertical)
-                        .autocorrectionDisabled()
                         .padding(.horizontal, 12)
                         .padding(.vertical, 10)
                         .frame(width: 260, alignment: .topLeading)
+                        .focused($isFocused)
+                        
                     
                     Spacer()
                     HStack{
@@ -129,7 +130,8 @@ struct SubCreateView: View {
                 Manager.shared.showPrincipalDescription = false
             }
         }
-        
+        .offset(y: isFocused ? -150 : 0)
+        .animation(.easeInOut, value: isFocused)
         
     }
     func posicaoEhValida(x: CGFloat, y: CGFloat) -> Bool {

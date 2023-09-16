@@ -11,6 +11,7 @@ struct PrincipalDescriptionView: View {
     @State var editing = false
     @State var textoOriginal = ""
     @State var tituloOriginal = ""
+    @FocusState var isFocused: Bool
     
     var body: some View {
         ZStack{
@@ -89,6 +90,7 @@ struct PrincipalDescriptionView: View {
                                 .frame(width: 260, alignment: .topLeading)
                                 .foregroundColor(.black)
                                 .disabled(!editing)
+                                .focused($isFocused)
                         }
                         .onAppear{
                             textoEditado = estrela.reflexao.texto
@@ -186,9 +188,8 @@ struct PrincipalDescriptionView: View {
             }
             .frame(width: 300, height: 487.5)
         }
-
-        
-        
+        .offset(y: isFocused ? -150 : 0)
+        .animation(.easeInOut, value: isFocused)
     }
 }
 
